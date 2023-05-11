@@ -5,7 +5,9 @@ body{
     align-items: center;
 }
 canvas{
+    /*
     width: 720px;
     height: 480px;
+    */
     background-color: black;
 }

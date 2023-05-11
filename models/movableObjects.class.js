@@ -2,10 +2,12 @@ class MovableObjects{
     posX
     posY;
     img; 
+    height = 100; 
+    width = 100; 
 
-    constructor(){
-    
-       
+    constructor(posX , posY){
+        this.posX = posX; 
+        this.posY = posY; 
     }
 
     /*
