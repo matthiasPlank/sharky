@@ -1,10 +1,16 @@
-class Floor extends MovableObjects{
-    height = 300; 
-    width = 900;
-    
-    constructor(posX, posY, floorIndex){
+class BackgroundObject extends MovableObjects{
+
+    height = 480; 
+    width = 720*2;
+
+    constructor(imagePath){
+        super().loadImage(imagePath);
+        this.posX = 0; 
+        this.posY = 0;
+
+        /*
         if( floorIndex == 0 ){
-            super(posX, posY).loadImage("./img/3. Background/Layers/2. Floor/D.png");
+            super().loadImage("./img/3. Background/Layers/2. Floor/D.png");
         }
         else if(floorIndex == 1){
             super(posX, posY).loadImage("./img/3. Background/Layers/2. Floor/D1.png");
@@ -15,6 +21,7 @@ class Floor extends MovableObjects{
         else{
             super(posX, posY).loadImage("./img/3. Background/Layers/2. Floor/D.png");
         }
+        */
     }
 
 }

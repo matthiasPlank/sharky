@@ -1,16 +1,18 @@
 class World{
 
     canvas; 
-    character = new Character(50 , 50); 
+    character = new Character(); 
     enemies = [
-        new Enemy( 100, 100), 
-        new Enemy( 200, 100), 
-        new Enemy( 50, 100)
+        new Enemy(), 
+        new Enemy( ), 
+        new Enemy( )
     ]; 
-    floor = [
-        new Floor (0 , 180, 0), 
-        new Floor (0 , 180, 1), 
-        new Floor (0 , 180, 2)
+    backgroundObjects = [
+        new BackgroundObject("./img/3. Background/Layers/5. Water/D.png"),
+        new BackgroundObject("./img/3. Background/Layers/3.Fondo 1/D.png"), 
+        new BackgroundObject("./img/3. Background/Layers/4.Fondo 2/D.png"), 
+        new BackgroundObject("./img/3. Background/Layers/2. Floor/D.png"), 
+        new BackgroundObject("./img/3. Background/Layers/1. Light/COMPLETO.png"), 
     ]
     ctx; 
 
@@ -24,18 +26,25 @@ class World{
     draw(){
 
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        this.ctx.drawImage(this.character.img , this.character.posX , this.character.posY, this.character.width , this.character.height) ; 
-        this.enemies.forEach(enemy => {
-            this.ctx.drawImage(enemy.img , enemy.posX , enemy.posY, enemy.width , enemy.height) ; 
-        });
-        this.floor.forEach(floor => {
-            this.ctx.drawImage(floor.img , floor.posX , floor.posY, floor.width , floor.height) ; 
-        });
+        this.addObjectArrayToMap(this.backgroundObjects); 
+        this.drawOnMap(this.character); 
+        this.addObjectArrayToMap(this.enemies); 
+
         
         
         let self = this; 
         requestAnimationFrame(function (){
             self.draw();
         })
+    }
+
+    addObjectArrayToMap(object){
+        object.forEach(object => {
+            this.drawOnMap(object); 
+        });
+    }
+    
+    drawOnMap(object){
+        this.ctx.drawImage(object.img , object.posX , object.posY, object.width , object.height) ; 
     }
 }
