@@ -9,6 +9,7 @@ class MovableObjects{
         this.posX = posX; 
         this.posY = posY; 
     }
+   
 
     /*
     constructor(posX, posY, imgPath){

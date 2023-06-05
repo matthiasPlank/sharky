@@ -7,6 +7,11 @@ class World{
         new Enemy( 200, 100), 
         new Enemy( 50, 100)
     ]; 
+    floor = [
+        new Floor (0 , 180, 0), 
+        new Floor (0 , 180, 1), 
+        new Floor (0 , 180, 2)
+    ]
     ctx; 
 
     constructor(canvas){
@@ -14,14 +19,19 @@ class World{
         this.ctx = canvas.getContext("2d");
         this.draw(); 
     }
+
+
     draw(){
 
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
         this.ctx.drawImage(this.character.img , this.character.posX , this.character.posY, this.character.width , this.character.height) ; 
         this.enemies.forEach(enemy => {
             this.ctx.drawImage(enemy.img , enemy.posX , enemy.posY, enemy.width , enemy.height) ; 
         });
+        this.floor.forEach(floor => {
+            this.ctx.drawImage(floor.img , floor.posX , floor.posY, floor.width , floor.height) ; 
+        });
+        
         
         let self = this; 
         requestAnimationFrame(function (){
