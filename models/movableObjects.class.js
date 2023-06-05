@@ -4,6 +4,7 @@ class MovableObjects{
     img; 
     height = 100; 
     width = 100; 
+    imageCache = {}; 
 
     /*
     constructor(posX , posY){
@@ -23,6 +24,15 @@ class MovableObjects{
     loadImage(path){
         this.img = new Image(); 
         this.img.src = path; 
+    }
+
+    loadImages(imgPaths){
+        imgPaths.forEach(path => {
+            let img = new Image();
+            img.src = path; 
+            this.imageCache[path] = img ;  
+        });
+
     }
 
     moveRight(){
