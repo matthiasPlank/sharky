@@ -5,6 +5,8 @@ class MovableObjects{
     height = 100; 
     width = 100; 
     imageCache = {}; 
+    currentImage = 0 ; 
+    speed = 0.15;  
 
     /*
     constructor(posX , posY){
@@ -40,6 +42,8 @@ class MovableObjects{
     }
 
     moveLeft(){
-
+        setInterval(()=>{
+           this.posX -= this.speed;  
+        }, 1000/60 )
     }
 }
