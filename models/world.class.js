@@ -4,8 +4,8 @@ class World{
     character = new Character(); 
     enemies = [
         new Enemy(), 
-        new Enemy( ), 
-        new Enemy( )
+        new Enemy(), 
+        new Enemy()
     ]; 
     backgroundObjects = [
         new BackgroundObject("./img/3. Background/Layers/5. Water/D.png"),
@@ -13,14 +13,14 @@ class World{
         new BackgroundObject("./img/3. Background/Layers/4.Fondo 2/D.png"), 
         new BackgroundObject("./img/3. Background/Layers/2. Floor/D.png"), 
         new BackgroundObject("./img/3. Background/Layers/1. Light/COMPLETO.png"), 
-    ]
+    ];
     ctx; 
     keyboard; 
 
     constructor(canvas , keyboard){
         this.canvas = canvas; 
-        this.ctx = canvas.getContext("2d");
         this.keyboard = keyboard; 
+        this.ctx = canvas.getContext("2d");
         this.draw(); 
         this.setWorld(); 
     }
@@ -52,6 +52,11 @@ class World{
     }
     
     drawOnMap(object){
-        this.ctx.drawImage(object.img , object.posX , object.posY, object.width , object.height) ; 
+        try{
+            this.ctx.drawImage(object.img , object.posX , object.posY, object.width , object.height) ; 
+        }
+        catch(e){
+            console.log("Could not load Image"); 
+        }
     }
 }

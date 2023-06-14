@@ -20,7 +20,7 @@ window.addEventListener("keydown", (event) => {
             keyboard.LEFT = true; 
             break;  
         case 'ArrowRight':
-            keyboard.RIGTHT = true; 
+            keyboard.RIGHT = true; 
             break;
         case 'Space':
             keyboard.SPACE = true; 
@@ -43,7 +43,7 @@ window.addEventListener("keyup", (event) => {
             keyboard.LEFT = false; 
             break;  
         case 'ArrowRight':
-            keyboard.RIGTHT = false; 
+            keyboard.RIGHT = false; 
             break;
         case 'Space':
             keyboard.SPACE = false; 

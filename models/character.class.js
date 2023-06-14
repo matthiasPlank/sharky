@@ -2,6 +2,7 @@ class Character extends MovableObjects{
 
     height = 150; 
     width = 150;
+    speed = 5; 
     IDLE_IMAGES = [
         "img/1.Sharkie/1.IDLE/1.png", 
         "img/1.Sharkie/1.IDLE/2.png", 
@@ -22,7 +23,6 @@ class Character extends MovableObjects{
         "img/1.Sharkie/1.IDLE/17.png", 
         "img/1.Sharkie/1.IDLE/18.png"
     ] ; 
-
     SWIM_IMAGES = [
         "img/1.Sharkie/3.Swim/1.png", 
         "img/1.Sharkie/3.Swim/2.png", 
@@ -37,19 +37,42 @@ class Character extends MovableObjects{
 
     constructor(){
           super().loadImage("img/1.Sharkie/3.Swim/1.png");
-          this.loadImages(this.IDLE_IMAGES); 
+          this.loadImages(this.SWIM_IMAGES); 
           this.animate(); 
 
     }
 
     animate(){
+
         setInterval(()=>{
-            let path = this.IDLE_IMAGES[this.currentImage]; 
+            if( this.world.keyboard.RIGHT ) {
+                this.posX += this.speed; 
+            }
+            if( this.world.keyboard.LEFT ) {
+                this.posX -= this.speed;
+            }
+            if( this.world.keyboard.UP ) {
+                this.posY -= this.speed;
+            }
+            if( this.world.keyboard.DOWN ) {
+                this.posY += this.speed;
+            }
+
+         }, 1000 / 60);
+
+
+        setInterval(()=>{
+
+            if( this.world.keyboard.RIGHT  || this.world.keyboard.LEFT ||  this.world.keyboard.UP ||  this.world.keyboard.DOWN ) {
+                console.log("TEST"); 
+            
+            let path = this.SWIM_IMAGES[this.currentImage]; 
             this.img = this.imageCache[path]; 
             this.currentImage ++ ; 
-            if (this.currentImage >= this.IDLE_IMAGES.length){
+            if (this.currentImage >= this.SWIM_IMAGES.length){
                 this.currentImage = 0; 
             }
-        }, 1000 )
+            }
+        }, 100 )
     }
 }
