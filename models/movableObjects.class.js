@@ -7,6 +7,7 @@ class MovableObjects{
     imageCache = {}; 
     currentImage = 0 ; 
     speed = 0.15;  
+    otherDirection = false; 
 
     /*
     constructor(posX , posY){

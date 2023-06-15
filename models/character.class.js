@@ -47,9 +47,11 @@ class Character extends MovableObjects{
         setInterval(()=>{
             if( this.world.keyboard.RIGHT ) {
                 this.posX += this.speed; 
+                this.otherDirection = false; 
             }
             if( this.world.keyboard.LEFT ) {
                 this.posX -= this.speed;
+                this.otherDirection = true; 
             }
             if( this.world.keyboard.UP ) {
                 this.posY -= this.speed;
@@ -57,6 +59,7 @@ class Character extends MovableObjects{
             if( this.world.keyboard.DOWN ) {
                 this.posY += this.speed;
             }
+            this.world.camera_x = -this.posX; 
 
          }, 1000 / 60);
 
@@ -64,14 +67,13 @@ class Character extends MovableObjects{
         setInterval(()=>{
 
             if( this.world.keyboard.RIGHT  || this.world.keyboard.LEFT ||  this.world.keyboard.UP ||  this.world.keyboard.DOWN ) {
-                console.log("TEST"); 
             
-            let path = this.SWIM_IMAGES[this.currentImage]; 
-            this.img = this.imageCache[path]; 
-            this.currentImage ++ ; 
-            if (this.currentImage >= this.SWIM_IMAGES.length){
-                this.currentImage = 0; 
-            }
+                let path = this.SWIM_IMAGES[this.currentImage]; 
+                this.img = this.imageCache[path]; 
+                this.currentImage ++ ; 
+                if (this.currentImage >= this.SWIM_IMAGES.length){
+                    this.currentImage = 0; 
+                }
             }
         }, 100 )
     }
