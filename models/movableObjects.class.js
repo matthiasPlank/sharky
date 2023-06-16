@@ -47,4 +47,13 @@ class MovableObjects{
            this.posX -= this.speed;  
         }, 1000/60 )
     }
+
+    playAnimation(images){
+        let path = images[this.currentImage]; 
+        this.img = this.imageCache[path]; 
+        this.currentImage ++ ; 
+        if (this.currentImage >= images.length){
+            this.currentImage = 0; 
+        }
+    }
 }
