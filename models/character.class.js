@@ -71,13 +71,7 @@ class Character extends MovableObjects{
         setInterval(()=>{
 
             if( this.world.keyboard.RIGHT  || this.world.keyboard.LEFT ||  this.world.keyboard.UP ||  this.world.keyboard.DOWN ) {
-            
-                let path = this.SWIM_IMAGES[this.currentImage]; 
-                this.img = this.imageCache[path]; 
-                this.currentImage ++ ; 
-                if (this.currentImage >= this.SWIM_IMAGES.length){
-                    this.currentImage = 0; 
-                }
+                this.playAnimation(this.SWIM_IMAGES); 
             }
         }, 100 )
     }

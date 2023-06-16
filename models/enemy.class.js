@@ -23,12 +23,7 @@ class Enemy extends MovableObjects{
     swim(){
         this.moveLeft();
         setInterval(()=>{
-            let path = this.SWIM_IMAGES[this.currentImage]; 
-            this.img = this.imageCache[path]; 
-            this.currentImage ++ ; 
-            if (this.currentImage >= this.SWIM_IMAGES.length){
-                this.currentImage = 0; 
-            }
+            this.playAnimation(this.SWIM_IMAGES); 
         }, 300 )
     }
 }

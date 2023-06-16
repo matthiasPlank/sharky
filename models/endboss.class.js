@@ -1,7 +1,9 @@
 class Endboss extends MovableObjects {
 
-    height = 50; 
-    width = 50; 
+    height = 400; 
+    width = 400; 
+    posY = -50;
+    posX = 2300; 
     SWIM_IMAGES = [
         "img/2.Enemy/3 Final Enemy/2.floating/1.png", 
         "img/2.Enemy/3 Final Enemy/2.floating/2.png", 
@@ -27,7 +29,7 @@ class Endboss extends MovableObjects {
 
     swim(){
         setInterval(()=>{
-            //playAnimation(this.SWIM_IMAGES); 
+            this.playAnimation(this.SWIM_IMAGES); 
         }, 300 )
     }
 
