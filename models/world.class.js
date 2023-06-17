@@ -13,10 +13,27 @@ class World{
         this.ctx = canvas.getContext("2d");
         this.draw(); 
         this.setWorld(); 
+        this.checkCollision(); 
     }
 
     setWorld(){
         this.character.world = this; 
+    }
+
+    checkCollision(){
+        setInterval(() => {
+            this.level.enemies.forEach((enemy) => {
+                /* console.log(this.character); 
+                console.log(enemy);  */
+
+                if(this.character.isColliding(enemy)){
+                    console.log("Character is colliding with" + enemy); 
+                }
+                else{
+                    //console.log("No collision"); 
+                }
+            })
+        }, 1000);
     }
 
 
