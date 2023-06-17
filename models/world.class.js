@@ -46,19 +46,28 @@ class World{
     drawOnMap(object){
         try{
             if(object.otherDirection){
-                this.ctx.save(); 
-                this.ctx.translate(object.width, 0); 
-                this.ctx.scale(-1, 1);
-                object.posX = object.posX * -1; 
+               this.flipImage(object); 
             }
-            this.ctx.drawImage(object.img , object.posX , object.posY, object.width , object.height) ; 
+            object.draw(this.ctx);
+            object.drawFrame(this.ctx);
+
             if(object.otherDirection){
-                object.posX = object.posX * -1; 
-                this.ctx.restore();
+               this.flipImageBack(object);
             }
         }
         catch(e){
             console.log("Could not load Image"); 
         }
+    }
+
+    flipImage(object){
+        this.ctx.save(); 
+        this.ctx.translate(object.width, 0); 
+        this.ctx.scale(-1, 1);
+        object.posX = object.posX * -1; 
+    }
+    flipImageBack(object){
+        object.posX = object.posX * -1; 
+        this.ctx.restore();
     }
 }

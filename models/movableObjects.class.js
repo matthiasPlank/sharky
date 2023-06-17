@@ -56,4 +56,15 @@ class MovableObjects{
             this.currentImage = 0; 
         }
     }
+
+    draw(ctx){
+        ctx.drawImage(this.img , this.posX , this.posY, this.width , this.height) ; 
+    }
+    drawFrame(ctx){
+        ctx.beginPath();
+        ctx.lineWidth = "2";
+        ctx.strokeStyle = "red";
+        ctx.rect( this.posX , this.posY ,  this.width , this.height); 
+        ctx.stroke(); 
+    }
 }
