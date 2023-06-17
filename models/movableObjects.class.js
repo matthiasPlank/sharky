@@ -1,4 +1,4 @@
-class MovableObjects{
+class MovableObjects extends DrawableObjects{
     posX = 100; 
     posY = 100;
     img; 
@@ -8,21 +8,8 @@ class MovableObjects{
     currentImage = 0 ; 
     speed = 0.15;  
     otherDirection = false; 
-
-    /*
-    constructor(posX , posY){
-        this.posX = posX; 
-        this.posY = posY; 
-    }
-    */
-
-    /*
-    constructor(posX, posY, imgPath){
-        this.posX = posX; 
-        this.posY = posY; 
-        this.img = loadImage; 
-    }
-    */
+    energy = 100; 
+    timeLastHit = 0; 
 
     loadImage(path){
         this.img = new Image(); 
@@ -77,5 +64,18 @@ class MovableObjects{
             this.posX < obj.posX && 
             this.posY < (obj.posY + obj.height)
             //obj.onCollisionCourse; // Optional: hiermit könnten wir schauen, ob ein Objekt sich in die richtige Richtung bewegt. Nur dann kollidieren wir. Nützlich bei Gegenständen, auf denen man stehen kann.
+    }
+    isHit(){
+        if(!this.isDead()){
+            this.energy -= 5; 
+            this.timeLastHit = new Date().getTime(); 
+        }
+    }
+    isDead(){
+        return this.energy < 0;  
+    }
+    isHurt(){
+        const timepassed = new Date().getTime() - this.timeLastHit; 
+        return timepassed < 1000; 
     }
 }

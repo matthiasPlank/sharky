@@ -27,14 +27,19 @@ class World{
                 console.log(enemy);  */
 
                 if(this.character.isColliding(enemy)){
-                    console.log("Character is colliding with" + enemy); 
+                    console.log("Character is colliding with: " + enemy); 
+                    this.character.isHit(); 
+                    console.log("Charcter Engery: " + this.character.energy) 
                 }
                 else{
                     //console.log("No collision"); 
                 }
             })
-        }, 1000);
+        }, 200);
     }
+
+
+
 
 
     draw(){

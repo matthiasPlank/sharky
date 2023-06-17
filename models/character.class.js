@@ -31,14 +31,36 @@ class Character extends MovableObjects{
         "img/1.Sharkie/3.Swim/5.png", 
         "img/1.Sharkie/3.Swim/6.png" 
     ]; 
+    DEAD_IMAGES = [
+        "img/1.Sharkie/6.dead/1.Poisoned/1.png", 
+        "img/1.Sharkie/6.dead/1.Poisoned/2.png", 
+        "img/1.Sharkie/6.dead/1.Poisoned/3.png", 
+        "img/1.Sharkie/6.dead/1.Poisoned/4.png", 
+        "img/1.Sharkie/6.dead/1.Poisoned/5.png", 
+        "img/1.Sharkie/6.dead/1.Poisoned/6.png", 
+        "img/1.Sharkie/6.dead/1.Poisoned/7.png", 
+        "img/1.Sharkie/6.dead/1.Poisoned/8.png", 
+        "img/1.Sharkie/6.dead/1.Poisoned/9.png", 
+        "img/1.Sharkie/6.dead/1.Poisoned/10.png", 
+        "img/1.Sharkie/6.dead/1.Poisoned/11.png",
+        "img/1.Sharkie/6.dead/1.Poisoned/12.png"
+    ]; 
+    HURT_IMAGES = [
+        "img/1.Sharkie/5.Hurt/1.Poisoned/1.png", 
+        "img/1.Sharkie/5.Hurt/1.Poisoned/2.png", 
+        "img/1.Sharkie/5.Hurt/1.Poisoned/3.png", 
+        "img/1.Sharkie/5.Hurt/1.Poisoned/4.png", 
+        "img/1.Sharkie/5.Hurt/1.Poisoned/5.png" 
+    ]; 
     world; 
     swim_sound = new Audio('./audio/swim.mp3'); 
 
     constructor(){
           super().loadImage("img/1.Sharkie/3.Swim/1.png");
           this.loadImages(this.SWIM_IMAGES); 
+          this.loadImages(this.DEAD_IMAGES); 
+          this.loadImages(this.HURT_IMAGES); 
           this.animate(); 
-
     }
 
     animate(){
@@ -70,8 +92,16 @@ class Character extends MovableObjects{
 
         setInterval(()=>{
 
-            if( this.world.keyboard.RIGHT  || this.world.keyboard.LEFT ||  this.world.keyboard.UP ||  this.world.keyboard.DOWN ) {
-                this.playAnimation(this.SWIM_IMAGES); 
+            if(this.isDead()){
+                this.playAnimation(this.DEAD_IMAGES); 
+            }
+            else if(this.isHurt()){
+                this.playAnimation(this.HURT_IMAGES); 
+            }
+            else{
+                if( this.world.keyboard.RIGHT  || this.world.keyboard.LEFT ||  this.world.keyboard.UP ||  this.world.keyboard.DOWN ) {
+                    this.playAnimation(this.SWIM_IMAGES); 
+                }
             }
         }, 100 )
     }
