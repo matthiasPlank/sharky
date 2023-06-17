@@ -43,6 +43,7 @@ class MovableObjects extends DrawableObjects{
     isHit(){
         if(!this.isDead()){
             this.energy -= 5; 
+            this.world.statusBar_Life.setPercentage(this.energy);
             this.timeLastHit = new Date().getTime(); 
         }
     }
