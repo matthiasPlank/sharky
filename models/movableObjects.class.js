@@ -11,19 +11,6 @@ class MovableObjects extends DrawableObjects{
     energy = 100; 
     timeLastHit = 0; 
 
-    loadImage(path){
-        this.img = new Image(); 
-        this.img.src = path; 
-    }
-
-    loadImages(imgPaths){
-        imgPaths.forEach(path => {
-            let img = new Image();
-            img.src = path; 
-            this.imageCache[path] = img ;  
-        });
-
-    }
 
     moveRight(){
 
@@ -44,19 +31,7 @@ class MovableObjects extends DrawableObjects{
         }
     }
 
-    draw(ctx){
-        ctx.drawImage(this.img , this.posX , this.posY, this.width , this.height) ; 
-    }
-    drawFrame(ctx){
-
-        if(this instanceof Character || this instanceof Enemy ){
-            ctx.beginPath();
-            ctx.lineWidth = "2";
-            ctx.strokeStyle = "red";
-            ctx.rect( this.posX , this.posY ,  this.width , this.height); 
-            ctx.stroke(); 
-        }
-    }
+   
     // Bessere Formel zur Kollisionsberechnung (Genauer)
     isColliding(obj) {
     return  (this.posX + this.width) > obj.posX && 
