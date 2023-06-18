@@ -9,7 +9,7 @@ class DrawableObjects{
     currentImage = 0 ; 
 
     constructor(){
-        
+
     }
 
     loadImage(path){
@@ -28,12 +28,20 @@ class DrawableObjects{
         ctx.drawImage(this.img , this.posX , this.posY, this.width , this.height) ; 
     }
     drawFrame(ctx){
-
         if(this instanceof Character || this instanceof Enemy ){
             ctx.beginPath();
             ctx.lineWidth = "2";
             ctx.strokeStyle = "red";
             ctx.rect( this.posX , this.posY ,  this.width , this.height); 
+            ctx.stroke(); 
+        }
+    }
+    drawFrameWithOffset(ctx){
+        if(this instanceof Character || this instanceof Enemy ){
+            ctx.beginPath();
+            ctx.lineWidth = "5";
+            ctx.strokeStyle = "blue";
+            ctx.rect( this.posX - this.offsetX , this.posY - this.offsetY,  this.width - this.offset.right - this.offset.left , this.height - this.offset.top - this.offset.bottom); 
             ctx.stroke(); 
         }
     }

@@ -10,7 +10,15 @@ class MovableObjects extends DrawableObjects{
     otherDirection = false; 
     energy = 100; 
     timeLastHit = 0; 
-
+    offset = {
+        top: 0, 
+        right: 0, 
+        left: 0, 
+        bottom: 0
+    }
+    offsetY = this.calcOffset(this.offset.top, this.offset.bottom);
+    offsetX = this.calcOffset(this.offset.left, this.offset.right);
+    
 
     moveRight(){
 
@@ -34,11 +42,24 @@ class MovableObjects extends DrawableObjects{
    
     // Bessere Formel zur Kollisionsberechnung (Genauer)
     isColliding(obj) {
-    return  (this.posX + this.width) > obj.posX && 
+                return  (this.posX + this.width) > obj.posX && 
             (this.posY + this.height) > obj.posY &&
             this.posX < obj.posX && 
             this.posY < (obj.posY + obj.height)
             //obj.onCollisionCourse; // Optional: hiermit könnten wir schauen, ob ein Objekt sich in die richtige Richtung bewegt. Nur dann kollidieren wir. Nützlich bei Gegenständen, auf denen man stehen kann.
+          
+         /*
+            return  (this.posX + this.width - this.offsetX) > (obj.posX + obj.offsetX) && 
+            (this.posY + this.height - this.offsetY) > (obj.posY + obj.offsetY) &&
+            (this.posX + this.offsetX )< (obj.posX - obj.offsetX) && 
+            (this.posY + this.offsetY) < (obj.posY + obj.height - obj.offsetY)  
+        */
+        /*
+            return (this.posX + this.width) > obj.posX && 
+            this.posX > (obj.posX + obj.width) && 
+            (this.posY + this.offsetY + this.height) < obj.posY &&
+            (this.posY + this.offsetY) < (obj.posY + obj.height)
+        */
     }
     isHit(){
         if(!this.isDead()){
@@ -53,5 +74,14 @@ class MovableObjects extends DrawableObjects{
     isHurt(){
         const timepassed = new Date().getTime() - this.timeLastHit; 
         return timepassed < 1000; 
+    }
+    calcOffset(x , y){
+        if ( x > y){
+            return ( y - x ); 
+        } else if (x < y){
+            return ( x - y ); 
+        } else {
+            return -x; 
+        }
     }
 }
