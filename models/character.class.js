@@ -56,16 +56,17 @@ class Character extends MovableObjects{
     world; 
     swim_sound = new Audio('./audio/swim.mp3'); 
     offset = {
-        top: 80, 
-        right: 20, 
-        left: 20, 
-        bottom: 15
+        top: 70, 
+        right: 25, 
+        left: 25, 
+        bottom: 35
     }
     offsetY = this.calcOffset(this.offset.top, this.offset.bottom);
     offsetX = this.calcOffset(this.offset.left, this.offset.right);
 
     constructor(){
           super().loadImage("img/1.Sharkie/3.Swim/1.png");
+          this.loadImages(this.IDLE_IMAGES); 
           this.loadImages(this.SWIM_IMAGES); 
           this.loadImages(this.DEAD_IMAGES); 
           this.loadImages(this.HURT_IMAGES); 

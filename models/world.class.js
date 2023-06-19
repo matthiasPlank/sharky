@@ -84,6 +84,7 @@ class World{
             }
         }
         catch(e){
+            debugger; 
             console.log("Could not load Image"); 
         }
     }

@@ -39,9 +39,10 @@ class DrawableObjects{
     drawFrameWithOffset(ctx){
         if(this instanceof Character || this instanceof Enemy ){
             ctx.beginPath();
-            ctx.lineWidth = "5";
+            ctx.lineWidth = "1";
             ctx.strokeStyle = "blue";
-            ctx.rect( this.posX - this.offsetX , this.posY - this.offsetY,  this.width - this.offset.right - this.offset.left , this.height - this.offset.top - this.offset.bottom); 
+            ctx.rect( this.posX + this.offset.left , this.posY + this.offset.top , this.width - this.offset.right - this.offset.left , this.height - this.offset.top - this.offset.bottom); 
+            //ctx.rect( this.posX - this.offsetX , this.posY - this.offsetY,  this.width - this.offset.right - this.offset.left , this.height - this.offset.top - this.offset.bottom); 
             ctx.stroke(); 
         }
     }

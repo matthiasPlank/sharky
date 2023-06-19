@@ -31,6 +31,9 @@ class MovableObjects extends DrawableObjects{
     }
 
     playAnimation(images){
+        if (this.currentImage >= images.length){
+            this.currentImage = 0; 
+        }
         let path = images[this.currentImage]; 
         this.img = this.imageCache[path]; 
         this.currentImage ++ ; 
@@ -42,12 +45,13 @@ class MovableObjects extends DrawableObjects{
    
     // Bessere Formel zur Kollisionsberechnung (Genauer)
     isColliding(obj) {
+        /*
                 return  (this.posX + this.width) > obj.posX && 
             (this.posY + this.height) > obj.posY &&
             this.posX < obj.posX && 
             this.posY < (obj.posY + obj.height)
             //obj.onCollisionCourse; // Optional: hiermit könnten wir schauen, ob ein Objekt sich in die richtige Richtung bewegt. Nur dann kollidieren wir. Nützlich bei Gegenständen, auf denen man stehen kann.
-          
+          */
          /*
             return  (this.posX + this.width - this.offsetX) > (obj.posX + obj.offsetX) && 
             (this.posY + this.height - this.offsetY) > (obj.posY + obj.offsetY) &&
@@ -60,6 +64,16 @@ class MovableObjects extends DrawableObjects{
             (this.posY + this.offsetY + this.height) < obj.posY &&
             (this.posY + this.offsetY) < (obj.posY + obj.height)
         */
+               /* console.log("try:");
+            console.log(this.posX + this.width - this.offset.right > obj.posX + obj.offset.left ); 
+            console.log(this.posY + this.height - this.offset.bottom > obj.posY + obj.offset.top); 
+            console.log(this.posX + this.offset.left < obj.posX + obj.width - obj.offset.right ); 
+            console.log( this.posY + this.offset.top < obj.height - obj.offset.bottom); 
+*/
+            return this.posX + this.width - this.offset.right > obj.posX + obj.offset.left &&
+            this.posY + this.height - this.offset.bottom > obj.posY + obj.offset.top &&
+            this.posX + this.offset.left < obj.posX + obj.width - obj.offset.right &&
+            this.posY + this.offset.top <obj.posY + obj.height - obj.offset.bottom;
     }
     isHit(){
         if(!this.isDead()){
