@@ -53,6 +53,11 @@ class Character extends MovableObjects{
         "img/1.Sharkie/5.Hurt/1.Poisoned/4.png", 
         "img/1.Sharkie/5.Hurt/1.Poisoned/5.png" 
     ]; 
+    SHOCK_IMAGES = [
+        "img/1.Sharkie/5.Hurt/2.Electric shock/1.png", 
+        "img/1.Sharkie/5.Hurt/2.Electric shock/2.png", 
+        "img/1.Sharkie/5.Hurt/2.Electric shock/3.png" 
+    ];
     world; 
     swim_sound = new Audio('./audio/swim.mp3'); 
     offset = {
@@ -61,13 +66,12 @@ class Character extends MovableObjects{
         left: 25, 
         bottom: 35
     }
-    offsetY = this.calcOffset(this.offset.top, this.offset.bottom);
-    offsetX = this.calcOffset(this.offset.left, this.offset.right);
 
     constructor(){
           super().loadImage("img/1.Sharkie/3.Swim/1.png");
           this.loadImages(this.IDLE_IMAGES); 
           this.loadImages(this.SWIM_IMAGES); 
+          this.loadImages(this.SHOCK_IMAGES); 
           this.loadImages(this.DEAD_IMAGES); 
           this.loadImages(this.HURT_IMAGES); 
           this.animate(); 
@@ -106,7 +110,15 @@ class Character extends MovableObjects{
                 this.playAnimation(this.DEAD_IMAGES); 
             }
             else if(this.isHurt()){
-                this.playAnimation(this.HURT_IMAGES); 
+                if(this.lastHitBy == "Pufferfish"){
+                    this.playAnimation(this.HURT_IMAGES); 
+                }
+                else if(this.lastHitBy == "Jellyfish"){
+                    this.playAnimation(this.SHOCK_IMAGES); 
+                }
+                else{
+                    this.playAnimation(this.HURT_IMAGES); 
+                }
             }
             else{
                 if( this.world.keyboard.RIGHT  || this.world.keyboard.LEFT ||  this.world.keyboard.UP ||  this.world.keyboard.DOWN ) {

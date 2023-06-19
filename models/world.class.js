@@ -30,7 +30,8 @@ class World{
                 console.log(enemy);  */
 
                 if(this.character.isColliding(enemy)){
-                    console.log("Character is colliding with: " + enemy); 
+                    console.log("Character is colliding with: " + enemy.constructor.name); 
+                    this.character.lastHitBy = enemy.constructor.name; 
                     this.character.isHit(); 
                     console.log("Charcter Engery: " + this.character.energy) 
                 }
@@ -74,7 +75,7 @@ class World{
                this.flipImage(object); 
             }
             object.draw(this.ctx);
-            object.drawFrame(this.ctx);
+            //object.drawFrame(this.ctx);
             if (object instanceof MovableObjects){
                 object.drawFrameWithOffset(this.ctx);
             }

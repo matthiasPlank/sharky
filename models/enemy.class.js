@@ -15,19 +15,46 @@ class Enemy extends MovableObjects{
         left: 0, 
         bottom: 10
     }
+    animationToogle = false; 
   
  
     constructor(){
         super().loadImage("./img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png");
-        this.posX = Math.random() * 500; 
-        this.speed += Math.random() * 0.25;
+        //this.posX = Math.random() * 500; 
+        //this.speed += Math.random() * 0.25;
         this.loadImages(this.SWIM_IMAGES); 
-        this.swim(); 
+        //this.swimLeft(); 
     
     }
 
-    swim(){
+    swimLeft(){
         this.moveLeft();
+        setInterval(()=>{
+            this.playAnimation(this.SWIM_IMAGES); 
+        }, 300 )
+    }
+
+    swimUp(){
+        this.moveUp();
+        setInterval(()=>{
+            this.playAnimation(this.SWIM_IMAGES); 
+        }, 300 )
+    }
+
+    swimAnimationUpAndDown(){
+        this.moveUp(); 
+        /*
+        setInterval(()=>{
+            if(this.animationToogle){
+                this.moveUp();
+                this.animationToogle = false; 
+            }
+            else{
+                this.moveDown(); 
+                this.animationToogle = true; 
+            }
+        }, 3000 ); 
+        */
         setInterval(()=>{
             this.playAnimation(this.SWIM_IMAGES); 
         }, 300 )
