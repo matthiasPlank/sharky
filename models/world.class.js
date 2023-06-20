@@ -28,7 +28,10 @@ class World{
             this.level.enemies.forEach((enemy) => {
                 /* console.log(this.character); 
                 console.log(enemy);  */
-
+                if(this.character.currentFinAttack && this.character.isInAttackRange(enemy) && !enemy.isDead){
+                    console.log("Character is attack " + enemy.constructor.name); 
+                    enemy.die(); 
+                }
                 if(this.character.isColliding(enemy)){
                     console.log("Character is colliding with: " + enemy.constructor.name); 
                     this.character.lastHitBy = enemy.constructor.name; 
@@ -78,6 +81,7 @@ class World{
             //object.drawFrame(this.ctx);
             if (object instanceof MovableObjects){
                 object.drawFrameWithOffset(this.ctx);
+                object.drawFrameWithOffsetAndRange(this.ctx);
             }
 
             if(object.otherDirection){

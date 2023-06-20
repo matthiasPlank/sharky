@@ -17,6 +17,7 @@ class MovableObjects extends DrawableObjects{
         bottom: 0
     }
     lastHitBy;
+    attackRange = 30; 
     
 
     moveRight(){
@@ -59,6 +60,12 @@ class MovableObjects extends DrawableObjects{
             this.posY + this.height - this.offset.bottom > obj.posY + obj.offset.top &&
             this.posX + this.offset.left < obj.posX + obj.width - obj.offset.right &&
             this.posY + this.offset.top <obj.posY + obj.height - obj.offset.bottom;
+    }
+    isInAttackRange(obj){
+        return this.posX + this.width - this.offset.right + this.attackRange > obj.posX + obj.offset.left &&
+        this.posY + this.height - this.offset.bottom + this.attackRange > obj.posY + obj.offset.top &&
+        this.posX + this.offset.left - this.attackRange < obj.posX + obj.width - obj.offset.right &&
+        this.posY + this.offset.top - this.attackRange  < obj.posY + obj.height - obj.offset.bottom;
     }
     isHit(){
         if(!this.isDead()){

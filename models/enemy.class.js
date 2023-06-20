@@ -9,6 +9,11 @@ class Enemy extends MovableObjects{
         "img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim4.png", 
         "img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim5.png"
     ] ; 
+    DIE_IMAGES = [
+        "img/2.Enemy/1.Puffer fish (3 color options)/4.DIE/1.1.png", 
+        "img/2.Enemy/1.Puffer fish (3 color options)/4.DIE/1.2.png", 
+        "img/2.Enemy/1.Puffer fish (3 color options)/4.DIE/1.3.png"
+    ];
     offset = {
         top: 0, 
         right: 5, 
@@ -16,6 +21,12 @@ class Enemy extends MovableObjects{
         bottom: 10
     }
     animationToogle = false; 
+    swimUpAndDownInterval; 
+    swimUpInterval; 
+    swimLeftInterval; 
+    dieInterval; 
+    isDead = false; 
+    dieAniamtionCounter = 0; 
   
  
     constructor(){
@@ -23,20 +34,21 @@ class Enemy extends MovableObjects{
         //this.posX = Math.random() * 500; 
         //this.speed += Math.random() * 0.25;
         this.loadImages(this.SWIM_IMAGES); 
+        this.loadImages(this.DIE_IMAGES); 
         //this.swimLeft(); 
     
     }
 
     swimLeft(){
         this.moveLeft();
-        setInterval(()=>{
+        this.swimLeftInterval = setInterval(()=>{
             this.playAnimation(this.SWIM_IMAGES); 
         }, 300 )
     }
 
     swimUp(){
         this.moveUp();
-        setInterval(()=>{
+        this.swimUpInterval = setInterval(()=>{
             this.playAnimation(this.SWIM_IMAGES); 
         }, 300 )
     }
@@ -55,8 +67,29 @@ class Enemy extends MovableObjects{
             }
         }, 3000 ); 
         */
-        setInterval(()=>{
+        this.swimUpAndDownInterval = setInterval(()=>{
             this.playAnimation(this.SWIM_IMAGES); 
         }, 300 )
+    }
+
+    die(){
+        console.log("DIE");
+        this.isDead = true; 
+        this.dieAniamtionCounter = 0; 
+        clearInterval(this.swimUpAndDownInterval); 
+        clearInterval(this.swimLeftInterval); 
+        clearInterval(this.swimUpInterval); 
+        this.dieInterval = setInterval(()=>{
+            if(this.dieAniamtionCounter < 3){
+                this.playAnimation(this.DIE_IMAGES);
+                //debugger; 
+                this.dieAniamtionCounter++; 
+                console.log("die Interval" +  this.dieAniamtionCounter);
+            }
+            else{
+                clearInterval(this.dieInterval); 
+            }
+        }, 300 )
+     
     }
 }

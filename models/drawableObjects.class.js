@@ -46,4 +46,15 @@ class DrawableObjects{
             ctx.stroke(); 
         }
     }
+    drawFrameWithOffsetAndRange(ctx){
+        if(this instanceof Character || this instanceof Enemy ){
+            ctx.beginPath();
+            ctx.lineWidth = "1";
+            ctx.strokeStyle = "red";
+            ctx.rect( this.posX + this.offset.left - this.attackRange , this.posY + this.offset.top - this.attackRange, this.width - this.offset.right - this.offset.left + 2*this.attackRange , this.height - this.offset.top - this.offset.bottom + 2*this.attackRange); 
+            //ctx.rect( this.posX - this.offsetX , this.posY - this.offsetY,  this.width - this.offset.right - this.offset.left , this.height - this.offset.top - this.offset.bottom); 
+            ctx.stroke(); 
+        }
+    }
 }
+
