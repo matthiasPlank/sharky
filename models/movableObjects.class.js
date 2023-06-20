@@ -18,6 +18,8 @@ class MovableObjects extends DrawableObjects{
     }
     lastHitBy;
     attackRange = 30; 
+
+    moveLeftInterval; 
     
 
     moveRight(){
@@ -27,7 +29,7 @@ class MovableObjects extends DrawableObjects{
     }
 
     moveLeft(){
-        setInterval(()=>{
+        this.moveLeftInterval = setInterval(()=>{
            this.posX -= this.speed;  
         }, 1000/60 )
     }

@@ -79,6 +79,7 @@ class Enemy extends MovableObjects{
         clearInterval(this.swimUpAndDownInterval); 
         clearInterval(this.swimLeftInterval); 
         clearInterval(this.swimUpInterval); 
+        clearInterval(this.moveLeftInterval); 
         this.dieInterval = setInterval(()=>{
             if(this.dieAniamtionCounter < 3){
                 this.playAnimation(this.DIE_IMAGES);
@@ -88,6 +89,7 @@ class Enemy extends MovableObjects{
             }
             else{
                 clearInterval(this.dieInterval); 
+               this.moveUp();  
             }
         }, 300 )
      
