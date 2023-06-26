@@ -194,8 +194,8 @@ class Character extends MovableObjects{
                 this.currentBubbleAttackCounter++; 
             }
             else{
-                this.world.bubble = new Bubble(this.posX + this.width-20, this.posY + (this.height/2)); 
-                this.world.bubble.visible = true; 
+                this.world.bubbles.push(new Bubble(this.posX + this.width-20, this.posY + (this.height/2))); 
+                //this.world.bubble.visible = true; 
                 this.currentBubbleAttackCounter = 0;
                 this.currentBubbleAttack = false; 
                 this.playAnimation(this.SWIM_IMAGES); 
