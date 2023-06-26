@@ -9,6 +9,7 @@ class World{
     statusBar_Life = new StatusBar("LIFE"); 
     statusBar_Coin =  new StatusBar("COIN"); 
     statusBar_Poison = new StatusBar("POISON"); 
+    bubble = new Bubble(0,0); 
 
     constructor(canvas , keyboard){
         this.canvas = canvas; 
@@ -30,7 +31,9 @@ class World{
                 console.log(enemy);  */
                 if(this.character.currentFinAttack && this.character.isInAttackRange(enemy) && !enemy.isDead){
                     console.log("Character is attack " + enemy.constructor.name); 
-                    enemy.die(); 
+                    if(enemy instanceof Pufferfish){
+                        enemy.die(); 
+                    }
                 }
                 if(this.character.isColliding(enemy)){
                     console.log("Character is colliding with: " + enemy.constructor.name); 
@@ -52,6 +55,9 @@ class World{
 
         this.addObjectArrayToMap(this.level.backgroundObjects); 
         this.drawOnMap(this.character); 
+        if(this.bubble.visible){
+            this.drawOnMap(this.bubble); 
+        }
         this.addObjectArrayToMap(this.level.enemies); 
       
 

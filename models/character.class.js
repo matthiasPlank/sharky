@@ -68,6 +68,16 @@ class Character extends MovableObjects{
         "img/1.Sharkie/4.Attack/Fin slap/7.png", 
         "img/1.Sharkie/4.Attack/Fin slap/8.png"
     ]; 
+    BUBBLE_ATTACK_IMAGE = [
+        "img/1.Sharkie/4.Attack/Bubble trap/op1/1.png", 
+        "img/1.Sharkie/4.Attack/Bubble trap/op1/2.png", 
+        "img/1.Sharkie/4.Attack/Bubble trap/op1/3.png", 
+        "img/1.Sharkie/4.Attack/Bubble trap/op1/4.png", 
+        "img/1.Sharkie/4.Attack/Bubble trap/op1/5.png", 
+        "img/1.Sharkie/4.Attack/Bubble trap/op1/6.png", 
+        "img/1.Sharkie/4.Attack/Bubble trap/op1/7.png", 
+        "img/1.Sharkie/4.Attack/Bubble trap/op1/8.png" 
+    ]; 
 
     world; 
     swim_sound = new Audio('./audio/swim.mp3'); 
@@ -80,6 +90,9 @@ class Character extends MovableObjects{
     currentFinAttack = false; 
     currentFinAttackCounter = 0; 
 
+    currentBubbleAttack = false; 
+    currentBubbleAttackCounter = 0; 
+
     constructor(){
           super().loadImage("img/1.Sharkie/3.Swim/1.png");
           this.loadImages(this.IDLE_IMAGES); 
@@ -88,6 +101,7 @@ class Character extends MovableObjects{
           this.loadImages(this.DEAD_IMAGES); 
           this.loadImages(this.HURT_IMAGES); 
           this.loadImages(this.ATTACK_IMAGE); 
+          this.loadImages(this.BUBBLE_ATTACK_IMAGE); 
           this.animate(); 
     }
 
@@ -144,7 +158,12 @@ class Character extends MovableObjects{
                     this.currentFinAttack = true; 
                     this.finAttack(); 
                 }
-                if( (this.world.keyboard.RIGHT  || this.world.keyboard.LEFT ||  this.world.keyboard.UP ||  this.world.keyboard.DOWN) && (!this.currentFinAttack) ) {
+                if(this.world.keyboard.KeyD && !this.currentBubbleAttack){
+                    console.log("BubbleAttack");
+                    this.currentBubbleAttack = true; 
+                    this.bubbleAttack(); 
+                }
+                if( (this.world.keyboard.RIGHT  || this.world.keyboard.LEFT ||  this.world.keyboard.UP ||  this.world.keyboard.DOWN) && (!this.currentFinAttack && !this.currentBubbleAttack) ) {
                     this.playAnimation(this.SWIM_IMAGES); 
                 }
             }
@@ -167,5 +186,22 @@ class Character extends MovableObjects{
         }, 100);
     
        
+    }
+    bubbleAttack(){
+        let bubbleAttackInterval = setInterval(() => {
+            if(this.currentBubbleAttackCounter < 8){
+                this.playAnimation(this.BUBBLE_ATTACK_IMAGE);   
+                this.currentBubbleAttackCounter++; 
+            }
+            else{
+                this.world.bubble = new Bubble(this.posX + this.width-20, this.posY + (this.height/2)); 
+                this.world.bubble.visible = true; 
+                this.currentBubbleAttackCounter = 0;
+                this.currentBubbleAttack = false; 
+                this.playAnimation(this.SWIM_IMAGES); 
+                clearInterval(bubbleAttackInterval);
+            }
+        }, 100);
+
     }
 }
