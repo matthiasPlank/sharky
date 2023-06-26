@@ -194,7 +194,12 @@ class Character extends MovableObjects{
                 this.currentBubbleAttackCounter++; 
             }
             else{
-                this.world.bubbles.push(new Bubble(this.posX + this.width-20, this.posY + (this.height/2))); 
+                if(!this.otherDirection){
+                    this.world.bubbles.push(new Bubble(this.posX + this.width-20, this.posY + (this.height/2) , "R")); 
+                }
+                else{
+                    this.world.bubbles.push(new Bubble(this.posX + 20, this.posY + (this.height/2), "L")); 
+                }
                 //this.world.bubble.visible = true; 
                 this.currentBubbleAttackCounter = 0;
                 this.currentBubbleAttack = false; 

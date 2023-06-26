@@ -5,18 +5,25 @@ class Bubble extends MovableObjects{
     width=40;
     height=40; 
     speed=1; 
+    direction = "R"; 
 
-    constructor(posX, posY){
+    constructor(posX, posY, direction){
         super().loadImage("img/1.Sharkie/4.Attack/Bubble trap/Bubble.png");
         this.loadImages(this.BUBBLE_IMAGE);
         console.log("Bubble created");
         this.posX = posX; 
         this.posY = posY; 
+        this.direction = direction; 
         this.animateBubble(); 
     }
 
     animateBubble(){
-        this.moveRight();
+        if(this.direction == "R"){
+            this.moveRight();
+        }
+        else{
+            this.moveLeft(); 
+        }
         this.moveUp();
         setInterval(()=>{
             this.playAnimation(this.BUBBLE_IMAGE); 
