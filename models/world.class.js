@@ -62,6 +62,7 @@ class World{
         this.addObjectArrayToMap(this.level.backgroundObjects); 
         this.drawOnMap(this.character); 
         this.addObjectArrayToMap(this.bubbles); 
+        this.addObjectArrayToMap(this.level.coins); 
         this.addObjectArrayToMap(this.level.enemies); 
       
 
