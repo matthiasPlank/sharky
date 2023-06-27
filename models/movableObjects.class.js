@@ -6,7 +6,7 @@ class MovableObjects extends DrawableObjects{
     width = 100; 
     imageCache = {}; 
     currentImage = 0 ; 
-    speed = 0.15;  
+    speed = 0.15; 
     otherDirection = false; 
     energy = 100; 
     timeLastHit = 0; 

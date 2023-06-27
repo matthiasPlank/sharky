@@ -37,7 +37,7 @@ class DrawableObjects{
         }
     }
     drawFrameWithOffset(ctx){
-        if(this instanceof Character || this instanceof Enemy ){
+        if(this instanceof Character || this instanceof Enemy || this instanceof Bubble ){
             ctx.beginPath();
             ctx.lineWidth = "1";
             ctx.strokeStyle = "blue";
@@ -47,7 +47,7 @@ class DrawableObjects{
         }
     }
     drawFrameWithOffsetAndRange(ctx){
-        if(this instanceof Character || this instanceof Enemy ){
+        if(this instanceof Character || this instanceof Enemy || this instanceof Bubble  ){
             ctx.beginPath();
             ctx.lineWidth = "1";
             ctx.strokeStyle = "red";

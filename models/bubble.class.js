@@ -6,11 +6,17 @@ class Bubble extends MovableObjects{
     height=40; 
     speed=1; 
     direction = "R"; 
+    offset = {
+        top: 0, 
+        right: 0, 
+        left: 0, 
+        bottom: 0
+    }
 
     constructor(posX, posY, direction){
         super().loadImage("img/1.Sharkie/4.Attack/Bubble trap/Bubble.png");
         this.loadImages(this.BUBBLE_IMAGE);
-        console.log("Bubble created");
+        //console.log("Bubble created");
         this.posX = posX; 
         this.posY = posY; 
         this.direction = direction; 
@@ -27,7 +33,7 @@ class Bubble extends MovableObjects{
         this.moveUp();
         setInterval(()=>{
             this.playAnimation(this.BUBBLE_IMAGE); 
-            console.log("Bubble Image @" + this.posX + " / " + this.posY); 
+            //console.log("Bubble Image @" + this.posX + " / " + this.posY); 
         }, 300 )
     }
 }

@@ -35,6 +35,12 @@ class World{
                         enemy.die(); 
                     }
                 }
+                this.bubbles.forEach(bubble => {
+                    if (bubble.isColliding(enemy) && enemy instanceof Jellyfish){
+                        console.log("Bubble colliding with enemy"); 
+                        enemy.dieBubbleAnimation(); 
+                    }
+                });
                 if(this.character.isColliding(enemy)){
                     console.log("Character is colliding with: " + enemy.constructor.name); 
                     this.character.lastHitBy = enemy.constructor.name; 
