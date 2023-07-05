@@ -42,13 +42,13 @@ class StatusBar extends DrawableObjects{
             this.statusBarType = "LIFE"; 
         }
         else if (type == "COIN"){
-            this.loadImage("img/4. Marcadores/green/Coin/100_ copia 4.png");
+            this.loadImage("img/4. Marcadores/green/Coin/0_  copia 4.png");
             this.loadImages(this.IMAGES_COIN); 
             this.posY = 40; 
             this.statusBarType = "COIN"; 
         }
         else if (type == "POISON"){
-            this.loadImage("img/4. Marcadores/green/poisoned bubbles/100_ copia 3.png");
+            this.loadImage("img/4. Marcadores/green/poisoned bubbles/0_ copia 2.png");
             this.loadImages(this.IMAGES_POISON); 
             this.posY = 80; 
             this.statusBarType = "POISON"; 
@@ -61,10 +61,10 @@ class StatusBar extends DrawableObjects{
             this.loadImage(this.IMAGES_LIFE[this.getImageNumber()]);
         }
         else if (this.statusBarType == "COIN"){
-            this.loadImage(this.IMAGES_LIFE[this.getImageNumber()]);
+            this.loadImage(this.IMAGES_COIN[this.getImageNumber()]);
         }
         else if (this.statusBarType == "POISON"){
-            this.loadImage(this.IMAGES_LIFE[this.getImageNumber()]);
+            this.loadImage(this.IMAGES_POISON[this.getImageNumber()]);
         }
     }
 
@@ -83,6 +83,7 @@ class StatusBar extends DrawableObjects{
         return 0; 
        }
     }
+
 
 
 }

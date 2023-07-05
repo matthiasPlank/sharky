@@ -41,7 +41,7 @@ class World{
                         enemy.dieBubbleAnimation(); 
                     }
                 });
-                if(this.character.isColliding(enemy)){
+                if(this.character.isColliding(enemy) && !enemy.isDead){
                     console.log("Character is colliding with: " + enemy.constructor.name); 
                     this.character.lastHitBy = enemy.constructor.name; 
                     this.character.isHit(); 
@@ -50,7 +50,21 @@ class World{
                 else{
                     //console.log("No collision"); 
                 }
-            })
+            }); 
+            let iterationCount = 0;
+            this.level.coins.forEach((coin) => { 
+                if(this.character.isColliding(coin)){
+                    console.log("Character is colliding with: " + coin.constructor.name); 
+                    this.character.collectedCoins ++; 
+                    this.statusBar_Coin.setPercentage( (this.character.collectedCoins / ( this.level.coins.length + this.character.collectedCoins) ) * 100); 
+                    //console.log("Collected Coins:" +  this.character.collectedCoins) ;   
+                    //console.log("All Level Coins:" +  this.level.coins.length) ;   
+                    //console.log("Percentage:" + (this.character.collectedCoins / this.level.coins.length)  * 100 );                    
+                    this.level.coins.splice(iterationCount, 1);
+                }
+                iterationCount++; 
+                //console.log(this.level.coins); 
+            }); 
         }, 200);
     }
 

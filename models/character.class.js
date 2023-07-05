@@ -89,9 +89,9 @@ class Character extends MovableObjects{
     }
     currentFinAttack = false; 
     currentFinAttackCounter = 0; 
-
     currentBubbleAttack = false; 
     currentBubbleAttackCounter = 0; 
+    collectedCoins = 0; 
 
     constructor(){
           super().loadImage("img/1.Sharkie/3.Swim/1.png");
