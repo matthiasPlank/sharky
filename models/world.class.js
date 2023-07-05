@@ -51,18 +51,36 @@ class World{
                     //console.log("No collision"); 
                 }
             }); 
-            let iterationCount = 0;
+            let iterationCountCoin = 0;
             this.level.coins.forEach((coin) => { 
                 if(this.character.isColliding(coin)){
-                    console.log("Character is colliding with: " + coin.constructor.name); 
+                  
+                    this.level.coins.splice(iterationCountCoin, 1);
                     this.character.collectedCoins ++; 
                     this.statusBar_Coin.setPercentage( (this.character.collectedCoins / ( this.level.coins.length + this.character.collectedCoins) ) * 100); 
                     //console.log("Collected Coins:" +  this.character.collectedCoins) ;   
                     //console.log("All Level Coins:" +  this.level.coins.length) ;   
-                    //console.log("Percentage:" + (this.character.collectedCoins / this.level.coins.length)  * 100 );                    
-                    this.level.coins.splice(iterationCount, 1);
+                    //console.log("Percentage:" + (this.character.collectedCoins / this.level.coins.length)  * 100 );   
+                    //console.log("Character is colliding with: " + coin.constructor.name);                  
+                  
                 }
-                iterationCount++; 
+                iterationCountCoin++; 
+                //console.log(this.level.coins); 
+            }); 
+            let iterationCountPoison = 0;
+            this.level.poisons.forEach((poison) => { 
+                if(this.character.isColliding(poison)){
+
+                    this.level.poisons.splice(iterationCountPoison, 1);
+                    this.character.collectedPoisons ++; 
+                    this.statusBar_Poison.setPercentage( (this.character.collectedPoisons / ( this.level.poisons.length + this.character.collectedPoisons) ) * 100); 
+                   
+                    //console.log("Character is colliding with: " + poison.constructor.name); 
+                    //console.log("Percentage:" + (this.character.collectedPoisons / ( this.level.poisons.length + this.character.collectedPoisons) ) * 100 );  
+                    //console.log("All Level Posions:" +   ( this.level.poisons.length + this.character.collectedPoisons) ) ;   
+                    //console.log("Collected Coins:" +  this.character.collectedPoisons) ;  
+                }
+                iterationCountPoison++; 
                 //console.log(this.level.coins); 
             }); 
         }, 200);
@@ -77,6 +95,7 @@ class World{
         this.drawOnMap(this.character); 
         this.addObjectArrayToMap(this.bubbles); 
         this.addObjectArrayToMap(this.level.coins); 
+        this.addObjectArrayToMap(this.level.poisons); 
         this.addObjectArrayToMap(this.level.enemies); 
       
 
