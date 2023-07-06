@@ -10,6 +10,7 @@ class World{
     statusBar_Coin =  new StatusBar("COIN"); 
     statusBar_Poison = new StatusBar("POISON"); 
     bubbles = []; 
+    endbossFromLevel; 
 
     constructor(canvas , keyboard){
         this.canvas = canvas; 
@@ -18,6 +19,7 @@ class World{
         this.draw(); 
         this.setWorld(); 
         this.checkCollision(); 
+        this.checkEndBossDistance(); 
     }
 
     setWorld(){
@@ -147,5 +149,25 @@ class World{
     flipImageBack(object){
         object.posX = object.posX * -1; 
         this.ctx.restore();
+    }
+
+    checkEndBossDistance(){
+        let enemies = this.level.enemies; 
+        console.log("checkEndbos");
+        enemies.forEach(enemie => {
+            if(enemie instanceof Endboss){
+                this.endbossFromLevel = enemie; 
+                console.log("Endboss" + this.endbossFromLevel); 
+            }
+        });
+        setInterval(() => {
+                //console.log(this.endbossFromLevel.posX); 
+                //console.log(this.character.posX +600); 
+
+                if( ( ( this.character.posX + 600) > this.endbossFromLevel.posX ) && !this.endbossFromLevel.introPlayed){
+                    console.log("Character is at Endboss");
+                    this.endbossFromLevel.playIntro(); 
+                }
+        }, 200);
     }
 }

@@ -19,18 +19,54 @@ class Endboss extends MovableObjects {
         "img/2.Enemy/3 Final Enemy/2.floating/12.png",
         "img/2.Enemy/3 Final Enemy/2.floating/13.png" 
     ] ; 
+    INTRO_IMAGES = [
+        "img/2.Enemy/3 Final Enemy/1.Introduce/1.png", 
+        "img/2.Enemy/3 Final Enemy/1.Introduce/2.png", 
+        "img/2.Enemy/3 Final Enemy/1.Introduce/3.png", 
+        "img/2.Enemy/3 Final Enemy/1.Introduce/4.png", 
+        "img/2.Enemy/3 Final Enemy/1.Introduce/5.png", 
+        "img/2.Enemy/3 Final Enemy/1.Introduce/6.png", 
+        "img/2.Enemy/3 Final Enemy/1.Introduce/7.png", 
+        "img/2.Enemy/3 Final Enemy/1.Introduce/8.png", 
+        "img/2.Enemy/3 Final Enemy/1.Introduce/9.png", 
+        "img/2.Enemy/3 Final Enemy/1.Introduce/10.png"
+    ];
+
+    swimInterval;
+    introInterval; 
+    introIntervalCounter = 0; 
+    introPlayed = false; 
 
     constructor(){
         super().loadImage("img/2.Enemy/3 Final Enemy/2.floating/1.png");
         this.loadImages(this.SWIM_IMAGES); 
+        this.loadImages(this.INTRO_IMAGES); 
         this.swim(); 
     
     }
 
     swim(){
-        setInterval(()=>{
+        this.swimInterval = setInterval(()=>{
             this.playAnimation(this.SWIM_IMAGES); 
+            console.log("Endboss swim");
         }, 300 )
+    }
+
+    playIntro(){
+        console.log("playIntro"); 
+        clearInterval(this.swimInterval); 
+        this.introInterval = setInterval(()=>{
+            if( ( this.introIntervalCounter < this.INTRO_IMAGES.length ) && !this.introPlayed){
+                this.playAnimation(this.INTRO_IMAGES); 
+                this.introIntervalCounter ++; 
+            }
+            else{
+                clearInterval(this.introInterval); 
+                this.introPlayed = true; 
+                this.swim();
+            }
+        }, 300 )
+
     }
 
 }
