@@ -55,18 +55,23 @@ class Endboss extends MovableObjects {
     playIntro(){
         console.log("playIntro"); 
         clearInterval(this.swimInterval); 
+        //clearInterval(this.introInterval); 
         this.introInterval = setInterval(()=>{
             if( ( this.introIntervalCounter < this.INTRO_IMAGES.length ) && !this.introPlayed){
+                console.log(this.INTRO_IMAGES.length ); 
+                console.log(this.introIntervalCounter ); 
                 this.playAnimation(this.INTRO_IMAGES); 
                 this.introIntervalCounter ++; 
             }
             else{
-                clearInterval(this.introInterval); 
                 this.introPlayed = true; 
-                this.swim();
+                console.log("restart swim");   
+                this.swim(); 
+                clearInterval(this.introInterval);    
             }
         }, 300 )
 
     }
+
 
 }

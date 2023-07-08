@@ -11,6 +11,7 @@ class World{
     statusBar_Poison = new StatusBar("POISON"); 
     bubbles = []; 
     endbossFromLevel; 
+    characterisAtEndboss = false; 
 
     constructor(canvas , keyboard){
         this.canvas = canvas; 
@@ -153,7 +154,7 @@ class World{
 
     checkEndBossDistance(){
         let enemies = this.level.enemies; 
-        console.log("checkEndbos");
+       
         enemies.forEach(enemie => {
             if(enemie instanceof Endboss){
                 this.endbossFromLevel = enemie; 
@@ -163,10 +164,10 @@ class World{
         setInterval(() => {
                 //console.log(this.endbossFromLevel.posX); 
                 //console.log(this.character.posX +600); 
-
-                if( ( ( this.character.posX + 600) > this.endbossFromLevel.posX ) && !this.endbossFromLevel.introPlayed){
+                if( ( ( this.character.posX + 600) > this.endbossFromLevel.posX ) && !this.endbossFromLevel.introPlayed && !this.characterisAtEndboss){
                     console.log("Character is at Endboss");
                     this.endbossFromLevel.playIntro(); 
+                    this.characterisAtEndboss = true; 
                 }
         }, 200);
     }
