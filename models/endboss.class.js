@@ -1,9 +1,11 @@
-class Endboss extends MovableObjects {
+class Endboss extends Enemy {
 
     height = 400; 
     width = 400; 
-    posY = -50;
+    posY = -5000;
+    //posX = 2300; 
     posX = 2300; 
+  
     SWIM_IMAGES = [
         "img/2.Enemy/3 Final Enemy/2.floating/1.png", 
         "img/2.Enemy/3 Final Enemy/2.floating/2.png", 
@@ -31,11 +33,16 @@ class Endboss extends MovableObjects {
         "img/2.Enemy/3 Final Enemy/1.Introduce/9.png", 
         "img/2.Enemy/3 Final Enemy/1.Introduce/10.png"
     ];
-
     swimInterval;
     introInterval; 
     introIntervalCounter = 0; 
     introPlayed = false; 
+    offset = {
+        top: 200, 
+        right: 10, 
+        left: 10, 
+        bottom: 60
+    }
 
     constructor(){
         super().loadImage("img/2.Enemy/3 Final Enemy/2.floating/1.png");
@@ -56,10 +63,12 @@ class Endboss extends MovableObjects {
         console.log("playIntro"); 
         clearInterval(this.swimInterval); 
         //clearInterval(this.introInterval); 
+
         this.introInterval = setInterval(()=>{
             if( ( this.introIntervalCounter < this.INTRO_IMAGES.length ) && !this.introPlayed){
                 console.log(this.INTRO_IMAGES.length ); 
                 console.log(this.introIntervalCounter ); 
+                this.posY = -50;
                 this.playAnimation(this.INTRO_IMAGES); 
                 this.introIntervalCounter ++; 
             }
@@ -69,7 +78,7 @@ class Endboss extends MovableObjects {
                 this.swim(); 
                 clearInterval(this.introInterval);    
             }
-        }, 300 )
+        }, 100 )
 
     }
 
