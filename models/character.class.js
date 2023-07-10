@@ -220,17 +220,20 @@ class Character extends MovableObjects{
             }
             else{
                 if(!this.otherDirection){
-                    this.world.bubbles.push(new Bubble(this.posX + this.width-20, this.posY + (this.height/2) , "R" , (this.collectedPoisons > 0 && this.world.characterisAtEndboss) ));
-                    if(this.collectedPoisons > 0 && this.world.characterisAtEndboss){
-                        this.collectedPoisons--;  
-                        this.world.statusBar_Poison.setPercentage( (this.collectedPoisons / ( this.world.level.poisons.length + this.collectedPoisons) ) * 100); 
+                    this.world.bubbles.push(new Bubble(this.posX + this.width-20, this.posY + (this.height/2) , "R" , ((this.collectedPoisons - this.poisonAttacks ) > 0 && this.world.characterisAtEndboss)));
+                    if((this.collectedPoisons - this.poisonAttacks ) > 0 && this.world.characterisAtEndboss){
+                        this.poisonAttacks ++; 
+                        console.log("attacks: " + this.poisonAttacks); 
+                        console.log("collected:" + this.collectedPoisons); 
+                        console.log("percent: " + ((this.collectedPoisons  - this.poisonAttacks) / ( this.world.level.poisons.length + this.collectedPoisons  - this.poisonAttacks) ) * 100); 
+                        this.world.statusBar_Poison.setPercentage( this.calcPosionPercentage() ); 
                     }
                 }
                 else{
-                    this.world.bubbles.push(new Bubble(this.posX + 20, this.posY + (this.height/2), "L", (this.collectedPoisons > 0 && this.world.characterisAtEndboss) )); 
-                    if(this.collectedPoisons > 0 && this.world.characterisAtEndboss){
-                        this.collectedPoisons--;  
-                        this.world.statusBar_Poison.setPercentage( (this.collectedPoisons / ( this.world.level.poisons.length + this.collectedPoisons) ) * 100); 
+                    this.world.bubbles.push(new Bubble(this.posX + 20, this.posY + (this.height/2), "L", ((this.collectedPoisons - this.poisonAttacks ) > 0 && this.world.characterisAtEndboss) )); 
+                    if((this.collectedPoisons - this.poisonAttacks ) > 0 && this.world.characterisAtEndboss){
+                        this.poisonAttacks ++; 
+                        this.world.statusBar_Poison.setPercentage( ((this.collectedPoisons  - this.poisonAttacks) / ( this.world.level.poisons.length + this.collectedPoisons  - this.poisonAttacks) ) * 100); 
                     }
                 }
                 //this.world.bubble.visible = true; 
@@ -241,5 +244,14 @@ class Character extends MovableObjects{
             }
         }, 100);
 
+    }
+
+    calcPosionPercentage(){
+        let calc = ((this.collectedPoisons  - this.poisonAttacks) / ( this.world.level.poisons.length + this.collectedPoisons + this.poisonAttacks) ) * 100; 
+        console.log("gesammelt: " + this.collectedPoisons); 
+        console.log("attacken: " + this.poisonAttacks); 
+        console.log("gesamt in wlelt: " + this.world.level.poisons.length); 
+        console.log("Ergebis: " + calc); 
+        return calc; 
     }
 }

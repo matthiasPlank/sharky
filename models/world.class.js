@@ -83,8 +83,8 @@ class World{
 
                     this.level.poisons.splice(iterationCountPoison, 1);
                     this.character.collectedPoisons ++; 
-                    this.statusBar_Poison.setPercentage( (this.character.collectedPoisons / ( this.level.poisons.length + this.character.collectedPoisons) ) * 100); 
-                   
+                    //this.statusBar_Poison.setPercentage( (this.character.collectedPoisons / ( this.level.poisons.length + this.character.collectedPoisons) ) * 100); 
+                    this.statusBar_Poison.setPercentage(this.character.calcPosionPercentage()); 
                     //console.log("Character is colliding with: " + poison.constructor.name); 
                     //console.log("Percentage:" + (this.character.collectedPoisons / ( this.level.poisons.length + this.character.collectedPoisons) ) * 100 );  
                     //console.log("All Level Posions:" +   ( this.level.poisons.length + this.character.collectedPoisons) ) ;   
