@@ -25,6 +25,14 @@ class StatusBar extends DrawableObjects{
         "img/4. Marcadores/green/poisoned bubbles/80_ copia 2.png", 
         "img/4. Marcadores/green/poisoned bubbles/100_ copia 3.png"
     ]; 
+    IMAGES_ENDBOSS = [
+        "img/4. Marcadores/Purple/0_ .png", 
+        "img/4. Marcadores/Purple/20__1.png", 
+        "img/4. Marcadores/Purple/40_ .png",
+        "img/4. Marcadores/Purple/60_ .png",
+        "img/4. Marcadores/Purple/80_ .png",
+        "img/4. Marcadores/Purple/100_ .png"
+    ]; 
     percentage = 100; 
     statusBarType; 
 
@@ -52,6 +60,13 @@ class StatusBar extends DrawableObjects{
             this.loadImages(this.IMAGES_POISON); 
             this.posY = 80; 
             this.statusBarType = "POISON"; 
+        }
+        else if (type == "ENDBOSS"){
+            this.loadImage("img/4. Marcadores/Purple/100_ .png");
+            this.loadImages(this.IMAGES_ENDBOSS); 
+            this.posY = 0;
+            this.posX = 500 
+            this.statusBarType = "ENDBOSS"; 
         }
     }
 

@@ -9,6 +9,7 @@ class World{
     statusBar_Life = new StatusBar("LIFE"); 
     statusBar_Coin =  new StatusBar("COIN"); 
     statusBar_Poison = new StatusBar("POISON"); 
+    statusBar_Endboss= new StatusBar("ENDBOSS"); 
     bubbles = []; 
     endbossFromLevel; 
     characterisAtEndboss = false; 
@@ -37,11 +38,17 @@ class World{
                     if(enemy instanceof Pufferfish){
                         enemy.die(); 
                     }
+                    if(enemy instanceof Endboss){
+                        console.log("Hit Endboss with Fin!"); 
+                    }
                 }
                 this.bubbles.forEach(bubble => {
                     if (bubble.isColliding(enemy) && enemy instanceof Jellyfish){
                         console.log("Bubble colliding with enemy"); 
                         enemy.dieBubbleAnimation(); 
+                    }
+                    if( bubble.isColliding(enemy) && enemy instanceof Endboss){
+                        console.log("Hit Endboss with Bubble!"); 
                     }
                 });
                 if(this.character.isColliding(enemy) && !enemy.isDead){
@@ -106,6 +113,9 @@ class World{
         this.drawOnMap(this.statusBar_Life); 
         this.drawOnMap(this.statusBar_Coin); 
         this.drawOnMap(this.statusBar_Poison); 
+        if(this.characterisAtEndboss){
+            this.drawOnMap(this.statusBar_Endboss); 
+        } 
         
         let self = this; 
         requestAnimationFrame(function (){
@@ -168,6 +178,7 @@ class World{
                     console.log("Character is at Endboss");
                     this.endbossFromLevel.playIntro(); 
                     this.characterisAtEndboss = true; 
+                    
                 }
         }, 200);
     }

@@ -78,6 +78,19 @@ class Character extends MovableObjects{
         "img/1.Sharkie/4.Attack/Bubble trap/op1/7.png", 
         "img/1.Sharkie/4.Attack/Bubble trap/op1/8.png" 
     ]; 
+    BUBBLE_POSION_ATTACK_IMAGE  = [
+        "img/1.Sharkie/4.Attack/Bubble trap/For Whale/1.png", 
+        "img/1.Sharkie/4.Attack/Bubble trap/For Whale/2.png", 
+        "img/1.Sharkie/4.Attack/Bubble trap/For Whale/3.png", 
+        "img/1.Sharkie/4.Attack/Bubble trap/For Whale/4.png", 
+        "img/1.Sharkie/4.Attack/Bubble trap/For Whale/5.png", 
+        "img/1.Sharkie/4.Attack/Bubble trap/For Whale/6.png", 
+        "img/1.Sharkie/4.Attack/Bubble trap/For Whale/7.png", 
+        "img/1.Sharkie/4.Attack/Bubble trap/For Whale/8.png" 
+    ];
+
+
+   
 
     world; 
     swim_sound = new Audio('./audio/swim.mp3'); 
@@ -93,6 +106,7 @@ class Character extends MovableObjects{
     currentBubbleAttackCounter = 0; 
     collectedCoins = 0; 
     collectedPoisons = 0; 
+    poisonAttacks = 0;
 
     constructor(){
           super().loadImage("img/1.Sharkie/3.Swim/1.png");
@@ -102,7 +116,8 @@ class Character extends MovableObjects{
           this.loadImages(this.DEAD_IMAGES); 
           this.loadImages(this.HURT_IMAGES); 
           this.loadImages(this.ATTACK_IMAGE); 
-          this.loadImages(this.BUBBLE_ATTACK_IMAGE); 
+          this.loadImages(this.BUBBLE_ATTACK_IMAGE);
+          this.loadImages(this.BUBBLE_POSION_ATTACK_IMAGE); 
           this.animate(); 
     }
 
@@ -189,17 +204,34 @@ class Character extends MovableObjects{
        
     }
     bubbleAttack(){
+       
         let bubbleAttackInterval = setInterval(() => {
             if(this.currentBubbleAttackCounter < 8){
-                this.playAnimation(this.BUBBLE_ATTACK_IMAGE);   
+    
+                if(this.collectedPoisons > 0 && this.world.characterisAtEndboss){
+                    console.log("Posion > 0" + this.collectedPoisons.length ); 
+                    this.playAnimation(this.BUBBLE_POSION_ATTACK_IMAGE);
+                }
+                else{
+                    console.log("Posion < 0"); 
+                    this.playAnimation(this.BUBBLE_ATTACK_IMAGE);  
+                }
                 this.currentBubbleAttackCounter++; 
             }
             else{
                 if(!this.otherDirection){
-                    this.world.bubbles.push(new Bubble(this.posX + this.width-20, this.posY + (this.height/2) , "R")); 
+                    this.world.bubbles.push(new Bubble(this.posX + this.width-20, this.posY + (this.height/2) , "R" , (this.collectedPoisons > 0 && this.world.characterisAtEndboss) ));
+                    if(this.collectedPoisons > 0 && this.world.characterisAtEndboss){
+                        this.collectedPoisons--;  
+                        this.world.statusBar_Poison.setPercentage( (this.collectedPoisons / ( this.world.level.poisons.length + this.collectedPoisons) ) * 100); 
+                    }
                 }
                 else{
-                    this.world.bubbles.push(new Bubble(this.posX + 20, this.posY + (this.height/2), "L")); 
+                    this.world.bubbles.push(new Bubble(this.posX + 20, this.posY + (this.height/2), "L", (this.collectedPoisons > 0 && this.world.characterisAtEndboss) )); 
+                    if(this.collectedPoisons > 0 && this.world.characterisAtEndboss){
+                        this.collectedPoisons--;  
+                        this.world.statusBar_Poison.setPercentage( (this.collectedPoisons / ( this.world.level.poisons.length + this.collectedPoisons) ) * 100); 
+                    }
                 }
                 //this.world.bubble.visible = true; 
                 this.currentBubbleAttackCounter = 0;
