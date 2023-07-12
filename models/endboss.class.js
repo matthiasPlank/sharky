@@ -33,6 +33,13 @@ class Endboss extends Enemy {
         "img/2.Enemy/3 Final Enemy/1.Introduce/9.png", 
         "img/2.Enemy/3 Final Enemy/1.Introduce/10.png"
     ];
+    DEAD_ENDBOSS_IMAGES = [
+        "img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 6.png", 
+        "img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 7.png", 
+        "img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 8.png", 
+        "img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 9.png", 
+        "img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 10.png"
+    ];
     world; 
     swimInterval;
     introInterval; 
@@ -44,18 +51,34 @@ class Endboss extends Enemy {
         left: 10, 
         bottom: 60
     }
+    dieAniamtionCounter = 0; 
 
     constructor(){
         super().loadImage("img/2.Enemy/3 Final Enemy/2.floating/1.png");
         this.loadImages(this.SWIM_IMAGES); 
         this.loadImages(this.INTRO_IMAGES); 
+        this.loadImages(this.DEAD_ENDBOSS_IMAGES); 
         this.swim(); 
+
     
     }
 
     swim(){
         this.swimInterval = setInterval(()=>{
-            this.playAnimation(this.SWIM_IMAGES); 
+            if(this.isDead()){
+                if(this.dieAniamtionCounter < this.DEAD_ENDBOSS_IMAGES.length){
+                    this.playAnimation(this.DEAD_ENDBOSS_IMAGES); 
+                    this.dieAniamtionCounter++;
+                } 
+                else{
+                    clearInterval(this.swimInterval); 
+                    console.log("Endboss is Dead - End of Game"); 
+                }
+            }
+            
+            else{
+                this.playAnimation(this.SWIM_IMAGES); 
+            }
             console.log("Endboss swim");
         }, 300 )
     }
@@ -81,10 +104,4 @@ class Endboss extends Enemy {
             }
         }, 100 )
     }
-
-    hit(){
-
-    }
-
-
 }

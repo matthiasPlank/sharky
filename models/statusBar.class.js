@@ -81,6 +81,9 @@ class StatusBar extends DrawableObjects{
         else if (this.statusBarType == "POISON"){
             this.loadImage(this.IMAGES_POISON[this.getImageNumber()]);
         }
+        else if (this.statusBarType == "ENDBOSS"){
+            this.loadImage(this.IMAGES_ENDBOSS[this.getImageNumber()]);
+        }
     }
 
     getImageNumber(){

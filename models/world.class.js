@@ -34,7 +34,7 @@ class World{
             this.level.enemies.forEach((enemy) => {
                 /* console.log(this.character); 
                 console.log(enemy);  */
-                if(this.character.currentFinAttack && this.character.isInAttackRange(enemy) && !enemy.isDead){
+                if(this.character.currentFinAttack && this.character.isInAttackRange(enemy) && !enemy.isDeadFlag){
                     console.log("Character is attack " + enemy.constructor.name); 
                     if(enemy instanceof Pufferfish){
                         enemy.die(); 
@@ -53,7 +53,7 @@ class World{
                         this.endbossFromLevel.isHit(); 
                     }
                 });
-                if(this.character.isColliding(enemy) && !enemy.isDead){
+                if(this.character.isColliding(enemy) && !enemy.isDeadFlag){
                     console.log("Character is colliding with: " + enemy.constructor.name); 
                     this.character.lastHitBy = enemy.constructor.name; 
                     this.character.isHit(); 

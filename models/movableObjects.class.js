@@ -77,15 +77,14 @@ class MovableObjects extends DrawableObjects{
                 this.timeLastHit = new Date().getTime(); 
             }
         }
-        else if(this instanceof Endboss){
-            console.log("Endboss Hit !!1!"); 
-        
+        else if(this instanceof Endboss && !this.isDead()){
+            console.log("Endboss Hit !!1!");
                 this.energy -= 5; 
                 this.world.statusBar_Endboss.setPercentage(this.energy);
-                this.timeLastHit = new Date().getTime(); 
-        
+                this.timeLastHit = new Date().getTime();   
         }
     }
+
     isDead(){
         return this.energy < 0;  
     }

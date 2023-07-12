@@ -25,7 +25,7 @@ class Enemy extends MovableObjects{
     swimUpInterval; 
     swimLeftInterval; 
     dieInterval; 
-    isDead = false; 
+    isDeadFlag = false; 
     dieAniamtionCounter = 0; 
   
  
@@ -74,7 +74,7 @@ class Enemy extends MovableObjects{
 
     die(){
         console.log("DIE");
-        this.isDead = true; 
+        this.isDeadFlag = true; 
         this.dieAniamtionCounter = 0; 
         clearInterval(this.swimUpAndDownInterval); 
         clearInterval(this.swimLeftInterval); 
@@ -94,4 +94,5 @@ class Enemy extends MovableObjects{
         }, 300 )
      
     }
+    
 }
