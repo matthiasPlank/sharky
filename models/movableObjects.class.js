@@ -70,10 +70,20 @@ class MovableObjects extends DrawableObjects{
         this.posY + this.offset.top - this.attackRange  < obj.posY + obj.height - obj.offset.bottom;
     }
     isHit(){
-        if(!this.isDead()){
-            this.energy -= 5; 
-            this.world.statusBar_Life.setPercentage(this.energy);
-            this.timeLastHit = new Date().getTime(); 
+        if(this instanceof Character){
+            if(!this.isDead()){
+                this.energy -= 5; 
+                this.world.statusBar_Life.setPercentage(this.energy);
+                this.timeLastHit = new Date().getTime(); 
+            }
+        }
+        else if(this instanceof Endboss){
+            console.log("Endboss Hit !!1!"); 
+        
+                this.energy -= 5; 
+                this.world.statusBar_Endboss.setPercentage(this.energy);
+                this.timeLastHit = new Date().getTime(); 
+        
         }
     }
     isDead(){

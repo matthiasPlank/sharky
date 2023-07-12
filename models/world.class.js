@@ -19,13 +19,14 @@ class World{
         this.keyboard = keyboard; 
         this.ctx = canvas.getContext("2d");
         this.draw(); 
-        this.setWorld(); 
         this.checkCollision(); 
         this.checkEndBossDistance(); 
+        this.setWorld(); 
     }
 
     setWorld(){
         this.character.world = this; 
+        this.endbossFromLevel.world = this; 
     }
 
     checkCollision(){
@@ -48,7 +49,8 @@ class World{
                         enemy.dieBubbleAnimation(); 
                     }
                     if( bubble.isColliding(enemy) && enemy instanceof Endboss){
-                        console.log("Hit Endboss with Bubble!"); 
+                        //console.log("Hit Endboss with Bubble!"); 
+                        this.endbossFromLevel.isHit(); 
                     }
                 });
                 if(this.character.isColliding(enemy) && !enemy.isDead){

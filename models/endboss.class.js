@@ -33,6 +33,7 @@ class Endboss extends Enemy {
         "img/2.Enemy/3 Final Enemy/1.Introduce/9.png", 
         "img/2.Enemy/3 Final Enemy/1.Introduce/10.png"
     ];
+    world; 
     swimInterval;
     introInterval; 
     introIntervalCounter = 0; 
@@ -79,6 +80,9 @@ class Endboss extends Enemy {
                 clearInterval(this.introInterval);    
             }
         }, 100 )
+    }
+
+    hit(){
 
     }
 
