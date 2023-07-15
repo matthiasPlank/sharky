@@ -11,6 +11,7 @@ class World{
     statusBar_Poison = new StatusBar("POISON"); 
     statusBar_Endboss= new StatusBar("ENDBOSS"); 
     bubbles = []; 
+    bubbleCounter = 0; 
     endbossFromLevel; 
     characterisAtEndboss = false; 
 
@@ -43,15 +44,19 @@ class World{
                         console.log("Hit Endboss with Fin!"); 
                     }
                 }
+                this.bubbleCounter = 0; 
                 this.bubbles.forEach(bubble => {
                     if (bubble.isColliding(enemy) && enemy instanceof Jellyfish){
                         console.log("Bubble colliding with enemy"); 
                         enemy.dieBubbleAnimation(); 
+                        //this.bubbles.splice(this.bubbleCounter, 1);
+                        this.removeBubble(this.bubbleCounter); 
                     }
                     if( bubble.isColliding(enemy) && enemy instanceof Endboss){
                         //console.log("Hit Endboss with Bubble!"); 
                         this.endbossFromLevel.isHit(); 
                     }
+                    this.bubbleCounter++; 
                 });
                 if(this.character.isColliding(enemy) && !enemy.isDeadFlag){
                     console.log("Character is colliding with: " + enemy.constructor.name); 
@@ -183,5 +188,12 @@ class World{
                     
                 }
         }, 200);
+    }
+
+    removeBubble(index){
+        setTimeout(() => {
+            this.bubbles.splice(index, 1);
+        }, 300);
+  
     }
 }
