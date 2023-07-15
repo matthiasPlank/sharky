@@ -78,7 +78,7 @@ class MovableObjects extends DrawableObjects{
             }
         }
         else if(this instanceof Endboss && !this.isDead()){
-            console.log("Endboss Hit !!1!");
+            console.log("Endboss Hit !!!");
                 this.energy -= 5; 
                 this.world.statusBar_Endboss.setPercentage(this.energy);
                 this.timeLastHit = new Date().getTime();   

@@ -40,6 +40,12 @@ class Endboss extends Enemy {
         "img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 9.png", 
         "img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 10.png"
     ];
+    HURT_ENDBOSS_IMAGES = [
+        "img/2.Enemy/3 Final Enemy/Hurt/1.png", 
+        "img/2.Enemy/3 Final Enemy/Hurt/2.png", 
+        "img/2.Enemy/3 Final Enemy/Hurt/3.png", 
+        "img/2.Enemy/3 Final Enemy/Hurt/4.png"
+    ];
     world; 
     swimInterval;
     introInterval; 
@@ -58,9 +64,8 @@ class Endboss extends Enemy {
         this.loadImages(this.SWIM_IMAGES); 
         this.loadImages(this.INTRO_IMAGES); 
         this.loadImages(this.DEAD_ENDBOSS_IMAGES); 
-        this.swim(); 
-
-    
+        this.loadImages(this.HURT_ENDBOSS_IMAGES); 
+        this.swim();     
     }
 
     swim(){
@@ -75,7 +80,9 @@ class Endboss extends Enemy {
                     console.log("Endboss is Dead - End of Game"); 
                 }
             }
-            
+            else if(this.isHurt()){
+                this.playAnimation(this.HURT_ENDBOSS_IMAGES); 
+            }
             else{
                 this.playAnimation(this.SWIM_IMAGES); 
             }
