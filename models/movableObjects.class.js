@@ -84,6 +84,23 @@ class MovableObjects extends DrawableObjects{
                 this.timeLastHit = new Date().getTime();   
         }
     }
+    isHitbyBubble(bubble){
+
+      if(this instanceof Endboss && !this.isDead()){
+            console.log("Endboss Hit by Bubble!!!");
+            if(bubble.isPoisoned){
+                this.energy -= 10; 
+                console.log("Hit by Poisoned buuble"); 
+            }
+            else{
+                this.energy -= 1;
+                console.log("Hit by normal  buuble"); 
+            }
+               
+                this.world.statusBar_Endboss.setPercentage(this.energy);
+                this.timeLastHit = new Date().getTime();   
+        }
+    }
 
     isDead(){
         return this.energy < 0;  

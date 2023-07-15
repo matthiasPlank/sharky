@@ -54,7 +54,8 @@ class World{
                     }
                     if( bubble.isColliding(enemy) && enemy instanceof Endboss){
                         //console.log("Hit Endboss with Bubble!"); 
-                        this.endbossFromLevel.isHit(); 
+                        this.endbossFromLevel.isHitbyBubble(bubble); 
+                        this.removeBubble(this.bubbleCounter); 
                     }
                     this.bubbleCounter++; 
                 });
@@ -82,7 +83,7 @@ class World{
                   
                 }
                 iterationCountCoin++; 
-                //console.log(this.level.coins); 
+            
             }); 
             let iterationCountPoison = 0;
             this.level.poisons.forEach((poison) => { 
@@ -98,7 +99,7 @@ class World{
                     //console.log("Collected Coins:" +  this.character.collectedPoisons) ;  
                 }
                 iterationCountPoison++; 
-                //console.log(this.level.coins); 
+              
             }); 
         }, 200);
     }
@@ -179,13 +180,10 @@ class World{
             }
         });
         setInterval(() => {
-                //console.log(this.endbossFromLevel.posX); 
-                //console.log(this.character.posX +600); 
                 if( ( ( this.character.posX + 600) > this.endbossFromLevel.posX ) && !this.endbossFromLevel.introPlayed && !this.characterisAtEndboss){
                     console.log("Character is at Endboss");
                     this.endbossFromLevel.playIntro(); 
-                    this.characterisAtEndboss = true; 
-                    
+                    this.characterisAtEndboss = true;                   
                 }
         }, 200);
     }

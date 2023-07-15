@@ -46,10 +46,26 @@ class Endboss extends Enemy {
         "img/2.Enemy/3 Final Enemy/Hurt/3.png", 
         "img/2.Enemy/3 Final Enemy/Hurt/4.png"
     ];
+    ATTACK_ENDBOSS_IMAGES = [
+        "img/2.Enemy/3 Final Enemy/Attack/1.png", 
+        "img/2.Enemy/3 Final Enemy/Attack/2.png", 
+        "img/2.Enemy/3 Final Enemy/Attack/3.png", 
+        "img/2.Enemy/3 Final Enemy/Attack/4.png", 
+        "img/2.Enemy/3 Final Enemy/Attack/5.png", 
+        "img/2.Enemy/3 Final Enemy/Attack/6.png"
+    ];
     world; 
     swimInterval;
     introInterval; 
     introIntervalCounter = 0; 
+    attackInterval; 
+    attackIntervalCounter = 0; 
+    attackIsPlaying = false;
+    timeToAttack = false; 
+    
+    saveOffsetWhileAttackLeft = 0; 
+    saveOffsetWhileAttackRight = 0; 
+
     introPlayed = false; 
     offset = {
         top: 200, 
@@ -65,28 +81,37 @@ class Endboss extends Enemy {
         this.loadImages(this.INTRO_IMAGES); 
         this.loadImages(this.DEAD_ENDBOSS_IMAGES); 
         this.loadImages(this.HURT_ENDBOSS_IMAGES); 
+        this.loadImages(this.ATTACK_ENDBOSS_IMAGES); 
         this.swim();     
+        this.attackTimeInterval(); 
     }
 
     swim(){
         this.swimInterval = setInterval(()=>{
-            if(this.isDead()){
-                if(this.dieAniamtionCounter < this.DEAD_ENDBOSS_IMAGES.length){
-                    this.playAnimation(this.DEAD_ENDBOSS_IMAGES); 
-                    this.dieAniamtionCounter++;
-                } 
-                else{
+            if(this.introPlayed){
+                if(this.isDead()){
+                    if(this.dieAniamtionCounter < this.DEAD_ENDBOSS_IMAGES.length){
+                        this.playAnimation(this.DEAD_ENDBOSS_IMAGES); 
+                        this.dieAniamtionCounter++;
+                    } 
+                    else{
+                        clearInterval(this.swimInterval); 
+                        console.log("Endboss is Dead - End of Game"); 
+                    }
+                }
+                else if(this.isHurt()){
+                    this.playAnimation(this.HURT_ENDBOSS_IMAGES); 
+                }
+                else if(this.timeToAttack){
+                    this.attack();  
+                    console.log("Endboss attack");
                     clearInterval(this.swimInterval); 
-                    console.log("Endboss is Dead - End of Game"); 
+                }
+                else{
+                    this.playAnimation(this.SWIM_IMAGES); 
                 }
             }
-            else if(this.isHurt()){
-                this.playAnimation(this.HURT_ENDBOSS_IMAGES); 
-            }
-            else{
-                this.playAnimation(this.SWIM_IMAGES); 
-            }
-            console.log("Endboss swim");
+            //console.log("Endboss swim");
         }, 300 )
     }
 
@@ -110,5 +135,41 @@ class Endboss extends Enemy {
                 clearInterval(this.introInterval);    
             }
         }, 100 )
+    }
+
+    attackTimeInterval(){
+        setInterval(() => {
+            if(!this.timeToAttack){
+                this.timeToAttack = true; 
+            }
+            console.log("Time to Attack: " + this.timeToAttack);
+        }, 5000);
+
+    }
+
+    attack(){
+
+        this.saveOffsetWhileAttackLeft = this.offset.left; 
+        this.saveOffsetWhileAttackRight =  this.offset.right ; 
+        this.offset.left = -100; 
+        this.offset.right = -100; 
+
+        this.attackInterval = setInterval(() => {
+            if( ( this.attackIntervalCounter < this.ATTACK_ENDBOSS_IMAGES.length )){
+                this.playAnimation(this.ATTACK_ENDBOSS_IMAGES); 
+                this.attackIntervalCounter++; 
+            }
+            else{
+                this.attackIsPlaying = true; 
+                this.timeToAttack = false; 
+                this.attackIntervalCounter = 0;
+                this.offset.left =  this.saveOffsetWhileAttackLeft ; 
+                this.offset.right =  this.saveOffsetWhileAttackRight; 
+        
+                this.swim(); 
+                clearInterval(this.attackInterval);    
+            }
+        }, 200);
+
     }
 }
