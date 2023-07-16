@@ -2,9 +2,15 @@ let world;
 let canvas; 
 let keyboard = new Keyboard(); 
 
+
 function init(){
     let canvas = document.getElementById("canvas");
     world = new World(canvas , keyboard); 
+}
+
+function startGame(){
+    document.getElementById("startScreen").classList.add("dsp-none"); 
+
 }
 
 window.addEventListener("keydown", (event) => {

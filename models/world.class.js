@@ -14,6 +14,7 @@ class World{
     bubbleCounter = 0; 
     endbossFromLevel; 
     characterisAtEndboss = false; 
+    pause = false; 
 
     constructor(canvas , keyboard){
         this.canvas = canvas; 

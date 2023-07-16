@@ -1,13 +1,80 @@
+@font-face {
+    font-family: "sharkyFont";
+    src: url("img/5.Font/Luckiest_Guy/LuckiestGuy-Regular.ttf");
+}
+
 body{
     margin: 0px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    font-family: "sharkyFont";
+}
+h1{
+    font-size: 64px;
+
 }
 canvas{
-    /*
-    width: 720px;
-    height: 480px;
-    */
     background-color: black;
+    display: block;
+    border: 1px solid black;
+    position: absolute;
+ 
+}
+
+.dsp-none{
+    display: none;
+}
+
+.background img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover;
+    z-index: -1;
+    filter: opacity(20%)
+}
+#canvasPanels{
+    height: 480px;
+    width: 720px;
+    position: relative; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#startScreen{
+    position: absolute;
+    top: 0; 
+    left: 0;
+    height: 480px;
+    width: 720px;
+    background-color: black;
+}
+#startScreen .startButton{
+    position: absolute;
+    bottom: 100px; 
+    right: 50px;
+    width: 300px;
+}
+#startScreen .startButton:hover{
+    filter: invert();
+    cursor: pointer;
+}
+#startScreen .startImage{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+@media only screen and (max-width: 720px){
+    canvas{
+        width: 100%; 
+    }
+}
+@media only screen and (max-height: 480px){
+    canvas{
+        height: 100vh;
+    }
 }

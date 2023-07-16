@@ -30,7 +30,19 @@
     <script src="./js/game.js"></script>
 </head>
 <body onload="init()">
+    <div class="background">
+        <img src="img/3. Background/Legacy/Light/2.png" alt="">
+    </div>
     <h1>Sharky</h1>
-    <canvas width="720" height="480" id="canvas"></canvas> 
+    <div id=canvasPanels>
+        <canvas width="720" height="480" id="canvas"></canvas> 
+        <div id="OverlayPanels">
+            <div id="startScreen">
+                <img class="startImage" src="img/3. Background/Mesa de trabajo 1.png" alt="">
+                <img class="startButton" onclick="startGame()" src="img/6.Botones/Start/2.png" alt="">
+            </div>
+
+        </div>
+    </div>
 </body>
 </html>
