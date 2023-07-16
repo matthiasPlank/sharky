@@ -4,12 +4,15 @@ let keyboard = new Keyboard();
 
 
 function init(){
-    let canvas = document.getElementById("canvas");
-    world = new World(canvas , keyboard); 
+  
+  
 }
 
 function startGame(){
     document.getElementById("startScreen").classList.add("dsp-none"); 
+    let canvas = document.getElementById("canvas");
+    initLevel(); 
+    world = new World(canvas , keyboard); 
 
 }
 

@@ -47,13 +47,13 @@ class World{
                 }
                 this.bubbleCounter = 0; 
                 this.bubbles.forEach(bubble => {
-                    if (bubble.isColliding(enemy) && enemy instanceof Jellyfish){
+                    if (bubble.isColliding(enemy) && enemy instanceof Jellyfish && !enemy.isDeadFlag){
                         console.log("Bubble colliding with enemy"); 
                         enemy.dieBubbleAnimation(); 
                         //this.bubbles.splice(this.bubbleCounter, 1);
                         this.removeBubble(this.bubbleCounter); 
                     }
-                    if( bubble.isColliding(enemy) && enemy instanceof Endboss){
+                    if( bubble.isColliding(enemy) && enemy instanceof Endboss && !enemy.isDeadFlag){
                         //console.log("Hit Endboss with Bubble!"); 
                         this.endbossFromLevel.isHitbyBubble(bubble); 
                         this.removeBubble(this.bubbleCounter); 

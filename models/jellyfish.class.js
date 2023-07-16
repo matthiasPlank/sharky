@@ -37,6 +37,7 @@ class Jellyfish extends Enemy{
     dieBubbleAnimation(){
         console.log("DIE");
         this.isDead = true; 
+        this.isDeadFlag = true; 
         this.dieAniamtionCounter = 0; 
         clearInterval(this.swimUpAndDownInterval); 
         clearInterval(this.swimLeftInterval); 

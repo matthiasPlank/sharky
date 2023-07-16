@@ -55,18 +55,6 @@ class Enemy extends MovableObjects{
 
     swimAnimationUpAndDown(){
         this.moveUp(); 
-        /*
-        setInterval(()=>{
-            if(this.animationToogle){
-                this.moveUp();
-                this.animationToogle = false; 
-            }
-            else{
-                this.moveDown(); 
-                this.animationToogle = true; 
-            }
-        }, 3000 ); 
-        */
         this.swimUpAndDownInterval = setInterval(()=>{
             this.playAnimation(this.SWIM_IMAGES); 
         }, 300 )
@@ -83,7 +71,6 @@ class Enemy extends MovableObjects{
         this.dieInterval = setInterval(()=>{
             if(this.dieAniamtionCounter < 3){
                 this.playAnimation(this.DIE_IMAGES);
-                //debugger; 
                 this.dieAniamtionCounter++; 
                 console.log("die Interval" +  this.dieAniamtionCounter);
             }
