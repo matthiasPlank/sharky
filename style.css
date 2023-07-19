@@ -23,7 +23,7 @@ canvas{
 }
 
 .dsp-none{
-    display: none;
+    display: none !important; 
 }
 
 .background img{
@@ -67,6 +67,30 @@ canvas{
     height: 100%;
     width: 100%;
     object-fit: cover;
+}
+
+#GameOverScreen{
+    position: absolute;
+    top: 0; 
+    left: 0;
+    height: 480px;
+    width: 720px;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.gameOverImg{
+    width: 620px;
+}
+.tryAgainButton{
+    position: absolute;
+    bottom: 100px; 
+    width: 300px;
+}
+.tryAgainButton:hover{
+    filter: invert();
+    cursor: pointer;
 }
 
 @media only screen and (max-width: 720px){
