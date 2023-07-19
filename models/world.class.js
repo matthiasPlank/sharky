@@ -128,7 +128,9 @@ class World{
         
         let self = this; 
         requestAnimationFrame(function (){
-            self.draw();
+            if(!self.pause){
+                self.draw();
+            }
         })
     }
 

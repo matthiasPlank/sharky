@@ -107,6 +107,7 @@ class Character extends MovableObjects{
     collectedCoins = 0; 
     collectedPoisons = 0; 
     poisonAttacks = 0;
+    dieAniamtionCounter = 0;
 
     constructor(){
           super().loadImage("img/1.Sharkie/3.Swim/1.png");
@@ -156,7 +157,16 @@ class Character extends MovableObjects{
         setInterval(()=>{
 
             if(this.isDead()){
-                this.playAnimation(this.DEAD_IMAGES); 
+                //this.playAnimation(this.DEAD_IMAGES); 
+                if(this.dieAniamtionCounter < this.DEAD_IMAGES.length){
+                    this.playAnimation(this.DEAD_IMAGES); 
+                    this.dieAniamtionCounter++;
+                } 
+                else{
+                    //clearInterval(this.swimInterval); 
+                    console.log("Character is Dead - End of Game"); 
+                    this.characterDied(); 
+                }
             }
             else if(this.isHurt()){
                 if(this.lastHitBy == "Pufferfish"){
@@ -247,8 +257,17 @@ class Character extends MovableObjects{
         let calc = ((this.collectedPoisons  - this.poisonAttacks) / ( this.world.level.poisons.length + this.collectedPoisons + this.poisonAttacks) ) * 100; 
         console.log("gesammelt: " + this.collectedPoisons); 
         console.log("attacken: " + this.poisonAttacks); 
-        console.log("gesamt in wlelt: " + this.world.level.poisons.length); 
+        console.log("gesamt in welt: " + this.world.level.poisons.length); 
         console.log("Ergebis: " + calc); 
         return calc; 
     }
+
+    characterDied(){
+
+        document.getElementById("GameOverScreen").classList.remove("dsp-none");
+        this.world.pause = true; 
+
+    }
+
+
 }

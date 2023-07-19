@@ -13,7 +13,10 @@ function startGame(){
     let canvas = document.getElementById("canvas");
     initLevel(); 
     world = new World(canvas , keyboard); 
-
+}
+function restartGame(){
+    document.getElementById("GameOverScreen").classList.add("dsp-none");     
+    startGame();
 }
 
 window.addEventListener("keydown", (event) => {
