@@ -108,6 +108,10 @@ class Character extends MovableObjects{
     collectedPoisons = 0; 
     poisonAttacks = 0;
     dieAniamtionCounter = 0;
+    animateIntervallMove; 
+    animateIntervallAnimation; 
+
+
 
     constructor(){
           super().loadImage("img/1.Sharkie/3.Swim/1.png");
@@ -124,7 +128,7 @@ class Character extends MovableObjects{
 
     animate(){
 
-        setInterval(()=>{
+        this.animateIntervallMove = setInterval(()=>{
             this.swim_sound.pause(); 
             if( this.world.keyboard.RIGHT && this.posX < this.world.level.level_end_x ) {
                 this.swim_sound.play(); 
@@ -154,7 +158,7 @@ class Character extends MovableObjects{
          }, 1000 / 60);
 
 
-        setInterval(()=>{
+         this.animateIntervallAnimation = setInterval(()=>{
 
             if(this.isDead()){
                 //this.playAnimation(this.DEAD_IMAGES); 
@@ -266,6 +270,8 @@ class Character extends MovableObjects{
 
         document.getElementById("GameOverScreen").classList.remove("dsp-none");
         this.world.pause = true; 
+        clearInterval(this.animateIntervallMove); 
+        clearInterval(this.animateIntervallAnimation)
 
     }
 
