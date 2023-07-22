@@ -15,7 +15,8 @@ function startGame(){
     world = new World(canvas , keyboard); 
 }
 function restartGame(){
-    document.getElementById("GameOverScreen").classList.add("dsp-none");     
+    document.getElementById("GameOverScreen").classList.add("dsp-none");  
+    document.getElementById("winScreen").classList.add("dsp-none");    
     startGame();
 }
 

@@ -37,7 +37,9 @@ function initLevel(){
             new Poison(250, 350), 
             new Poison(600, 340), 
             new Poison(1000, 350), 
-            new Poison(2000, 350) 
+            new Poison(2000, 350), 
+            new Poison(1500, 350), 
+            new Poison(1800, 350)
         ] 
     );
 }

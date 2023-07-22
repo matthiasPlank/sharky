@@ -91,12 +91,13 @@ class Endboss extends Enemy {
             if(this.introPlayed){
                 if(this.isDead()){
                     if(this.dieAniamtionCounter < this.DEAD_ENDBOSS_IMAGES.length){
-                        this.playAnimation(this.DEAD_ENDBOSS_IMAGES); 
-                        this.dieAniamtionCounter++;
+                        this.playSingleAnimation(this.DEAD_ENDBOSS_IMAGES , this.dieAniamtionCounter ); 
+                        this.dieAniamtionCounter++;               
                     } 
                     else{
                         clearInterval(this.swimInterval); 
                         console.log("Endboss is Dead - End of Game"); 
+                        document.getElementById("winScreen").classList.remove("dsp-none"); 
                     }
                 }
                 else if(this.isHurt()){

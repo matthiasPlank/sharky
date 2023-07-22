@@ -93,6 +93,21 @@ canvas{
     cursor: pointer;
 }
 
+#winScreen{
+    position: absolute;
+    top: 0; 
+    left: 0;
+    height: 480px;
+    width: 720px;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.winImg{
+    width: 620px;
+}
+
 @media only screen and (max-width: 720px){
     #canvasPanels{
         width: 100%; 

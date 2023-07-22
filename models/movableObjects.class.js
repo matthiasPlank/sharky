@@ -57,6 +57,10 @@ class MovableObjects extends DrawableObjects{
             this.currentImage = 0; 
         }
     }
+    playSingleAnimation(images , index){
+        let path = images[index]; 
+        this.img = this.imageCache[path]; 
+    }
     isColliding(obj) {
             return this.posX + this.width - this.offset.right > obj.posX + obj.offset.left &&
             this.posY + this.height - this.offset.bottom > obj.posY + obj.offset.top &&
@@ -89,11 +93,11 @@ class MovableObjects extends DrawableObjects{
       if(this instanceof Endboss && !this.isDead()){
             console.log("Endboss Hit by Bubble!!!");
             if(bubble.isPoisoned){
-                this.energy -= 10; 
+                this.energy -= 20; 
                 console.log("Hit by Poisoned buuble"); 
             }
             else{
-                this.energy -= 1;
+                this.energy -= 5;
                 console.log("Hit by normal  buuble"); 
             }
                
