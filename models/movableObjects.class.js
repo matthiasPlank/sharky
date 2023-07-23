@@ -57,22 +57,26 @@ class MovableObjects extends DrawableObjects{
             this.currentImage = 0; 
         }
     }
+
     playSingleAnimation(images , index){
         let path = images[index]; 
         this.img = this.imageCache[path]; 
     }
+
     isColliding(obj) {
             return this.posX + this.width - this.offset.right > obj.posX + obj.offset.left &&
             this.posY + this.height - this.offset.bottom > obj.posY + obj.offset.top &&
             this.posX + this.offset.left < obj.posX + obj.width - obj.offset.right &&
             this.posY + this.offset.top <obj.posY + obj.height - obj.offset.bottom;
     }
+
     isInAttackRange(obj){
         return this.posX + this.width - this.offset.right + this.attackRange > obj.posX + obj.offset.left &&
         this.posY + this.height - this.offset.bottom + this.attackRange > obj.posY + obj.offset.top &&
         this.posX + this.offset.left - this.attackRange < obj.posX + obj.width - obj.offset.right &&
         this.posY + this.offset.top - this.attackRange  < obj.posY + obj.height - obj.offset.bottom;
     }
+
     isHit(){
         if(this instanceof Character){
             if(!this.isDead()){
@@ -88,6 +92,7 @@ class MovableObjects extends DrawableObjects{
                 this.timeLastHit = new Date().getTime();   
         }
     }
+    
     isHitbyBubble(bubble){
 
       if(this instanceof Endboss && !this.isDead()){

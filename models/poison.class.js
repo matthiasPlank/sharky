@@ -11,7 +11,6 @@ class Poison extends CollectableObjects{
         this.posY = posY; 
         this.loadImages(this.POISON_IMAGE); 
         this.playAnimation(this.POISON_IMAGE);
-
     }
     
 }

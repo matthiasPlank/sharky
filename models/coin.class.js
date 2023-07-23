@@ -10,6 +10,5 @@ class Coin extends CollectableObjects{
         this.posY = posY; 
         this.loadImages(this.COIN_IMAGE); 
         this.playAnimation(this.COIN_IMAGE);
-
     }
 }

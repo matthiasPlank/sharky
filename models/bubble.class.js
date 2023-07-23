@@ -24,7 +24,6 @@ class Bubble extends MovableObjects{
         }
         this.loadImages(this.BUBBLE_IMAGE);
         this.loadImages(this.POISONED_BUBBLE_IMAGE);
-        //console.log("Bubble created");
         this.posX = posX; 
         this.posY = posY; 
         this.direction = direction; 

@@ -3,7 +3,6 @@ class Endboss extends Enemy {
     height = 400; 
     width = 400; 
     posY = -5000;
-    //posX = 2300; 
     posX = 2300; 
   
     SWIM_IMAGES = [
@@ -112,15 +111,11 @@ class Endboss extends Enemy {
                     this.playAnimation(this.SWIM_IMAGES); 
                 }
             }
-            //console.log("Endboss swim");
         }, 300 )
     }
 
     playIntro(){
-        console.log("playIntro"); 
         clearInterval(this.swimInterval); 
-        //clearInterval(this.introInterval); 
-
         this.introInterval = setInterval(()=>{
             if( ( this.introIntervalCounter < this.INTRO_IMAGES.length ) && !this.introPlayed){
                 console.log(this.INTRO_IMAGES.length ); 
@@ -145,7 +140,6 @@ class Endboss extends Enemy {
             }
             console.log("Time to Attack: " + this.timeToAttack);
         }, 5000);
-
     }
 
     attack(){
@@ -154,7 +148,6 @@ class Endboss extends Enemy {
         this.saveOffsetWhileAttackRight =  this.offset.right ; 
         this.offset.left = -100; 
         this.offset.right = -100; 
-
         this.attackInterval = setInterval(() => {
             if( ( this.attackIntervalCounter < this.ATTACK_ENDBOSS_IMAGES.length )){
                 this.playAnimation(this.ATTACK_ENDBOSS_IMAGES); 
@@ -166,11 +159,9 @@ class Endboss extends Enemy {
                 this.attackIntervalCounter = 0;
                 this.offset.left =  this.saveOffsetWhileAttackLeft ; 
                 this.offset.right =  this.saveOffsetWhileAttackRight; 
-        
                 this.swim(); 
                 clearInterval(this.attackInterval);    
             }
         }, 200);
-
     }
 }

@@ -27,16 +27,11 @@ class Enemy extends MovableObjects{
     dieInterval; 
     isDeadFlag = false; 
     dieAniamtionCounter = 0; 
-  
  
     constructor(){
         super().loadImage("./img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png");
-        //this.posX = Math.random() * 500; 
-        //this.speed += Math.random() * 0.25;
         this.loadImages(this.SWIM_IMAGES); 
         this.loadImages(this.DIE_IMAGES); 
-        //this.swimLeft(); 
-    
     }
 
     swimLeft(){
@@ -61,7 +56,6 @@ class Enemy extends MovableObjects{
     }
 
     die(){
-        console.log("DIE");
         this.isDeadFlag = true; 
         this.dieAniamtionCounter = 0; 
         clearInterval(this.swimUpAndDownInterval); 
@@ -79,7 +73,5 @@ class Enemy extends MovableObjects{
                this.moveUp();  
             }
         }, 300 )
-     
-    }
-    
+    }  
 }

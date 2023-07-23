@@ -34,8 +34,6 @@ class World{
     checkCollision(){
         setInterval(() => {
             this.level.enemies.forEach((enemy) => {
-                /* console.log(this.character); 
-                console.log(enemy);  */
                 if(this.character.currentFinAttack && this.character.isInAttackRange(enemy) && !enemy.isDeadFlag){
                     //console.log("Character is attack " + enemy.constructor.name); 
                     if(enemy instanceof Pufferfish){
@@ -50,11 +48,9 @@ class World{
                     if (bubble.isColliding(enemy) && enemy instanceof Jellyfish && !enemy.isDeadFlag){
                         //console.log("Bubble colliding with enemy"); 
                         enemy.dieBubbleAnimation(); 
-                        //this.bubbles.splice(this.bubbleCounter, 1);
                         this.removeBubble(this.bubbleCounter); 
                     }
                     if( bubble.isColliding(enemy) && enemy instanceof Endboss && !enemy.isDeadFlag){
-                        //console.log("Hit Endboss with Bubble!"); 
                         this.endbossFromLevel.isHitbyBubble(bubble); 
                         this.removeBubble(this.bubbleCounter); 
                     }
@@ -76,12 +72,7 @@ class World{
                   
                     this.level.coins.splice(iterationCountCoin, 1);
                     this.character.collectedCoins ++; 
-                    this.statusBar_Coin.setPercentage( (this.character.collectedCoins / ( this.level.coins.length + this.character.collectedCoins) ) * 100); 
-                    //console.log("Collected Coins:" +  this.character.collectedCoins) ;   
-                    //console.log("All Level Coins:" +  this.level.coins.length) ;   
-                    //console.log("Percentage:" + (this.character.collectedCoins / this.level.coins.length)  * 100 );   
-                    //console.log("Character is colliding with: " + coin.constructor.name);                  
-                  
+                    this.statusBar_Coin.setPercentage( (this.character.collectedCoins / ( this.level.coins.length + this.character.collectedCoins) ) * 100);                 
                 }
                 iterationCountCoin++; 
             
@@ -92,12 +83,7 @@ class World{
 
                     this.level.poisons.splice(iterationCountPoison, 1);
                     this.character.collectedPoisons ++; 
-                    //this.statusBar_Poison.setPercentage( (this.character.collectedPoisons / ( this.level.poisons.length + this.character.collectedPoisons) ) * 100); 
                     this.statusBar_Poison.setPercentage(this.character.calcPosionPercentage()); 
-                    //console.log("Character is colliding with: " + poison.constructor.name); 
-                    //console.log("Percentage:" + (this.character.collectedPoisons / ( this.level.poisons.length + this.character.collectedPoisons) ) * 100 );  
-                    //console.log("All Level Posions:" +   ( this.level.poisons.length + this.character.collectedPoisons) ) ;   
-                    //console.log("Collected Coins:" +  this.character.collectedPoisons) ;  
                 }
                 iterationCountPoison++; 
               
@@ -168,6 +154,7 @@ class World{
         this.ctx.scale(-1, 1);
         object.posX = object.posX * -1; 
     }
+
     flipImageBack(object){
         object.posX = object.posX * -1; 
         this.ctx.restore();
@@ -195,6 +182,5 @@ class World{
         setTimeout(() => {
             this.bubbles.splice(index, 1);
         }, 300);
-  
     }
 }

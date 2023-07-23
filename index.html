@@ -49,7 +49,27 @@
                 <img class="winImg" src="img/6.Botones/Tittles/You win/Recurso 20.png" alt="">
                 <img class="tryAgainButton" onclick="restartGame()" src="img/6.Botones/Try again/Recurso 16.png" alt="">
             </div>
-
+            <div id="gameOverlayButtons" class="dsp-none">
+                <button id="fullscreenBtn" class="sharkyBtn fullscreenBtn" onclick="fullscreen()">fullscreen</button>
+                <button id="instructionBtn" class="sharkyBtn" onclick="instruction()">Instruction</button>
+            </div>
+            <div id="instructionOverlay" class="dsp-none">
+                <button id="closeInstructionBtn" class="sharkyBtn" onclick="instruction()">Close</button>
+                <div id="instructions">
+                    <div class="instructionRow">
+                        <img id="instructionKeysImage" class="overlayImage" src="img/6.Botones/Key/arrow keys.png" alt="">
+                        <h2>MOVE SHARK</h2>
+                    </div>
+                    <div class="instructionRow">
+                        <img id="instructionFinKey" class="overlayImage" src="img/6.Botones/Key/Space Bar key.png" alt="">
+                        <h2>Fin Attack</h2>
+                    </div>
+                    <div class="instructionRow">
+                        <img id="instructionBubbleKey" class="overlayImage" src="img/6.Botones/Key/D key.png" alt="">
+                        <h2>Bubble Attack</h2>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </body>

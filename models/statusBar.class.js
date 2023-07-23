@@ -44,7 +44,6 @@ class StatusBar extends DrawableObjects{
         this.posY = 0; 
         if (type == "LIFE"){
             this.loadImage("img/4. Marcadores/green/Life/100_  copia 2.png");
-            //loadImage("img/4. Marcadores/green/Life/100_  copia 2.png");
             this.loadImages(this.IMAGES_LIFE); 
             this.posY = 0;  
             this.statusBarType = "LIFE"; 

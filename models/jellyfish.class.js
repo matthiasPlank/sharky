@@ -22,7 +22,6 @@ class Jellyfish extends Enemy{
     }
     speed = 0.05;
   
- 
     constructor(){
         super().loadImage("./img/2.Enemy/2 Jelly fish/Regular damage/Lila 1.png");
         this.posX = Math.random() * 500; 
@@ -35,7 +34,6 @@ class Jellyfish extends Enemy{
     }
 
     dieBubbleAnimation(){
-        console.log("DIE");
         this.isDead = true; 
         this.isDeadFlag = true; 
         this.dieAniamtionCounter = 0; 
@@ -46,13 +44,11 @@ class Jellyfish extends Enemy{
         this.dieInterval = setInterval(()=>{
             if(this.dieAniamtionCounter < 4){
                 this.playAnimation(this.DIE_IN_BUBBLE_IMAGES);
-                //debugger; 
                 this.dieAniamtionCounter++; 
-                console.log("die Interval" +  this.dieAniamtionCounter);
             }
             else{
                 clearInterval(this.dieInterval); 
-               this.moveUp();  
+                this.moveUp();  
             }
         }, 300 )
      

@@ -1,6 +1,4 @@
-class CollectableObjects extends MovableObjects{
-
-    
+class CollectableObjects extends MovableObjects{   
     
 }
 

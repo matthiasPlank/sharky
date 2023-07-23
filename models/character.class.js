@@ -88,10 +88,6 @@ class Character extends MovableObjects{
         "img/1.Sharkie/4.Attack/Bubble trap/For Whale/7.png", 
         "img/1.Sharkie/4.Attack/Bubble trap/For Whale/8.png" 
     ];
-
-
-   
-
     world; 
     swim_sound = new Audio('./audio/swim.mp3'); 
     offset = {
@@ -111,8 +107,6 @@ class Character extends MovableObjects{
     animateIntervallMove; 
     animateIntervallAnimation; 
 
-
-
     constructor(){
           super().loadImage("img/1.Sharkie/3.Swim/1.png");
           this.loadImages(this.IDLE_IMAGES); 
@@ -127,7 +121,6 @@ class Character extends MovableObjects{
     }
 
     animate(){
-
         this.animateIntervallMove = setInterval(()=>{
             this.swim_sound.pause(); 
             if( this.world.keyboard.RIGHT && this.posX < this.world.level.level_end_x ) {
@@ -152,14 +145,10 @@ class Character extends MovableObjects{
                     this.posY += this.speed;
                 }
             }
-          
-            this.world.camera_x = -this.posX + 100; 
-
+            this.world.camera_x = -this.posX + 100;
          }, 1000 / 60);
 
-
          this.animateIntervallAnimation = setInterval(()=>{
-
             if(this.isDead()){
                 //this.playAnimation(this.DEAD_IMAGES); 
                 if(this.dieAniamtionCounter < this.DEAD_IMAGES.length){
@@ -201,7 +190,6 @@ class Character extends MovableObjects{
     }
 
     finAttack(){
-
         let finAttackInterval = setInterval(() => {
             if(this.currentFinAttackCounter < 8){
                 this.playAnimation(this.ATTACK_IMAGE);   
@@ -214,14 +202,11 @@ class Character extends MovableObjects{
                 clearInterval(finAttackInterval);
             }
         }, 100);
-    
-       
     }
+
     bubbleAttack(){
-       
         let bubbleAttackInterval = setInterval(() => {
             if(this.currentBubbleAttackCounter < 8){
-    
                 if(this.collectedPoisons > 0 && this.world.characterisAtEndboss){
                     console.log("Posion > 0" + this.collectedPoisons.length ); 
                     this.playAnimation(this.BUBBLE_POSION_ATTACK_IMAGE);
@@ -247,14 +232,12 @@ class Character extends MovableObjects{
                         this.world.statusBar_Poison.setPercentage( this.calcPosionPercentage() ); 
                     }
                 }
-                //this.world.bubble.visible = true; 
                 this.currentBubbleAttackCounter = 0;
                 this.currentBubbleAttack = false; 
                 this.playAnimation(this.SWIM_IMAGES); 
                 clearInterval(bubbleAttackInterval);
             }
         }, 100);
-
     }
 
     calcPosionPercentage(){
@@ -269,13 +252,9 @@ class Character extends MovableObjects{
     }
 
     characterDied(){
-
         document.getElementById("GameOverScreen").classList.remove("dsp-none");
         this.world.pause = true; 
         clearInterval(this.animateIntervallMove); 
         clearInterval(this.animateIntervallAnimation)
-
     }
-
-
 }

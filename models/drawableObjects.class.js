@@ -9,7 +9,7 @@ class DrawableObjects{
     currentImage = 0 ; 
 
     constructor(){
-
+        
     }
 
     loadImage(path){
