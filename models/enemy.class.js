@@ -52,6 +52,14 @@ class Enemy extends MovableObjects{
         this.moveUp(); 
         this.swimUpAndDownInterval = setInterval(()=>{
             this.playAnimation(this.SWIM_IMAGES); 
+            if(this.posY < 0){
+                clearInterval(this.moveUpInterval);
+                this.moveDown(); 
+            }
+            else if(this.posY > 400){
+                clearInterval(this.moveDownInterval);
+                this.moveUp(); 
+            }
         }, 300 )
     }
 

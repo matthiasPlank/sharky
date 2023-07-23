@@ -253,6 +253,7 @@ class Character extends MovableObjects{
 
     characterDied(){
         document.getElementById("GameOverScreen").classList.remove("dsp-none");
+        document.getElementById("gameOverlayButtons").classList.add("dsp-none"); 
         this.world.pause = true; 
         clearInterval(this.animateIntervallMove); 
         clearInterval(this.animateIntervallAnimation)

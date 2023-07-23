@@ -4,7 +4,28 @@ let keyboard = new Keyboard();
 let isInFullscreen = false; 
 let isInInstrction = false; 
 
-function init(){}
+let mobileUpBtn; 
+let mobileDownBtn; 
+let mobileLeftBtn;
+let mobileRigthBtn; 
+let mobileBubbleBtn; 
+let mobileFinBtn; 
+
+function init(){
+    mobileUpBtn = document.getElementById("mobileUpBtn"); 
+    mobileDownBtn= document.getElementById("mobileDownBtn"); 
+    mobileLeftBtn = document.getElementById("mobileLeftBtn"); 
+    mobileRigthBtn = document.getElementById("mobileRigthBtn"); 
+    mobileBubbleBtn = document.getElementById("mobileBubbleBtn"); 
+    mobileFinBtn = document.getElementById("mobileFinBtn"); 
+    mobileUpBtn.addEventListener("contextmenu", e => e.preventDefault());
+    mobileDownBtn.addEventListener("contextmenu", e => e.preventDefault());
+    mobileLeftBtn.addEventListener("contextmenu", e => e.preventDefault());
+    mobileRigthBtn.addEventListener("contextmenu", e => e.preventDefault());
+    mobileFinBtn.addEventListener("contextmenu", e => e.preventDefault());
+    mobileBubbleBtn.addEventListener("contextmenu", e => e.preventDefault());
+    setupMobileEvents(); 
+}
 
 function startGame(){
     document.getElementById("startScreen").classList.add("dsp-none"); 
@@ -63,12 +84,64 @@ function instruction(){
         isInInstrction = true; 
         document.getElementById("instructionOverlay").classList.remove("dsp-none"); 
         document.getElementById("gameOverlayButtons").classList.add("dsp-none"); 
+        //document.getElementById("startScreen").classList.add("dsp-none"); 
     }
     else{
         isInInstrction = false; 
         document.getElementById("instructionOverlay").classList.add("dsp-none"); 
         document.getElementById("gameOverlayButtons").classList.remove("dsp-none"); 
+        //document.getElementById("startScreen").classList.remove("dsp-none"); 
     }
+}
+
+function setupMobileEvents(){
+
+    //*****UP****/
+    mobileUpBtn.addEventListener("touchstart", (event) => {
+        console.log("Touched UP - START"); 
+        console.log(event); 
+        keyboard.UP = true; 
+    });
+    mobileUpBtn.addEventListener("touchend", (event) => {
+        console.log("Touched UP - END"); 
+        console.log(event); 
+        keyboard.UP = false; 
+    });
+    //*****DOWN****/
+    mobileDownBtn.addEventListener("touchstart", (event) => {
+        keyboard.DOWN = true; 
+    });
+    mobileDownBtn.addEventListener("touchend", (event) => {
+        keyboard.DOWN = false; 
+    });
+    //*****LEFT****/
+    mobileLeftBtn.addEventListener("touchstart", (event) => {
+        keyboard.LEFT = true; 
+    });
+    mobileLeftBtn.addEventListener("touchend", (event) => {
+        keyboard.LEFT = false; 
+    });
+    //*****Rigth****/
+    mobileRigthBtn.addEventListener("touchstart", (event) => {
+        keyboard.RIGHT = true; 
+    });
+    mobileRigthBtn.addEventListener("touchend", (event) => {
+        keyboard.RIGHT = false; 
+    });
+     //*****FIN****/
+     mobileFinBtn.addEventListener("touchstart", (event) => {
+        keyboard.SPACE = true; 
+    });
+    mobileFinBtn.addEventListener("touchend", (event) => {
+        keyboard.SPACE = false; 
+    });
+     //*****Bubble****/
+     mobileBubbleBtn.addEventListener("touchstart", (event) => {
+        keyboard.KeyD = true; 
+    });
+    mobileBubbleBtn.addEventListener("touchend", (event) => {
+        keyboard.KeyD = false; 
+    });
 }
 
 window.addEventListener("keydown", (event) => {

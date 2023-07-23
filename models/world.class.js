@@ -41,6 +41,7 @@ class World{
                     }
                     if(enemy instanceof Endboss){
                         console.log("Hit Endboss with Fin!"); 
+                        this.endbossFromLevel.isHitbyFin();
                     }
                 }
                 this.bubbleCounter = 0; 

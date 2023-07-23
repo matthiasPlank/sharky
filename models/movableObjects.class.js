@@ -1,5 +1,5 @@
 class MovableObjects extends DrawableObjects{
-    posX = 100; 
+    posX = 120; 
     posY = 100;
     img; 
     height = 100; 
@@ -46,6 +46,14 @@ class MovableObjects extends DrawableObjects{
         this.moveDownInterval = setInterval(()=>{
             this.posY += this.speed;  
          }, 1000/60 )
+    }
+    randomSwimDirection(){
+        if(Math.random() < 0.5){
+            this.moveLeft(); 
+        }
+        else{
+            this.moveRight();
+        }
     }
 
     playAnimation(images){
@@ -110,6 +118,15 @@ class MovableObjects extends DrawableObjects{
                
                 this.world.statusBar_Endboss.setPercentage(this.energy);
                 this.timeLastHit = new Date().getTime();   
+        }
+    }
+
+    isHitbyFin(){
+        if(this instanceof Endboss && !this.isDead()){
+            console.log("Endboss Hit by Fin!!!");
+            this.energy -= 5;            
+            this.world.statusBar_Endboss.setPercentage(this.energy);
+            this.timeLastHit = new Date().getTime();   
         }
     }
 

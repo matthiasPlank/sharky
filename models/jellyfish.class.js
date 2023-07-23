@@ -31,6 +31,7 @@ class Jellyfish extends Enemy{
         this.loadImages(this.DIE_IN_BUBBLE_IMAGES); 
         this.SWIM_IMAGES;
         this.swimAnimationUpAndDown(); 
+        this.randomSwimDirection();
     }
 
     dieBubbleAnimation(){

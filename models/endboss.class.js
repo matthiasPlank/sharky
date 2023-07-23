@@ -76,6 +76,7 @@ class Endboss extends Enemy {
         bottom: 60
     }
     dieAniamtionCounter = 0; 
+    moveUpAndDownInterval; 
 
     constructor(){
         super().loadImage("img/2.Enemy/3 Final Enemy/2.floating/1.png");
@@ -99,9 +100,10 @@ class Endboss extends Enemy {
                         this.dieAniamtionCounter++;               
                     } 
                     else{
-                        clearInterval(this.swimInterval); 
+                        this.clearEnbossIntervals(); 
                         console.log("Endboss is Dead - End of Game"); 
                         document.getElementById("winScreen").classList.remove("dsp-none"); 
+                        document.getElementById("gameOverlayButtons").classList.add("dsp-none"); 
                     }
                 }
                 else if(this.isHurt()){
@@ -142,7 +144,7 @@ class Endboss extends Enemy {
 
     moveUpAndDown(){
         this.moveDown(); 
-        setInterval(() => {
+        this.moveUpAndDownInterval = setInterval(() => {
             if(this.posY < -100){
                 clearInterval(this.moveUpInterval); 
                 this.moveDown(); 
@@ -174,7 +176,7 @@ class Endboss extends Enemy {
             if(!this.timeToAttack){
                 this.timeToAttack = true; 
             }
-            console.log("Time to Attack: " + this.timeToAttack);
+            //console.log("Time to Attack: " + this.timeToAttack);
         }, 5000);
     }
 
@@ -219,5 +221,14 @@ class Endboss extends Enemy {
             }
         }, 200);
         */ 
+    }
+
+    clearEnbossIntervals(){
+        clearInterval(this.swimInterval); 
+        clearInterval(this.moveUpAndDownInterval);
+        clearInterval(this.moveLeftInterval);
+        clearInterval(this.moveRigthInterval);
+        clearInterval(this.moveUpInterval);
+        clearInterval(this.moveDownInterval);
     }
 }

@@ -133,8 +133,8 @@ canvas{
 }
 .fullscreenBtn{
     position: absolute;
-    bottom: 10px;
-    left: 10px; 
+    top: 180px;
+    left: 24px; 
     width: 100px;
 }
 .fullscreenBtn:hover{
@@ -144,8 +144,9 @@ canvas{
 
 #instructionBtn{
     position: absolute;
-    bottom: 10px;
-    left: 130px; 
+    top: 140px;
+    left: 24px; 
+    width: 100px;
 }
 
 .sharkyBtn{
@@ -222,8 +223,15 @@ canvas{
 
 }
 
+#restartBtn{
+    position: absolute;
+    bottom: 10px;
+    right: 10px; 
+}
+
 #canvasPanels>* {
     height: 100%;
+    width: 100%;
 }
 
 /* Set OverlayPanels to fill the full width and height of canvasPanels */
@@ -233,13 +241,88 @@ canvas{
     height: 100%;
 }
 
+.mobileBtn{
+    width: 80px;
+    filter: invert();
+    opacity: 0.8;
+}
+/* 
+.mobileBtn:hover{
+    opacity: 1;
+} */
+#mobileUpBtn{
+    position: absolute;
+    bottom: 100px;
+    left: 150px; 
+}
+#mobileDownBtn{
+    position: absolute;
+    bottom: 10px;
+    left: 150px; 
+}
+#mobileLeftBtn{
+    position: absolute;
+    bottom: 10px;
+    left: 50px; 
+}
+#mobileRigthBtn{
+    position: absolute;
+    bottom: 10px;
+    left: 250px; 
+}
+#mobileFinBtn{
+    background-color: transparent;
+    border-radius: 50%;
+    font-size: 18px;
+    font-family: "sharkyFont";
+    color: white;
+    opacity: 0.8;
+    border: 8px solid white;
+    height: 80px;
+    width: 80px;
+    position: absolute;
+    bottom: 10px;
+    right: 150px; 
+}
+#mobileBubbleBtn{
+    background-color: transparent;
+    border-radius: 50%;
+    font-size: 12px;
+    font-family: "sharkyFont";
+    color: white;
+    opacity: 0.8;
+    border: 8px solid white;
+    height: 80px;
+    width: 80px;
+    position: absolute;
+    bottom: 100px;
+    right: 150px; 
+}
+
+#mobileButtons{
+    display: none;
+}
+
 @media only screen and (max-width: 720px){
     #canvasPanels{
         width: 100%; 
+    }
+    #headerTitle{
+        display: none;
+    }
+    #mobileButtons{
+        display:block
     }
 }
 @media only screen and (max-height: 480px){
     #canvasPanels{
         height: 100vh;
     }
+    #headerTitle{
+        display: none;
+    }
+    #mobileButtons{
+        display:block
+    }
+    
 }

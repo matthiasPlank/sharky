@@ -33,13 +33,15 @@
     <div class="background">
         <img src="img/3. Background/Legacy/Light/2.png" alt="">
     </div>
-    <h1>Sharky</h1>
+    <h1 id="headerTitle">Sharky</h1>
     <div id=canvasPanels>
         <canvas width="720" height="480" id="canvas"></canvas> 
         <div id="OverlayPanels">
             <div id="startScreen">
                 <img class="startImage" src="img/3. Background/Mesa de trabajo 1.png" alt="">
                 <img class="startButton" onclick="startGame()" src="img/6.Botones/Start/2.png" alt="">
+                <button id="fullscreenBtn" class="sharkyBtn fullscreenBtn" onclick="fullscreen()">fullscreen</button>
+              <!--   <button id="instructionBtn" class="sharkyBtn" onclick="instruction()">Instruction</button> -->
             </div>
             <div id="GameOverScreen" class="dsp-none">
                 <img class="gameOverImg" src="img/6.Botones/Tittles/Game Over/Recurso 13.png" alt="">
@@ -52,6 +54,15 @@
             <div id="gameOverlayButtons" class="dsp-none">
                 <button id="fullscreenBtn" class="sharkyBtn fullscreenBtn" onclick="fullscreen()">fullscreen</button>
                 <button id="instructionBtn" class="sharkyBtn" onclick="instruction()">Instruction</button>
+                <button id="restartBtn" class="sharkyBtn" onclick="restartGame()">Restart</button>
+                <div id="mobileButtons">
+                    <img id="mobileUpBtn" class="mobileBtn" src="img/mobileButtons/round-line-top-arrow-icon.png" alt="">
+                    <img id="mobileDownBtn" class="mobileBtn" src="img/mobileButtons/round-line-bottom-arrow-icon.png" alt="">
+                    <img id="mobileLeftBtn" class="mobileBtn" src="img/mobileButtons/round-line-left-arrow-icon.png" alt="">
+                    <img id="mobileRigthBtn" class="mobileBtn" src="img/mobileButtons/round-line-right-arrow-icon.png" alt="">  
+                    <button id="mobileFinBtn" class="">Fin</button> 
+                    <button id="mobileBubbleBtn" class="">Bubble</button> 
+                </div>
             </div>
             <div id="instructionOverlay" class="dsp-none">
                 <button id="closeInstructionBtn" class="sharkyBtn" onclick="instruction()">Close</button>
@@ -64,7 +75,7 @@
                         <img id="instructionFinKey" class="overlayImage" src="img/6.Botones/Key/Space Bar key.png" alt="">
                         <div>
                             <h2>Fin Attack</h2>
-                            <h5>(Attack for Pufferfish)</h5>
+                            <h5>(Attack for Pufferfish and killer whale)</h5>
                         </div>
                     </div>
                     <div class="instructionRow">
