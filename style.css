@@ -17,6 +17,10 @@ h1{
 h2{
     font-size: 32px;
 }
+h3{
+    font-size: 18px;
+    color: white;
+}
 canvas{
     background-color: black;
     display: block;
@@ -155,17 +159,6 @@ canvas{
     cursor: pointer;
 }
 
-#instructionOverlay{
-    position: absolute;
-    top: 0; 
-    left: 0;
-    height: 480px;
-    width: 720px;
-    background-color: transparent;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 
 #instructionOverlay{
     position: absolute;
@@ -179,6 +172,7 @@ canvas{
     align-items: center;
     background-color: rgba(0, 0, 0, 0.7);
 }
+
 #closeInstructionBtn{
     position: absolute;
     top: 10px;
@@ -189,13 +183,14 @@ canvas{
     display: flex;
     gap: 100px; 
     color: white;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 #instructions{
     display: flex;
     gap:10px; 
     flex-direction: column ;
+    width: 100%;
 }
 
 #instructionKeysImage{
@@ -211,6 +206,11 @@ canvas{
     object-fit: contain;
 }
 
+#instructionText{
+    margin-left: 24px;
+    margin-right: 24px;
+
+}
 
 #canvasPanels>* {
     height: 100%;
