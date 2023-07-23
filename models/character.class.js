@@ -163,8 +163,8 @@ class Character extends MovableObjects{
             if(this.isDead()){
                 //this.playAnimation(this.DEAD_IMAGES); 
                 if(this.dieAniamtionCounter < this.DEAD_IMAGES.length){
-                    this.playAnimation(this.DEAD_IMAGES); 
-                    this.dieAniamtionCounter++;
+                    this.playSingleAnimation(this.DEAD_IMAGES , this.dieAniamtionCounter ); 
+                    this.dieAniamtionCounter++;            
                 } 
                 else{
                     //clearInterval(this.swimInterval); 
@@ -259,10 +259,12 @@ class Character extends MovableObjects{
 
     calcPosionPercentage(){
         let calc = ((this.collectedPoisons  - this.poisonAttacks) / ( this.world.level.poisons.length + this.collectedPoisons + this.poisonAttacks) ) * 100; 
+        /*
         console.log("gesammelt: " + this.collectedPoisons); 
         console.log("attacken: " + this.poisonAttacks); 
         console.log("gesamt in welt: " + this.world.level.poisons.length); 
         console.log("Ergebis: " + calc); 
+        */
         return calc; 
     }
 

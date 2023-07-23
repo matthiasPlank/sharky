@@ -37,7 +37,7 @@ class World{
                 /* console.log(this.character); 
                 console.log(enemy);  */
                 if(this.character.currentFinAttack && this.character.isInAttackRange(enemy) && !enemy.isDeadFlag){
-                    console.log("Character is attack " + enemy.constructor.name); 
+                    //console.log("Character is attack " + enemy.constructor.name); 
                     if(enemy instanceof Pufferfish){
                         enemy.die(); 
                     }
@@ -48,7 +48,7 @@ class World{
                 this.bubbleCounter = 0; 
                 this.bubbles.forEach(bubble => {
                     if (bubble.isColliding(enemy) && enemy instanceof Jellyfish && !enemy.isDeadFlag){
-                        console.log("Bubble colliding with enemy"); 
+                        //console.log("Bubble colliding with enemy"); 
                         enemy.dieBubbleAnimation(); 
                         //this.bubbles.splice(this.bubbleCounter, 1);
                         this.removeBubble(this.bubbleCounter); 
@@ -61,10 +61,10 @@ class World{
                     this.bubbleCounter++; 
                 });
                 if(this.character.isColliding(enemy) && !enemy.isDeadFlag){
-                    console.log("Character is colliding with: " + enemy.constructor.name); 
+                    //console.log("Character is colliding with: " + enemy.constructor.name); 
                     this.character.lastHitBy = enemy.constructor.name; 
                     this.character.isHit(); 
-                    console.log("Charcter Engery: " + this.character.energy) 
+                    //console.log("Charcter Engery: " + this.character.energy) 
                 }
                 else{
                     //console.log("No collision"); 
