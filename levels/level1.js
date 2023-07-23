@@ -6,6 +6,18 @@ function initLevel(){
             new Pufferfish(), 
             new Pufferfish(), 
             new Pufferfish(), 
+            new Pufferfish(), 
+            new Pufferfish(), 
+            new Pufferfish(), 
+            new Pufferfish(), 
+            new Pufferfish(), 
+            new Pufferfish(), 
+            new Pufferfish(), 
+            new Jellyfish(), 
+            new Jellyfish(), 
+            new Jellyfish(), 
+            new Jellyfish(), 
+            new Jellyfish(), 
             new Jellyfish(), 
             new Endboss()
         ], 
@@ -31,7 +43,17 @@ function initLevel(){
             new Coin(450, 90), 
             new Coin(500, 100), 
             new Coin(550, 90), 
-            new Coin(600, 80)
+            new Coin(600, 80), 
+
+            new Coin(850, 290), 
+            new Coin(900, 300), 
+            new Coin(950, 290), 
+
+            new Coin(1400, 80), 
+            new Coin(1450, 90), 
+            new Coin(1500, 100), 
+            new Coin(1550, 90), 
+            new Coin(1600, 80)
         ], 
         [
             new Poison(250, 350), 

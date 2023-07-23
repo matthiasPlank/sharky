@@ -16,15 +16,20 @@ h1{
 }
 h2{
     font-size: 32px;
+    margin: 0px;
 }
 h3{
     font-size: 18px;
     color: white;
 }
+h5{
+    font-size: 12px;
+    color: white;
+    margin: 0px;
+}
 canvas{
     background-color: black;
     display: block;
-    border: 1px solid black;
     position: absolute;
 }
 
@@ -50,6 +55,7 @@ canvas{
     justify-content: center;
     align-items: center;
     display: block;
+    border:1px solid black;
 }
 #startScreen{
     position: absolute;
@@ -184,17 +190,20 @@ canvas{
     gap: 100px; 
     color: white;
     justify-content: space-around;
+    align-items: center;
+    min-height: 60px;
 }
 
 #instructions{
     display: flex;
-    gap:10px; 
+    gap:20px; 
     flex-direction: column ;
     width: 100%;
+    margin-top: 48px;
 }
 
 #instructionKeysImage{
-    width: 150px; 
+    width: 100px; 
     object-fit: contain;
 }
 #instructionBubbleKey{
@@ -209,6 +218,7 @@ canvas{
 #instructionText{
     margin-left: 24px;
     margin-right: 24px;
+    text-align: center;
 
 }
 

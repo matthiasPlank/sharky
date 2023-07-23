@@ -4,6 +4,7 @@ class Endboss extends Enemy {
     width = 400; 
     posY = -5000;
     posX = 2300; 
+    speed = 0.8; 
   
     SWIM_IMAGES = [
         "img/2.Enemy/3 Final Enemy/2.floating/1.png", 
@@ -65,6 +66,8 @@ class Endboss extends Enemy {
     saveOffsetWhileAttackLeft = 0; 
     saveOffsetWhileAttackRight = 0; 
 
+    savePosXWhileAttacK = this.posX; 
+
     introPlayed = false; 
     offset = {
         top: 200, 
@@ -83,6 +86,8 @@ class Endboss extends Enemy {
         this.loadImages(this.ATTACK_ENDBOSS_IMAGES); 
         this.swim();     
         this.attackTimeInterval(); 
+ 
+    
     }
 
     swim(){
@@ -128,9 +133,40 @@ class Endboss extends Enemy {
                 this.introPlayed = true; 
                 console.log("restart swim");   
                 this.swim(); 
-                clearInterval(this.introInterval);    
+                this.moveUpAndDown(); 
+                clearInterval(this.introInterval);  
+                  
             }
         }, 100 )
+    }
+
+    moveUpAndDown(){
+        this.moveDown(); 
+        setInterval(() => {
+            if(this.posY < -100){
+                clearInterval(this.moveUpInterval); 
+                this.moveDown(); 
+            }
+            else if(this.posY > 80){
+                clearInterval(this.moveDownInterval); 
+                this.moveUp(); 
+            }
+        }, 300);
+    }
+
+    backToOrignalPosition(){
+
+        this.posX = this.savePosXWhileAttacK; 
+        
+        /*this.moveRight(); 
+        let positonInternval = setInterval(() => {
+            if(this.posX >= this.savePosXWhileAttacK){
+                console.log("Original position reached"); 
+                clearInterval(this.moveRigthInterval); 
+                //clearInterval(positonInternval); 
+            }
+        }, 100);
+        */
     }
 
     attackTimeInterval(){
@@ -143,7 +179,24 @@ class Endboss extends Enemy {
     }
 
     attack(){
+        this.attackInterval = setInterval(() => {
+            if( ( this.attackIntervalCounter < this.ATTACK_ENDBOSS_IMAGES.length )){
+                this.playAnimation(this.ATTACK_ENDBOSS_IMAGES); 
+                this.attackIntervalCounter++; 
+                this.posX -= 20;
+            }
+            else{
+                this.attackIsPlaying = true; 
+                this.timeToAttack = false; 
+                this.attackIntervalCounter = 0;
+                this.swim();
+                this.backToOrignalPosition(); 
+                clearInterval(this.attackInterval);    
+            }
+        }, 200);
 
+        // OLD VERSION with Offset change; 
+        /*
         this.saveOffsetWhileAttackLeft = this.offset.left; 
         this.saveOffsetWhileAttackRight =  this.offset.right ; 
         this.offset.left = -100; 
@@ -152,6 +205,7 @@ class Endboss extends Enemy {
             if( ( this.attackIntervalCounter < this.ATTACK_ENDBOSS_IMAGES.length )){
                 this.playAnimation(this.ATTACK_ENDBOSS_IMAGES); 
                 this.attackIntervalCounter++; 
+                this.posX -= 20;
             }
             else{
                 this.attackIsPlaying = true; 
@@ -159,9 +213,11 @@ class Endboss extends Enemy {
                 this.attackIntervalCounter = 0;
                 this.offset.left =  this.saveOffsetWhileAttackLeft ; 
                 this.offset.right =  this.saveOffsetWhileAttackRight; 
-                this.swim(); 
+                this.swim();
+                this.backToOrignalPosition(); 
                 clearInterval(this.attackInterval);    
             }
         }, 200);
+        */ 
     }
 }

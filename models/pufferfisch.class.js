@@ -19,7 +19,8 @@ class Pufferfish extends Enemy{
  
     constructor(){
         super().loadImage("./img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png");
-        this.posX = Math.random() * 500; 
+        this.posX = ( Math.random() * 2300 ) + 300; 
+        this.posY = Math.random() * 400; 
         this.speed += Math.random() * 0.25;
         this.loadImages(this.SWIM_IMAGES); 
         this.swimLeft(); 

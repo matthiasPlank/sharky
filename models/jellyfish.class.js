@@ -24,7 +24,7 @@ class Jellyfish extends Enemy{
   
     constructor(){
         super().loadImage("./img/2.Enemy/2 Jelly fish/Regular damage/Lila 1.png");
-        this.posX = Math.random() * 500; 
+        this.posX = ( Math.random() * 2000 ) + 300; 
         this.posY = ( Math.random() * 300 ) + 100; 
         this.speed += Math.random() * 0.1;
         this.loadImages(this.SWIM_IMAGES); 

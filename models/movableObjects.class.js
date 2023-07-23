@@ -20,10 +20,12 @@ class MovableObjects extends DrawableObjects{
     attackRange = 30; 
 
     moveLeftInterval; 
-    
+    moveRigthInterval; 
+    moveUpInterval; 
+    moveDownInterval; 
 
     moveRight(){
-        setInterval(()=>{
+        this.moveRigthInterval = setInterval(()=>{
             this.posX += this.speed;  
          }, 1000/60 )
     }
@@ -35,13 +37,13 @@ class MovableObjects extends DrawableObjects{
     }
 
     moveUp(){
-        setInterval(()=>{
+        this.moveUpInterval = setInterval(()=>{
             this.posY -= this.speed;  
          }, 1000/60 )
     }
 
     moveDown(){
-        setInterval(()=>{
+        this.moveDownInterval = setInterval(()=>{
             this.posY += this.speed;  
          }, 1000/60 )
     }
@@ -92,7 +94,7 @@ class MovableObjects extends DrawableObjects{
                 this.timeLastHit = new Date().getTime();   
         }
     }
-    
+
     isHitbyBubble(bubble){
 
       if(this instanceof Endboss && !this.isDead()){
