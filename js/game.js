@@ -33,12 +33,14 @@ function startGame(){
     let canvas = document.getElementById("canvas");
     initLevel(); 
     world = new World(canvas , keyboard); 
+    world.character.energy = 100; 
 }
 
 function restartGame(){
     document.getElementById("GameOverScreen").classList.add("dsp-none");  
     document.getElementById("winScreen").classList.add("dsp-none");    
     startGame();
+    //world.character = new Character(); 
 }
 
 function fullscreen(){
@@ -48,12 +50,10 @@ function fullscreen(){
     if(!isInFullscreen){
         isInFullscreen = true; 
         openFullscreen(myscreen);
-        document.getElementById("fullscreenBtn").innerHTML = "Exit Fullscreen"; 
     }
     else{
         console.log("close fullscreen"); 
         isInFullscreen = false; 
-        document.getElementById("fullscreenBtn").innerHTML = "Fullscreen"; 
         closeFullscreen(); 
     }
 }

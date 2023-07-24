@@ -133,8 +133,8 @@ canvas{
 }
 .fullscreenBtn{
     position: absolute;
-    top: 180px;
-    left: 24px; 
+    bottom: 90px;
+    right: 10px; 
     width: 100px;
 }
 .fullscreenBtn:hover{
@@ -144,10 +144,18 @@ canvas{
 
 #instructionBtn{
     position: absolute;
-    top: 140px;
-    left: 24px; 
+    bottom: 50px;
+    right: 10px; 
     width: 100px;
 }
+
+#restartBtn{
+    position: absolute;
+    bottom: 10px;
+    right: 10px; 
+    width: 100px;
+}
+
 
 .sharkyBtn{
     background-color: #7FFFE0;
@@ -223,11 +231,6 @@ canvas{
 
 }
 
-#restartBtn{
-    position: absolute;
-    bottom: 10px;
-    right: 10px; 
-}
 
 #canvasPanels>* {
     height: 100%;
@@ -302,9 +305,20 @@ canvas{
 #mobileButtons{
     display: none;
 }
+.mobileMoveBtn{
+    background-color: transparent;
+    border-radius: 50%;
+    font-size: 12px;
+    font-family: "sharkyFont";
+    color: white;
+    opacity: 0.8;
+    border: 8px solid white;
+    height: 80px;
+    width: 80px;
+}
 
 @media only screen and (max-width: 720px){
-    #canvasPanels{
+     #canvasPanels{
         width: 100%; 
     }
     #headerTitle{
@@ -312,7 +326,7 @@ canvas{
     }
     #mobileButtons{
         display:block
-    }
+    } 
 }
 @media only screen and (max-height: 480px){
     #canvasPanels{
@@ -323,6 +337,6 @@ canvas{
     }
     #mobileButtons{
         display:block
-    }
+    } 
     
 }

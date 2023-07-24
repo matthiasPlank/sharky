@@ -141,8 +141,10 @@ class Character extends MovableObjects{
             }
             if( this.world.keyboard.DOWN ) {
                 this.swim_sound.play(); 
-                if(this.posY < this.world.ctx.canvas.clientHeight-200){
+                if(this.posY < this.world.ctx.canvas.clientHeight - ((this.world.ctx.canvas.clientHeight / 100) * 25)){
                     this.posY += this.speed;
+                    console.log(this.world.ctx.canvas.clientHeight);
+                    console.log("POS: " + this.posY);
                 }
             }
             this.world.camera_x = -this.posX + 100;
