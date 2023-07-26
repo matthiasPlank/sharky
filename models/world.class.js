@@ -68,7 +68,7 @@ class World{
             this.bubbleCounter++; 
         });
     }
-    
+
     checkCollisionCharacterisHit(enemy){
         if(this.character.isColliding(enemy) && !enemy.isDeadFlag){
             this.character.lastHitBy = enemy.constructor.name; 
@@ -139,6 +139,7 @@ class World{
     }
     
     drawOnMap(object){
+        /* Kommentare in diesem Bereich werden vor Finaler abgabe nochmal entfernt.*/
         try{
             if(object.otherDirection){
                this.flipImage(object); 
@@ -146,8 +147,8 @@ class World{
             object.draw(this.ctx);
             //object.drawFrame(this.ctx);
             if (object instanceof MovableObjects){
-                object.drawFrameWithOffset(this.ctx);
-                object.drawFrameWithOffsetAndRange(this.ctx);
+                //object.drawFrameWithOffset(this.ctx); 
+                //object.drawFrameWithOffsetAndRange(this.ctx);
             }
             if(object.otherDirection){
                this.flipImageBack(object);
