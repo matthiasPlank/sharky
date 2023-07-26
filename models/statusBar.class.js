@@ -35,38 +35,33 @@ class StatusBar extends DrawableObjects{
     ]; 
     percentage = 100; 
     statusBarType; 
+    height = 50;
+    width = 200;  
+    posX = 20; 
+    posY = 0; 
 
     constructor(type){
         super();
-        this.height = 50;
-        this.width = 200;  
-        this.posX = 20; 
-        this.posY = 0; 
         if (type == "LIFE"){
-            this.loadImage("img/4. Marcadores/green/Life/100_  copia 2.png");
-            this.loadImages(this.IMAGES_LIFE); 
-            this.posY = 0;  
-            this.statusBarType = "LIFE"; 
+            this.setInital("img/4. Marcadores/green/Life/100_  copia 2.png", this.IMAGES_LIFE , 0, this.posX , type);
         }
         else if (type == "COIN"){
-            this.loadImage("img/4. Marcadores/green/Coin/0_  copia 4.png");
-            this.loadImages(this.IMAGES_COIN); 
-            this.posY = 40; 
-            this.statusBarType = "COIN"; 
+            this.setInital("img/4. Marcadores/green/Coin/0_  copia 4.png", this.IMAGES_COIN , 40, this.posX , type);
         }
         else if (type == "POISON"){
-            this.loadImage("img/4. Marcadores/green/poisoned bubbles/0_ copia 2.png");
-            this.loadImages(this.IMAGES_POISON); 
-            this.posY = 80; 
-            this.statusBarType = "POISON"; 
+            this.setInital("img/4. Marcadores/green/poisoned bubbles/0_ copia 2.png", this.IMAGES_POISON , 80, this.posX , type);
         }
         else if (type == "ENDBOSS"){
-            this.loadImage("img/4. Marcadores/Purple/100_ .png");
-            this.loadImages(this.IMAGES_ENDBOSS); 
-            this.posY = 0;
-            this.posX = 500 
-            this.statusBarType = "ENDBOSS"; 
+            this.setInital("img/4. Marcadores/Purple/100_ .png" , this.IMAGES_ENDBOSS , 0 , 500 , type ); 
         }
+    }
+
+    setInital( imagePath , imagesArray , posY , posX , statusBarType ){
+        this.loadImage(imagePath);
+        this.loadImages(imagesArray); 
+        this.posY = posY;
+        this.posX = posX;  
+        this.statusBarType = statusBarType; 
     }
 
     setPercentage(percentage){

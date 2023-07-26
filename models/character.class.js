@@ -117,78 +117,95 @@ class Character extends MovableObjects{
           this.loadImages(this.ATTACK_IMAGE); 
           this.loadImages(this.BUBBLE_ATTACK_IMAGE);
           this.loadImages(this.BUBBLE_POSION_ATTACK_IMAGE); 
-          this.animate(); 
+          this.animateMove(); 
+          this.animateImage(); 
     }
 
-    animate(){
+    animateMove(){
         this.animateIntervallMove = setInterval(()=>{
             this.swim_sound.pause(); 
-            if( this.world.keyboard.RIGHT && this.posX < this.world.level.level_end_x ) {
-                this.swim_sound.play(); 
-                this.posX += this.speed; 
-                this.otherDirection = false; 
-            }
-            if( this.world.keyboard.LEFT && this.posX > 100) {
-                this.swim_sound.play(); 
-                this.posX -= this.speed;
-                this.otherDirection = true; 
-            }
-            if( this.world.keyboard.UP ) {
-                this.swim_sound.play(); 
-                if(this.posY > -70){
-                    this.posY -= this.speed;
-                }
-            }
-            if( this.world.keyboard.DOWN ) {
-                this.swim_sound.play(); 
-                if(this.posY < this.world.ctx.canvas.clientHeight - ((this.world.ctx.canvas.clientHeight / 100) * 25)){
-                    this.posY += this.speed;
-                    console.log(this.world.ctx.canvas.clientHeight);
-                    console.log("POS: " + this.posY);
-                }
-            }
+            this.animateMoveHorizontal();
+            this.animateMoveVertical();
             this.world.camera_x = -this.posX + 100;
          }, 1000 / 60);
+    }
 
-         this.animateIntervallAnimation = setInterval(()=>{
+    animateMoveHorizontal(){
+        if( this.world.keyboard.RIGHT && this.posX < this.world.level.level_end_x ) {
+            this.swim_sound.play(); 
+            this.posX += this.speed; 
+            this.otherDirection = false; 
+        }
+        if( this.world.keyboard.LEFT && this.posX > 100) {
+            this.swim_sound.play(); 
+            this.posX -= this.speed;
+            this.otherDirection = true; 
+        }
+    }
+
+    animateMoveVertical(){
+        if( this.world.keyboard.UP ) {
+            this.swim_sound.play(); 
+            if(this.posY > -70){
+                this.posY -= this.speed;
+            }
+        }
+        if( this.world.keyboard.DOWN ) {
+            this.swim_sound.play(); 
+            if(this.posY < this.world.ctx.canvas.clientHeight - ((this.world.ctx.canvas.clientHeight / 100) * 25)){
+                this.posY += this.speed;
+            }
+        }
+    }
+
+    animateImage(){
+        this.animateIntervallAnimation = setInterval(()=>{
             if(this.isDead()){
-                //this.playAnimation(this.DEAD_IMAGES); 
-                if(this.dieAniamtionCounter < this.DEAD_IMAGES.length){
-                    this.playSingleAnimation(this.DEAD_IMAGES , this.dieAniamtionCounter ); 
-                    this.dieAniamtionCounter++;            
-                } 
-                else{
-                    //clearInterval(this.swimInterval); 
-                    console.log("Character is Dead - End of Game"); 
-                    this.characterDied(); 
-                }
+                this.animateImageIsDead(); 
             }
             else if(this.isHurt()){
-                if(this.lastHitBy == "Pufferfish"){
-                    this.playAnimation(this.HURT_IMAGES); 
-                }
-                else if(this.lastHitBy == "Jellyfish"){
-                    this.playAnimation(this.SHOCK_IMAGES); 
-                }
-                else{
-                    this.playAnimation(this.HURT_IMAGES); 
-                }
+                this.animateImageIsHurt(); 
             }
             else{
-                if (this.world.keyboard.SPACE && !this.currentFinAttack){
-                    this.currentFinAttack = true; 
-                    this.finAttack(); 
-                }
-                if(this.world.keyboard.KeyD && !this.currentBubbleAttack){
-                    console.log("BubbleAttack");
-                    this.currentBubbleAttack = true; 
-                    this.bubbleAttack(); 
-                }
-                if( (this.world.keyboard.RIGHT  || this.world.keyboard.LEFT ||  this.world.keyboard.UP ||  this.world.keyboard.DOWN) && (!this.currentFinAttack && !this.currentBubbleAttack) ) {
-                    this.playAnimation(this.SWIM_IMAGES); 
-                }
+                this.animateImageAttacks();
             }
         }, 100 )
+    }
+
+    animateImageIsDead(){
+        if(this.dieAniamtionCounter < this.DEAD_IMAGES.length){
+            this.playSingleAnimation(this.DEAD_IMAGES , this.dieAniamtionCounter ); 
+            this.dieAniamtionCounter++;            
+        } 
+        else{
+            this.characterDied(); 
+        }
+    }
+
+    animateImageIsHurt(){
+        if(this.lastHitBy == "Pufferfish"){
+            this.playAnimation(this.HURT_IMAGES); 
+        }
+        else if(this.lastHitBy == "Jellyfish"){
+            this.playAnimation(this.SHOCK_IMAGES); 
+        }
+        else{
+            this.playAnimation(this.HURT_IMAGES); 
+        }
+    }
+
+    animateImageAttacks(){
+        if (this.world.keyboard.SPACE && !this.currentFinAttack){
+            this.currentFinAttack = true; 
+            this.finAttack(); 
+        }
+        if(this.world.keyboard.KeyD && !this.currentBubbleAttack){
+            this.currentBubbleAttack = true; 
+            this.bubbleAttack(); 
+        }
+        if( (this.world.keyboard.RIGHT  || this.world.keyboard.LEFT ||  this.world.keyboard.UP ||  this.world.keyboard.DOWN) && (!this.currentFinAttack && !this.currentBubbleAttack) ) {
+            this.playAnimation(this.SWIM_IMAGES); 
+        }
     }
 
     finAttack(){
@@ -209,31 +226,10 @@ class Character extends MovableObjects{
     bubbleAttack(){
         let bubbleAttackInterval = setInterval(() => {
             if(this.currentBubbleAttackCounter < 8){
-                if(this.collectedPoisons > 0 && this.world.characterisAtEndboss){
-                    console.log("Posion > 0" + this.collectedPoisons.length ); 
-                    this.playAnimation(this.BUBBLE_POSION_ATTACK_IMAGE);
-                }
-                else{
-                    console.log("Posion < 0"); 
-                    this.playAnimation(this.BUBBLE_ATTACK_IMAGE);  
-                }
-                this.currentBubbleAttackCounter++; 
+                this.bubbleAttackCharacterAnimation(); 
             }
             else{
-                if(!this.otherDirection){
-                    this.world.bubbles.push(new Bubble(this.posX + this.width-20, this.posY + (this.height/2) , "R" , ((this.collectedPoisons - this.poisonAttacks ) > 0 && this.world.characterisAtEndboss)));
-                    if((this.collectedPoisons - this.poisonAttacks ) > 0 && this.world.characterisAtEndboss){
-                        this.poisonAttacks ++; 
-                        this.world.statusBar_Poison.setPercentage( this.calcPosionPercentage() ); 
-                    }
-                }
-                else{
-                    this.world.bubbles.push(new Bubble(this.posX + 20, this.posY + (this.height/2), "L", ((this.collectedPoisons - this.poisonAttacks ) > 0 && this.world.characterisAtEndboss) )); 
-                    if((this.collectedPoisons - this.poisonAttacks ) > 0 && this.world.characterisAtEndboss){
-                        this.poisonAttacks ++; 
-                        this.world.statusBar_Poison.setPercentage( this.calcPosionPercentage() ); 
-                    }
-                }
+                this.bubbleAttackCreateNewBubble(); 
                 this.currentBubbleAttackCounter = 0;
                 this.currentBubbleAttack = false; 
                 this.playAnimation(this.SWIM_IMAGES); 
@@ -242,14 +238,37 @@ class Character extends MovableObjects{
         }, 100);
     }
 
+    bubbleAttackCharacterAnimation(){
+        if(this.collectedPoisons > 0 && this.world.characterisAtEndboss){
+            this.playAnimation(this.BUBBLE_POSION_ATTACK_IMAGE);
+        }
+        else{
+            this.playAnimation(this.BUBBLE_ATTACK_IMAGE);  
+        }
+        this.currentBubbleAttackCounter++; 
+    }
+    
+    bubbleAttackCreateNewBubble(){
+        let isPoisonBubble = (this.collectedPoisons - this.poisonAttacks ) > 0 && this.world.characterisAtEndboss; 
+        if(!this.otherDirection){
+            this.world.bubbles.push(new Bubble(this.posX + this.width-20, this.posY + (this.height/2) , "R" , isPoisonBubble));
+            this.bubbleAttackCheckPoison(isPoisonBubble); 
+        }
+        else{
+            this.world.bubbles.push(new Bubble(this.posX + 20, this.posY + (this.height/2), "L", isPoisonBubble)); 
+            this.bubbleAttackCheckPoison(isPoisonBubble); 
+        }
+    }
+
+    bubbleAttackCheckPoison( isPoisonBubble ){
+        if(isPoisonBubble){
+            this.poisonAttacks ++; 
+            this.world.statusBar_Poison.setPercentage( this.calcPosionPercentage() ); 
+        }
+    }
+
     calcPosionPercentage(){
         let calc = ((this.collectedPoisons  - this.poisonAttacks) / ( this.world.level.poisons.length + this.collectedPoisons + this.poisonAttacks) ) * 100; 
-        /*
-        console.log("gesammelt: " + this.collectedPoisons); 
-        console.log("attacken: " + this.poisonAttacks); 
-        console.log("gesamt in welt: " + this.world.level.poisons.length); 
-        console.log("Ergebis: " + calc); 
-        */
         return calc; 
     }
 

@@ -62,12 +62,9 @@ class Endboss extends Enemy {
     attackIntervalCounter = 0; 
     attackIsPlaying = false;
     timeToAttack = false; 
-    
     saveOffsetWhileAttackLeft = 0; 
     saveOffsetWhileAttackRight = 0; 
-
     savePosXWhileAttacK = this.posX; 
-
     introPlayed = false; 
     offset = {
         top: 200, 
@@ -87,31 +84,19 @@ class Endboss extends Enemy {
         this.loadImages(this.ATTACK_ENDBOSS_IMAGES); 
         this.swim();     
         this.attackTimeInterval(); 
- 
-    
     }
 
     swim(){
         this.swimInterval = setInterval(()=>{
             if(this.introPlayed){
                 if(this.isDead()){
-                    if(this.dieAniamtionCounter < this.DEAD_ENDBOSS_IMAGES.length){
-                        this.playSingleAnimation(this.DEAD_ENDBOSS_IMAGES , this.dieAniamtionCounter ); 
-                        this.dieAniamtionCounter++;               
-                    } 
-                    else{
-                        this.clearEnbossIntervals(); 
-                        console.log("Endboss is Dead - End of Game"); 
-                        document.getElementById("winScreen").classList.remove("dsp-none"); 
-                        document.getElementById("gameOverlayButtons").classList.add("dsp-none"); 
-                    }
+                    this.isDeadAnimation();
                 }
                 else if(this.isHurt()){
                     this.playAnimation(this.HURT_ENDBOSS_IMAGES); 
                 }
                 else if(this.timeToAttack){
                     this.attack();  
-                    console.log("Endboss attack");
                     clearInterval(this.swimInterval); 
                 }
                 else{
@@ -121,23 +106,31 @@ class Endboss extends Enemy {
         }, 300 )
     }
 
+    isDeadAnimation(){
+        if(this.dieAniamtionCounter < this.DEAD_ENDBOSS_IMAGES.length){
+            this.playSingleAnimation(this.DEAD_ENDBOSS_IMAGES , this.dieAniamtionCounter ); 
+            this.dieAniamtionCounter++;               
+        } 
+        else{
+            this.clearEnbossIntervals(); 
+            document.getElementById("winScreen").classList.remove("dsp-none"); 
+            document.getElementById("gameOverlayButtons").classList.add("dsp-none"); 
+        }
+    }
+
     playIntro(){
         clearInterval(this.swimInterval); 
         this.introInterval = setInterval(()=>{
             if( ( this.introIntervalCounter < this.INTRO_IMAGES.length ) && !this.introPlayed){
-                console.log(this.INTRO_IMAGES.length ); 
-                console.log(this.introIntervalCounter ); 
                 this.posY = -50;
                 this.playAnimation(this.INTRO_IMAGES); 
                 this.introIntervalCounter ++; 
             }
             else{
                 this.introPlayed = true; 
-                console.log("restart swim");   
                 this.swim(); 
                 this.moveUpAndDown(); 
-                clearInterval(this.introInterval);  
-                  
+                clearInterval(this.introInterval);            
             }
         }, 100 )
     }
@@ -157,18 +150,7 @@ class Endboss extends Enemy {
     }
 
     backToOrignalPosition(){
-
         this.posX = this.savePosXWhileAttacK; 
-        
-        /*this.moveRight(); 
-        let positonInternval = setInterval(() => {
-            if(this.posX >= this.savePosXWhileAttacK){
-                console.log("Original position reached"); 
-                clearInterval(this.moveRigthInterval); 
-                //clearInterval(positonInternval); 
-            }
-        }, 100);
-        */
     }
 
     attackTimeInterval(){
@@ -176,7 +158,6 @@ class Endboss extends Enemy {
             if(!this.timeToAttack){
                 this.timeToAttack = true; 
             }
-            //console.log("Time to Attack: " + this.timeToAttack);
         }, 5000);
     }
 
@@ -185,8 +166,7 @@ class Endboss extends Enemy {
             if( ( this.attackIntervalCounter < this.ATTACK_ENDBOSS_IMAGES.length )){
                 this.playAnimation(this.ATTACK_ENDBOSS_IMAGES); 
                 this.attackIntervalCounter++; 
-                this.posX -= 20;
-            }
+                this.posX -= 20; }
             else{
                 this.attackIsPlaying = true; 
                 this.timeToAttack = false; 
@@ -196,31 +176,6 @@ class Endboss extends Enemy {
                 clearInterval(this.attackInterval);    
             }
         }, 200);
-
-        // OLD VERSION with Offset change; 
-        /*
-        this.saveOffsetWhileAttackLeft = this.offset.left; 
-        this.saveOffsetWhileAttackRight =  this.offset.right ; 
-        this.offset.left = -100; 
-        this.offset.right = -100; 
-        this.attackInterval = setInterval(() => {
-            if( ( this.attackIntervalCounter < this.ATTACK_ENDBOSS_IMAGES.length )){
-                this.playAnimation(this.ATTACK_ENDBOSS_IMAGES); 
-                this.attackIntervalCounter++; 
-                this.posX -= 20;
-            }
-            else{
-                this.attackIsPlaying = true; 
-                this.timeToAttack = false; 
-                this.attackIntervalCounter = 0;
-                this.offset.left =  this.saveOffsetWhileAttackLeft ; 
-                this.offset.right =  this.saveOffsetWhileAttackRight; 
-                this.swim();
-                this.backToOrignalPosition(); 
-                clearInterval(this.attackInterval);    
-            }
-        }, 200);
-        */ 
     }
 
     clearEnbossIntervals(){

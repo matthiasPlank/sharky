@@ -38,10 +38,7 @@ class Jellyfish extends Enemy{
         this.isDead = true; 
         this.isDeadFlag = true; 
         this.dieAniamtionCounter = 0; 
-        clearInterval(this.swimUpAndDownInterval); 
-        clearInterval(this.swimLeftInterval); 
-        clearInterval(this.swimUpInterval); 
-        clearInterval(this.moveLeftInterval); 
+        this.clearIntervalls(); 
         this.dieInterval = setInterval(()=>{
             if(this.dieAniamtionCounter < 4){
                 this.playAnimation(this.DIE_IN_BUBBLE_IMAGES);
@@ -52,9 +49,7 @@ class Jellyfish extends Enemy{
                 this.moveUp();  
             }
         }, 300 )
-     
     }
+}
 
     
-
-}

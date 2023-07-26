@@ -32,12 +32,7 @@ class Bubble extends MovableObjects{
     }
 
     animateBubble(){
-        if(this.direction == "R"){
-            this.moveRight();
-        }
-        else{
-            this.moveLeft(); 
-        }
+        this.direction == "R" ? this.moveRight() : this.moveLeft(); 
         this.moveUp();
         setInterval(()=>{
             if(this.isPoisoned){
@@ -46,7 +41,6 @@ class Bubble extends MovableObjects{
             else{
                 this.playAnimation(this.BUBBLE_IMAGE); 
             }
-            //console.log("Bubble Image @" + this.posX + " / " + this.posY); 
         }, 300 )
     }
 }

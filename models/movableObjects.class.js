@@ -96,7 +96,6 @@ class MovableObjects extends DrawableObjects{
             }
         }
         else if(this instanceof Endboss && !this.isDead()){
-            console.log("Endboss Hit !!!");
                 this.energy -= 5; 
                 this.world.statusBar_Endboss.setPercentage(this.energy);
                 this.timeLastHit = new Date().getTime();   
@@ -104,26 +103,15 @@ class MovableObjects extends DrawableObjects{
     }
 
     isHitbyBubble(bubble){
-
       if(this instanceof Endboss && !this.isDead()){
-            console.log("Endboss Hit by Bubble!!!");
-            if(bubble.isPoisoned){
-                this.energy -= 20; 
-                console.log("Hit by Poisoned buuble"); 
-            }
-            else{
-                this.energy -= 5;
-                console.log("Hit by normal  buuble"); 
-            }
-               
-                this.world.statusBar_Endboss.setPercentage(this.energy);
-                this.timeLastHit = new Date().getTime();   
+            bubble.isPoisoned ? this.energy -= 20 : this.energy -= 5; 
+            this.world.statusBar_Endboss.setPercentage(this.energy);
+            this.timeLastHit = new Date().getTime();   
         }
     }
 
     isHitbyFin(){
         if(this instanceof Endboss && !this.isDead()){
-            console.log("Endboss Hit by Fin!!!");
             this.energy -= 5;            
             this.world.statusBar_Endboss.setPercentage(this.energy);
             this.timeLastHit = new Date().getTime();   

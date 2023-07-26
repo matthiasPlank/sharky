@@ -237,7 +237,6 @@ canvas{
     width: 100%;
 }
 
-/* Set OverlayPanels to fill the full width and height of canvasPanels */
 #OverlayPanels>* {
     position: relative;
     width: 100%;
@@ -249,10 +248,7 @@ canvas{
     filter: invert();
     opacity: 0.8;
 }
-/* 
-.mobileBtn:hover{
-    opacity: 1;
-} */
+
 #mobileUpBtn{
     position: absolute;
     bottom: 100px;

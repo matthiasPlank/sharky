@@ -34,91 +34,102 @@ class World{
     checkCollision(){
         setInterval(() => {
             this.level.enemies.forEach((enemy) => {
-                if(this.character.currentFinAttack && this.character.isInAttackRange(enemy) && !enemy.isDeadFlag){
-                    //console.log("Character is attack " + enemy.constructor.name); 
-                    if(enemy instanceof Pufferfish){
-                        enemy.die(); 
-                    }
-                    if(enemy instanceof Endboss){
-                        console.log("Hit Endboss with Fin!"); 
-                        this.endbossFromLevel.isHitbyFin();
-                    }
-                }
-                this.bubbleCounter = 0; 
-                this.bubbles.forEach(bubble => {
-                    if (bubble.isColliding(enemy) && enemy instanceof Jellyfish && !enemy.isDeadFlag){
-                        //console.log("Bubble colliding with enemy"); 
-                        enemy.dieBubbleAnimation(); 
-                        this.removeBubble(this.bubbleCounter); 
-                    }
-                    if( bubble.isColliding(enemy) && enemy instanceof Endboss && !enemy.isDeadFlag){
-                        this.endbossFromLevel.isHitbyBubble(bubble); 
-                        this.removeBubble(this.bubbleCounter); 
-                    }
-                    this.bubbleCounter++; 
-                });
-                if(this.character.isColliding(enemy) && !enemy.isDeadFlag){
-                    //console.log("Character is colliding with: " + enemy.constructor.name); 
-                    this.character.lastHitBy = enemy.constructor.name; 
-                    this.character.isHit(); 
-                    //console.log("Charcter Engery: " + this.character.energy) 
-                }
-                else{
-                    //console.log("No collision"); 
-                }
+                this.checkCollisionFinAttack(enemy); 
+                this.checkCollisionBubbleAttack(enemy); 
+                this.checkCollisionCharacterisHit(enemy);
             }); 
-            let iterationCountCoin = 0;
-            this.level.coins.forEach((coin) => { 
-                if(this.character.isColliding(coin)){
-                  
-                    this.level.coins.splice(iterationCountCoin, 1);
-                    this.character.collectedCoins ++; 
-                    this.statusBar_Coin.setPercentage( (this.character.collectedCoins / ( this.level.coins.length + this.character.collectedCoins) ) * 100);                 
-                }
-                iterationCountCoin++; 
-            
-            }); 
-            let iterationCountPoison = 0;
-            this.level.poisons.forEach((poison) => { 
-                if(this.character.isColliding(poison)){
-
-                    this.level.poisons.splice(iterationCountPoison, 1);
-                    this.character.collectedPoisons ++; 
-                    this.statusBar_Poison.setPercentage(this.character.calcPosionPercentage()); 
-                }
-                iterationCountPoison++; 
-              
-            }); 
+          this.checkCollisionCoin();
+          this.checkCollisionPoison();              
         }, 200);
     }
 
-    draw(){
+    checkCollisionFinAttack(enemy){
+        if(this.character.currentFinAttack && this.character.isInAttackRange(enemy) && !enemy.isDeadFlag){
+            if(enemy instanceof Pufferfish){
+                enemy.die(); 
+            }
+            if(enemy instanceof Endboss){
+                this.endbossFromLevel.isHitbyFin();
+            }
+        }
+    }
 
+    checkCollisionBubbleAttack(enemy){
+        this.bubbleCounter = 0; 
+        this.bubbles.forEach(bubble => {
+            if (bubble.isColliding(enemy) && enemy instanceof Jellyfish && !enemy.isDeadFlag){
+                enemy.dieBubbleAnimation(); 
+                this.removeBubble(this.bubbleCounter); 
+            }
+            if( bubble.isColliding(enemy) && enemy instanceof Endboss && !enemy.isDeadFlag){
+                this.endbossFromLevel.isHitbyBubble(bubble); 
+                this.removeBubble(this.bubbleCounter); 
+            }
+            this.bubbleCounter++; 
+        });
+    }
+    
+    checkCollisionCharacterisHit(enemy){
+        if(this.character.isColliding(enemy) && !enemy.isDeadFlag){
+            this.character.lastHitBy = enemy.constructor.name; 
+            this.character.isHit(); 
+        }
+    }
+
+    checkCollisionCoin(){
+        let iterationCountCoin = 0;
+        this.level.coins.forEach((coin) => { 
+            if(this.character.isColliding(coin)){
+                this.level.coins.splice(iterationCountCoin, 1);
+                this.character.collectedCoins ++; 
+                this.statusBar_Coin.setPercentage( (this.character.collectedCoins / ( this.level.coins.length + this.character.collectedCoins) ) * 100);                 
+            }
+            iterationCountCoin++; 
+        }); 
+    }
+
+    checkCollisionPoison(){
+        let iterationCountPoison = 0;
+        this.level.poisons.forEach((poison) => { 
+            if(this.character.isColliding(poison)){
+                this.level.poisons.splice(iterationCountPoison, 1);
+                this.character.collectedPoisons ++; 
+                this.statusBar_Poison.setPercentage(this.character.calcPosionPercentage()); 
+            }
+            iterationCountPoison++; 
+        }); 
+    }
+
+    draw(){
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.translate(this.camera_x , 0); 
-
-        this.addObjectArrayToMap(this.level.backgroundObjects); 
-        this.drawOnMap(this.character); 
-        this.addObjectArrayToMap(this.bubbles); 
-        this.addObjectArrayToMap(this.level.coins); 
-        this.addObjectArrayToMap(this.level.poisons); 
-        this.addObjectArrayToMap(this.level.enemies); 
-      
-
+        this.drawMoveableObjects(); 
         this.ctx.translate(-this.camera_x , 0); 
-        this.drawOnMap(this.statusBar_Life); 
-        this.drawOnMap(this.statusBar_Coin); 
-        this.drawOnMap(this.statusBar_Poison); 
-        if(this.characterisAtEndboss){
-            this.drawOnMap(this.statusBar_Endboss); 
-        } 
-        
+        this.drawStatusBarObjects(); 
         let self = this; 
         requestAnimationFrame(function (){
             if(!self.pause){
                 self.draw();
             }
         })
+    }
+    
+    drawMoveableObjects(){
+        this.addObjectArrayToMap(this.level.backgroundObjects); 
+        this.drawOnMap(this.character); 
+        this.addObjectArrayToMap(this.bubbles); 
+        this.addObjectArrayToMap(this.level.coins); 
+        this.addObjectArrayToMap(this.level.poisons); 
+        this.addObjectArrayToMap(this.level.enemies); 
+    }
+
+    drawStatusBarObjects(){
+        this.drawOnMap(this.statusBar_Life); 
+        this.drawOnMap(this.statusBar_Coin); 
+        this.drawOnMap(this.statusBar_Poison); 
+        if(this.characterisAtEndboss){
+            this.drawOnMap(this.statusBar_Endboss); 
+        } 
     }
 
     addObjectArrayToMap(object){
@@ -138,14 +149,13 @@ class World{
                 object.drawFrameWithOffset(this.ctx);
                 object.drawFrameWithOffsetAndRange(this.ctx);
             }
-
             if(object.otherDirection){
                this.flipImageBack(object);
             }
         }
         catch(e){
             debugger; 
-            console.log("Could not load Image"); 
+            console.warn("Could not load Image"); 
         }
     }
 
@@ -163,16 +173,13 @@ class World{
 
     checkEndBossDistance(){
         let enemies = this.level.enemies; 
-       
         enemies.forEach(enemie => {
             if(enemie instanceof Endboss){
                 this.endbossFromLevel = enemie; 
-                console.log("Endboss" + this.endbossFromLevel); 
             }
         });
         setInterval(() => {
                 if( ( ( this.character.posX + 600) > this.endbossFromLevel.posX ) && !this.endbossFromLevel.introPlayed && !this.characterisAtEndboss){
-                    console.log("Character is at Endboss");
                     this.endbossFromLevel.playIntro(); 
                     this.characterisAtEndboss = true;                   
                 }

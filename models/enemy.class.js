@@ -66,20 +66,23 @@ class Enemy extends MovableObjects{
     die(){
         this.isDeadFlag = true; 
         this.dieAniamtionCounter = 0; 
-        clearInterval(this.swimUpAndDownInterval); 
-        clearInterval(this.swimLeftInterval); 
-        clearInterval(this.swimUpInterval); 
-        clearInterval(this.moveLeftInterval); 
+        this.clearIntervalls();
         this.dieInterval = setInterval(()=>{
             if(this.dieAniamtionCounter < 3){
                 this.playAnimation(this.DIE_IMAGES);
                 this.dieAniamtionCounter++; 
-                console.log("die Interval" +  this.dieAniamtionCounter);
             }
             else{
                 clearInterval(this.dieInterval); 
-               this.moveUp();  
+                this.moveUp();  
             }
         }, 300 )
     }  
+
+    clearIntervalls(){
+        clearInterval(this.swimUpAndDownInterval); 
+        clearInterval(this.swimLeftInterval); 
+        clearInterval(this.swimUpInterval); 
+        clearInterval(this.moveLeftInterval); 
+    }
 }

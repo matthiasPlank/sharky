@@ -40,7 +40,6 @@ function restartGame(){
     document.getElementById("GameOverScreen").classList.add("dsp-none");  
     document.getElementById("winScreen").classList.add("dsp-none");    
     startGame();
-    //world.character = new Character(); 
 }
 
 function fullscreen(){
@@ -78,70 +77,38 @@ function closeFullscreen() {
     }
 }
 
-
 function instruction(){
     if(!isInInstrction){
         isInInstrction = true; 
         document.getElementById("instructionOverlay").classList.remove("dsp-none"); 
         document.getElementById("gameOverlayButtons").classList.add("dsp-none"); 
-        //document.getElementById("startScreen").classList.add("dsp-none"); 
     }
     else{
         isInInstrction = false; 
         document.getElementById("instructionOverlay").classList.add("dsp-none"); 
         document.getElementById("gameOverlayButtons").classList.remove("dsp-none"); 
-        //document.getElementById("startScreen").classList.remove("dsp-none"); 
     }
 }
 
 function setupMobileEvents(){
-
     //*****UP****/
-    mobileUpBtn.addEventListener("touchstart", (event) => {
-        console.log("Touched UP - START"); 
-        console.log(event); 
-        keyboard.UP = true; 
-    });
-    mobileUpBtn.addEventListener("touchend", (event) => {
-        console.log("Touched UP - END"); 
-        console.log(event); 
-        keyboard.UP = false; 
-    });
+    mobileUpBtn.addEventListener("touchstart", () => { keyboard.UP = true});
+    mobileUpBtn.addEventListener("touchend", () => { keyboard.UP = false});
     //*****DOWN****/
-    mobileDownBtn.addEventListener("touchstart", (event) => {
-        keyboard.DOWN = true; 
-    });
-    mobileDownBtn.addEventListener("touchend", (event) => {
-        keyboard.DOWN = false; 
-    });
+    mobileDownBtn.addEventListener("touchstart", () => {keyboard.DOWN = true});
+    mobileDownBtn.addEventListener("touchend", () => { keyboard.DOWN = false});
     //*****LEFT****/
-    mobileLeftBtn.addEventListener("touchstart", (event) => {
-        keyboard.LEFT = true; 
-    });
-    mobileLeftBtn.addEventListener("touchend", (event) => {
-        keyboard.LEFT = false; 
-    });
+    mobileLeftBtn.addEventListener("touchstart", () => {keyboard.LEFT = true});
+    mobileLeftBtn.addEventListener("touchend", () => {keyboard.LEFT = false});
     //*****Rigth****/
-    mobileRigthBtn.addEventListener("touchstart", (event) => {
-        keyboard.RIGHT = true; 
-    });
-    mobileRigthBtn.addEventListener("touchend", (event) => {
-        keyboard.RIGHT = false; 
-    });
-     //*****FIN****/
-     mobileFinBtn.addEventListener("touchstart", (event) => {
-        keyboard.SPACE = true; 
-    });
-    mobileFinBtn.addEventListener("touchend", (event) => {
-        keyboard.SPACE = false; 
-    });
+    mobileRigthBtn.addEventListener("touchstart", () => { keyboard.RIGHT = true});
+    mobileRigthBtn.addEventListener("touchend", () => { keyboard.RIGHT = false});
+    //*****FIN****/
+    mobileFinBtn.addEventListener("touchstart", () => { keyboard.SPACE = true});
+    mobileFinBtn.addEventListener("touchend", () => { keyboard.SPACE = false});
      //*****Bubble****/
-     mobileBubbleBtn.addEventListener("touchstart", (event) => {
-        keyboard.KeyD = true; 
-    });
-    mobileBubbleBtn.addEventListener("touchend", (event) => {
-        keyboard.KeyD = false; 
-    });
+    mobileBubbleBtn.addEventListener("touchstart", () => { keyboard.KeyD = true});
+    mobileBubbleBtn.addEventListener("touchend", () => { keyboard.KeyD = false });
 }
 
 window.addEventListener("keydown", (event) => {
@@ -164,7 +131,6 @@ window.addEventListener("keydown", (event) => {
             break;
         case 'KeyD':
             keyboard.KeyD = true; 
-            //console.log(event); 
         break;
         default:
             break; 
@@ -172,7 +138,6 @@ window.addEventListener("keydown", (event) => {
 });
 
 window.addEventListener("keyup", (event) => {
-    //console.log(event); 
     switch (event.code) {
         case 'ArrowUp':
           keyboard.UP = false; 
@@ -191,7 +156,6 @@ window.addEventListener("keyup", (event) => {
             break;
         case 'KeyD':
             keyboard.KeyD = false; 
-            //console.log(event); 
         break;
         default:
             break; 
