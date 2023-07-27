@@ -21,6 +21,8 @@ h2{
 h3{
     font-size: 18px;
     color: white;
+    margin: 0px;
+    text-align: center;
 }
 h5{
     font-size: 12px;
@@ -67,7 +69,7 @@ canvas{
 }
 #startScreen .startButton{
     position: absolute;
-    bottom: 100px; 
+    bottom: 160px; 
     right: 50px;
     width: 300px;
 }
@@ -311,6 +313,53 @@ canvas{
     border: 8px solid white;
     height: 80px;
     width: 80px;
+}
+
+#instructionKeysStartScreenPanel{
+    display: flex;
+    flex-direction: column;
+    gap:12px;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: 10px;
+    right: 400px;
+}
+
+#instructionKeysImageStartScreen{
+    width: 70px; 
+    object-fit: contain;
+}
+
+#instructionBubbleStartScreenPanel{
+    display: flex;
+    flex-direction: column;
+    gap:12px;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+#instructionBubbleStartScreen{
+    width: 25px; 
+    object-fit: contain;
+}
+
+#instructionFinStartScreenPanel{
+    display: flex;
+    flex-direction: column;
+    gap:12px;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: 10px;
+    right: 200px;
+}
+
+#instructionFinStartScreen{
+    width: 100px; 
+    object-fit: contain;
 }
 
 @media only screen and (max-width: 720px){
