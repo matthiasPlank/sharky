@@ -106,6 +106,8 @@ class Character extends MovableObjects{
     dieAniamtionCounter = 0;
     animateIntervallMove; 
     animateIntervallAnimation; 
+    IDLESpeed = 0.5; 
+    currentIDLEValue = this.IDLESpeed;
 
     constructor(){
           super().loadImage("img/1.Sharkie/3.Swim/1.png");
@@ -206,6 +208,19 @@ class Character extends MovableObjects{
         if( (this.world.keyboard.RIGHT  || this.world.keyboard.LEFT ||  this.world.keyboard.UP ||  this.world.keyboard.DOWN) && (!this.currentFinAttack && !this.currentBubbleAttack) ) {
             this.playAnimation(this.SWIM_IMAGES); 
         }
+        else{  
+            this.animateImageIDLE(); 
+        }
+    }
+    
+    animateImageIDLE(){
+        if(this.currentIDLEValue >= 1){
+            this.playAnimation(this.IDLE_IMAGES);
+            this.currentIDLEValue = this.IDLESpeed;  
+        } 
+        else{
+            this.currentIDLEValue += this.IDLESpeed; 
+        }  
     }
 
     finAttack(){
