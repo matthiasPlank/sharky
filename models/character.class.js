@@ -106,6 +106,8 @@ class Character extends MovableObjects{
     ];
     world; 
     swim_sound = new Audio('./audio/swim.mp3'); 
+    hurt_shock_sound = new Audio('./audio/shock.mp3'); 
+    hurt_hit_sound = new Audio('./audio/hurt2.mp3'); 
     offset = {
         top: 70, 
         right: 25, 
@@ -145,6 +147,7 @@ class Character extends MovableObjects{
     animateMove(){
         this.animateIntervallMove = setInterval(()=>{
             this.swim_sound.pause(); 
+            //this.hurt_shock_sound.pause(); 
             this.animateMoveHorizontal();
             this.animateMoveVertical();
             this.world.camera_x = -this.posX + 100;
@@ -205,9 +208,11 @@ class Character extends MovableObjects{
 
     animateImageIsHurt(){
         if(this.lastHitBy == "Pufferfish"){
+            this.hurt_hit_sound.play();
             this.playAnimation(this.HURT_IMAGES); 
         }
         else if(this.lastHitBy == "Jellyfish"){
+            this.hurt_shock_sound.play(); 
             this.playAnimation(this.SHOCK_IMAGES); 
         }
         else{
