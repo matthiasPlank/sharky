@@ -24,6 +24,22 @@ class Character extends MovableObjects{
         "img/1.Sharkie/1.IDLE/17.png", 
         "img/1.Sharkie/1.IDLE/18.png"
     ] ; 
+    LONG_IDLE_IMAGES = [
+        "img/1.Sharkie/2.Long_IDLE/i1.png", 
+        "img/1.Sharkie/2.Long_IDLE/i2.png", 
+        "img/1.Sharkie/2.Long_IDLE/i3.png", 
+        "img/1.Sharkie/2.Long_IDLE/i4.png", 
+        "img/1.Sharkie/2.Long_IDLE/i5.png", 
+        "img/1.Sharkie/2.Long_IDLE/i6.png", 
+        "img/1.Sharkie/2.Long_IDLE/i7.png", 
+        "img/1.Sharkie/2.Long_IDLE/i8.png", 
+        "img/1.Sharkie/2.Long_IDLE/i9.png", 
+        "img/1.Sharkie/2.Long_IDLE/i10.png", 
+        "img/1.Sharkie/2.Long_IDLE/i11.png", 
+        "img/1.Sharkie/2.Long_IDLE/i12.png", 
+        "img/1.Sharkie/2.Long_IDLE/i13.png", 
+        "img/1.Sharkie/2.Long_IDLE/i14.png"
+    ];
     SWIM_IMAGES = [
         "img/1.Sharkie/3.Swim/1.png", 
         "img/1.Sharkie/3.Swim/2.png", 
@@ -108,10 +124,13 @@ class Character extends MovableObjects{
     animateIntervallAnimation; 
     IDLESpeed = 0.5; 
     currentIDLEValue = this.IDLESpeed;
+    timeLastMove= new Date().getTime();  
+    longIDLECounter = 0; 
 
     constructor(){
           super().loadImage("img/1.Sharkie/3.Swim/1.png");
           this.loadImages(this.IDLE_IMAGES); 
+          this.loadImages(this.LONG_IDLE_IMAGES);
           this.loadImages(this.SWIM_IMAGES); 
           this.loadImages(this.SHOCK_IMAGES); 
           this.loadImages(this.DEAD_IMAGES); 
@@ -200,27 +219,53 @@ class Character extends MovableObjects{
         if (this.world.keyboard.SPACE && !this.currentFinAttack){
             this.currentFinAttack = true; 
             this.finAttack(); 
+            this.timeLastMove = new Date().getTime();   
         }
         if(this.world.keyboard.KeyD && !this.currentBubbleAttack){
             this.currentBubbleAttack = true; 
             this.bubbleAttack(); 
+            this.timeLastMove = new Date().getTime();   
         }
         if( (this.world.keyboard.RIGHT  || this.world.keyboard.LEFT ||  this.world.keyboard.UP ||  this.world.keyboard.DOWN) && (!this.currentFinAttack && !this.currentBubbleAttack) ) {
             this.playAnimation(this.SWIM_IMAGES); 
+            this.timeLastMove = new Date().getTime();   
         }
         else{  
             this.animateImageIDLE(); 
         }
     }
-    
+
     animateImageIDLE(){
-        if(this.currentIDLEValue >= 1){
+        if(this.currentIDLEValue >= 1 && !this.calcLongIDLE()){
             this.playAnimation(this.IDLE_IMAGES);
-            this.currentIDLEValue = this.IDLESpeed;  
+            this.currentIDLEValue = this.IDLESpeed; 
+            this.longIDLECounter = 0;  
         } 
+        else if(this.currentIDLEValue >= 1 && this.calcLongIDLE()){
+            this.animateImageLongIDLE();
+        }
         else{
             this.currentIDLEValue += this.IDLESpeed; 
         }  
+    }
+
+    animateImageLongIDLE(){
+        if(this.longIDLECounter < this.LONG_IDLE_IMAGES.length){
+            this.playSingleAnimation(this.LONG_IDLE_IMAGES , this.longIDLECounter);
+            this.longIDLECounter++; 
+            this.currentIDLEValue = this.IDLESpeed;  
+            if(this.posY < this.world.ctx.canvas.clientHeight - ((this.world.ctx.canvas.clientHeight / 100) * 25)){
+                this.posY += this.speed/4;
+            }
+        } 
+        else{
+            this.longIDLECounter = 10; 
+        }     
+    }
+
+    calcLongIDLE(){
+        const timepassed = new Date().getTime() - this.timeLastMove; 
+        return timepassed > 5000; 
     }
 
     finAttack(){
