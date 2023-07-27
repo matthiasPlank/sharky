@@ -5,7 +5,8 @@ class Bubble extends MovableObjects{
     visible = false; 
     width=40;
     height=40; 
-    speed=1; 
+    speed=1.5; 
+    speedUp=0.5;
     direction = "R"; 
     offset = {
         top: 0, 
@@ -33,7 +34,7 @@ class Bubble extends MovableObjects{
 
     animateBubble(){
         this.direction == "R" ? this.moveRight() : this.moveLeft(); 
-        this.moveUp();
+        this.moveUpWitCustomSpeed(this.speedUp);
         setInterval(()=>{
             if(this.isPoisoned){
                 this.playAnimation(this.POISONED_BUBBLE_IMAGE);

@@ -42,6 +42,12 @@ class MovableObjects extends DrawableObjects{
          }, 1000/60 )
     }
 
+    moveUpWitCustomSpeed(customSpeed){
+        this.moveUpInterval = setInterval(()=>{
+            this.posY -= customSpeed;  
+         }, 1000/60 )
+    }
+
     moveDown(){
         this.moveDownInterval = setInterval(()=>{
             this.posY += this.speed;  
