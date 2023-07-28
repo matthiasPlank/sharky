@@ -113,6 +113,7 @@ class Endboss extends Enemy {
         } 
         else{
             this.clearEnbossIntervals(); 
+            this.clearCharacterIntervals(); 
             document.getElementById("winScreen").classList.remove("dsp-none"); 
             document.getElementById("gameOverlayButtons").classList.add("dsp-none"); 
         }
@@ -185,5 +186,9 @@ class Endboss extends Enemy {
         clearInterval(this.moveRigthInterval);
         clearInterval(this.moveUpInterval);
         clearInterval(this.moveDownInterval);
+    }
+
+    clearCharacterIntervals(){
+        clearInterval(this.world.character.animateIntervallAnimation);
     }
 }

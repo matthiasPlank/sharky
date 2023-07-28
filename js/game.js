@@ -32,8 +32,9 @@ function startGame(){
     document.getElementById("gameOverlayButtons").classList.remove("dsp-none");
     let canvas = document.getElementById("canvas");
     initLevel(); 
+    world = undefined;
     world = new World(canvas , keyboard); 
-    world.character.energy = 100; 
+    //world.character.energy = 100; 
 }
 
 function restartGame(){

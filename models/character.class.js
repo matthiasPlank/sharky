@@ -197,11 +197,11 @@ class Character extends MovableObjects{
     }
 
     animateImageIsDead(){
-        if(this.dieAniamtionCounter < this.DEAD_IMAGES.length){
+        if(this.dieAniamtionCounter < this.DEAD_IMAGES.length && this.isDead()){
             this.playSingleAnimation(this.DEAD_IMAGES , this.dieAniamtionCounter ); 
             this.dieAniamtionCounter++;            
         } 
-        else{
+        else if(this.isDead()){
             this.characterDied(); 
         }
     }
@@ -338,10 +338,13 @@ class Character extends MovableObjects{
     }
 
     characterDied(){
+        console.log("character Died Funktion");
         document.getElementById("GameOverScreen").classList.remove("dsp-none");
         document.getElementById("gameOverlayButtons").classList.add("dsp-none"); 
+        clearInterval(this.animateIntervallAnimation);
+        clearInterval(this.animateIntervallMove);
         this.world.pause = true; 
-        clearInterval(this.animateIntervallMove); 
-        clearInterval(this.animateIntervallAnimation)
+        
+      
     }
 }
