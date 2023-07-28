@@ -344,7 +344,10 @@ class Character extends MovableObjects{
         clearInterval(this.animateIntervallAnimation);
         clearInterval(this.animateIntervallMove);
         this.world.pause = true; 
-        
-      
+    }
+    
+    clearCharacterInvervals(){
+        clearInterval(this.animateIntervallAnimation);
+        clearInterval(this.animateIntervallMove);
     }
 }

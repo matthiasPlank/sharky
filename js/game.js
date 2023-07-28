@@ -40,6 +40,7 @@ function startGame(){
 function restartGame(){
     document.getElementById("GameOverScreen").classList.add("dsp-none");  
     document.getElementById("winScreen").classList.add("dsp-none");    
+    world.character.clearCharacterInvervals(); 
     startGame();
 }
 

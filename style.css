@@ -12,6 +12,7 @@ body{
 }
 h1{
     font-size: 64px;
+    text-align: center;
 
 }
 h2{
@@ -246,14 +247,14 @@ canvas{
 }
 
 .mobileBtn{
-    width: 80px;
+    width: 60px;
     filter: invert();
     opacity: 0.8;
 }
 
 #mobileUpBtn{
     position: absolute;
-    bottom: 100px;
+    bottom: 80px;
     left: 150px; 
 }
 #mobileDownBtn{
@@ -264,28 +265,14 @@ canvas{
 #mobileLeftBtn{
     position: absolute;
     bottom: 10px;
-    left: 50px; 
+    left: 70px; 
 }
 #mobileRigthBtn{
     position: absolute;
     bottom: 10px;
-    left: 250px; 
+    left: 230px; 
 }
 #mobileFinBtn{
-    background-color: transparent;
-    border-radius: 50%;
-    font-size: 18px;
-    font-family: "sharkyFont";
-    color: white;
-    opacity: 0.8;
-    border: 8px solid white;
-    height: 80px;
-    width: 80px;
-    position: absolute;
-    bottom: 10px;
-    right: 150px; 
-}
-#mobileBubbleBtn{
     background-color: transparent;
     border-radius: 50%;
     font-size: 12px;
@@ -293,8 +280,22 @@ canvas{
     color: white;
     opacity: 0.8;
     border: 8px solid white;
-    height: 80px;
-    width: 80px;
+    height: 60px;
+    width: 60px;
+    position: absolute;
+    bottom: 10px;
+    right: 150px; 
+}
+#mobileBubbleBtn{
+    background-color: transparent;
+    border-radius: 50%;
+    font-size: 10px;
+    font-family: "sharkyFont";
+    color: white;
+    opacity: 0.8;
+    border: 8px solid white;
+    height: 60px;
+    width: 60px;
     position: absolute;
     bottom: 100px;
     right: 150px; 
@@ -311,8 +312,8 @@ canvas{
     color: white;
     opacity: 0.8;
     border: 8px solid white;
-    height: 80px;
-    width: 80px;
+    height: 60px;
+    width: 60px;
 }
 
 #instructionKeysStartScreenPanel{
@@ -361,6 +362,16 @@ canvas{
     width: 100px; 
     object-fit: contain;
 }
+#rotate{
+    margin-top: 50px;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+#rotateScreenImage{
+    width: 50px;
+}
 
 @media only screen and (max-width: 720px){
      #canvasPanels{
@@ -384,4 +395,15 @@ canvas{
         display:block
     } 
     
+}
+
+@media screen and (orientation:portrait) {
+    #canvasPanels{
+        display: none;    
+    }
+    #rotate{
+        display: flex;
+    }
+
+
 }
