@@ -129,6 +129,9 @@ class Character extends MovableObjects{
     timeLastMove= new Date().getTime();  
     longIDLECounter = 0; 
 
+    /**
+     *  Creates a new instance of a character. 
+     */
     constructor(){
           super().loadImage("img/1.Sharkie/3.Swim/1.png");
           this.loadImages(this.IDLE_IMAGES); 
@@ -144,6 +147,9 @@ class Character extends MovableObjects{
           this.animateImage(); 
     }
 
+    /**
+     * Sets the interval that controls the character moves and hurt animation. 
+     */
     animateMove(){
         this.animateIntervallMove = setInterval(()=>{
             this.swim_sound.pause(); 
@@ -154,6 +160,9 @@ class Character extends MovableObjects{
          }, 1000 / 60);
     }
 
+    /**
+     * Checks the keys for a horizontal move an change horizintal position of the character. 
+     */
     animateMoveHorizontal(){
         if( this.world.keyboard.RIGHT && this.posX < this.world.level.level_end_x ) {
             this.swim_sound.play(); 
@@ -167,6 +176,9 @@ class Character extends MovableObjects{
         }
     }
 
+    /**
+     * Checks the keys for a vertical move an change vertical position of the character. 
+     */
     animateMoveVertical(){
         if( this.world.keyboard.UP ) {
             this.swim_sound.play(); 
@@ -182,6 +194,9 @@ class Character extends MovableObjects{
         }
     }
 
+    /**
+     * Set the interval thats controls the animnation of the character
+     */
     animateImage(){
         this.animateIntervallAnimation = setInterval(()=>{
             if(this.isDead()){
@@ -196,6 +211,9 @@ class Character extends MovableObjects{
         }, 100 )
     }
 
+    /**
+     * Plays the dead animation images of the character. 
+     */
     animateImageIsDead(){
         if(this.dieAniamtionCounter < this.DEAD_IMAGES.length && this.isDead()){
             this.playSingleAnimation(this.DEAD_IMAGES , this.dieAniamtionCounter ); 
@@ -206,6 +224,9 @@ class Character extends MovableObjects{
         }
     }
 
+    /**
+     * Plays the hurt animation images of the character. 
+     */
     animateImageIsHurt(){
         if(this.lastHitBy == "Pufferfish"){
             this.hurt_hit_sound.play();
@@ -220,6 +241,9 @@ class Character extends MovableObjects{
         }
     }
 
+    /**
+     * Checks the keys for a attack or move and plays the images of the action. With no action the character goes in IDLE mode. 
+     */
     animateImageAttacks(){
         if (this.world.keyboard.SPACE && !this.currentFinAttack){
             this.currentFinAttack = true; 
@@ -345,7 +369,7 @@ class Character extends MovableObjects{
         clearInterval(this.animateIntervallMove);
         this.world.pause = true; 
     }
-    
+
     clearCharacterInvervals(){
         clearInterval(this.animateIntervallAnimation);
         clearInterval(this.animateIntervallMove);

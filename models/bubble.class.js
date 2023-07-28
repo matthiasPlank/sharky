@@ -16,6 +16,13 @@ class Bubble extends MovableObjects{
     }
     isPoisoned; 
 
+    /**
+     * Creates a new instance of a bubble. 
+     * @param {number} posX - Position on the x-axis of the canvas. 
+     * @param {number} posY - Position on the y-axis of the canvas. 
+     * @param {string} direction - In which direction is the bubble moving "L" for left or "R" for right.
+     * @param {boolean} isPoisoned - Is the bubble a normal or a posioned bubbel.
+     */
     constructor(posX, posY, direction , isPoisoned){
         if(!isPoisoned){
             super().loadImage("img/1.Sharkie/4.Attack/Bubble trap/Bubble.png");
@@ -32,6 +39,9 @@ class Bubble extends MovableObjects{
         this.animateBubble(); 
     }
 
+    /**
+     * Set the move intervall an the bubble image. 
+     */
     animateBubble(){
         this.direction == "R" ? this.moveRight() : this.moveLeft(); 
         this.moveUpWitCustomSpeed(this.speedUp);
