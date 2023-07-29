@@ -21,7 +21,10 @@ class Jellyfish extends Enemy{
         bottom: 10
     }
     speed = 0.05;
-  
+
+    /**
+     * Creates a new instance of an jellyfish. 
+     */
     constructor(){
         super().loadImage("./img/2.Enemy/2 Jelly fish/Regular damage/Lila 1.png");
         this.posX = ( Math.random() * 2000 ) + 300; 
@@ -34,6 +37,9 @@ class Jellyfish extends Enemy{
         this.randomSwimDirection();
     }
 
+    /**
+     * Play the bubble die animation for the jellyfish.
+     */
     dieBubbleAnimation(){
         this.isDead = true; 
         this.isDeadFlag = true; 

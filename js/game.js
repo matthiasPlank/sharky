@@ -11,6 +11,9 @@ let mobileRigthBtn;
 let mobileBubbleBtn; 
 let mobileFinBtn; 
 
+/**
+ * Initial function
+ */
 function init(){
     mobileUpBtn = document.getElementById("mobileUpBtn"); 
     mobileDownBtn= document.getElementById("mobileDownBtn"); 
@@ -27,6 +30,9 @@ function init(){
     setupMobileEvents(); 
 }
 
+/**
+ * Creates the world and starts the game. 
+ */
 function startGame(){
     document.getElementById("startScreen").classList.add("dsp-none"); 
     document.getElementById("gameOverlayButtons").classList.remove("dsp-none");
@@ -34,9 +40,11 @@ function startGame(){
     initLevel(); 
     world = undefined;
     world = new World(canvas , keyboard); 
-    //world.character.energy = 100; 
 }
 
+/**
+ * Reset Overlays and restarts game.
+ */
 function restartGame(){
     document.getElementById("GameOverScreen").classList.add("dsp-none");  
     document.getElementById("winScreen").classList.add("dsp-none");    
@@ -44,6 +52,9 @@ function restartGame(){
     startGame();
 }
 
+/**
+ * Toogle fullscreen on button click.
+ */
 function fullscreen(){
     console.log("switch to fullscreen"); 
     let myscreen = document.getElementById("canvasPanels");
@@ -59,6 +70,10 @@ function fullscreen(){
     }
 }
 
+/**
+ * Sets the HTMLElement into fullscreen mode. 
+ * @param {HTMLElement} elem 
+ */
 function openFullscreen(elem) {
     if (elem.requestFullscreen) {
       elem.requestFullscreen();
@@ -69,6 +84,10 @@ function openFullscreen(elem) {
     }
 }
   
+/**
+ * Close fullscreen mode for an HTMLElement. 
+ * @param {HTMLElement} elem 
+ */
 function closeFullscreen() {
     if (document.exitFullscreen) {
       document.exitFullscreen();
@@ -79,6 +98,9 @@ function closeFullscreen() {
     }
 }
 
+/**
+ * Open/Close instruction oberlay by button. 
+ */
 function instruction(){
     if(!isInInstrction){
         isInInstrction = true; 
@@ -92,6 +114,9 @@ function instruction(){
     }
 }
 
+/**
+ * Intital configuration for the mobile "keyboard"
+ */
 function setupMobileEvents(){
     //*****UP****/
     mobileUpBtn.addEventListener("touchstart", () => { keyboard.UP = true});
@@ -113,6 +138,9 @@ function setupMobileEvents(){
     mobileBubbleBtn.addEventListener("touchend", () => { keyboard.KeyD = false });
 }
 
+/**
+ * Set eventlistener for "normal" Keyboard on the keydown event.
+ */
 window.addEventListener("keydown", (event) => {
     //console.log(event); 
     switch (event.code) {
@@ -139,6 +167,9 @@ window.addEventListener("keydown", (event) => {
       }
 });
 
+/**
+ * Set eventlistener for "normal" Keyboard on the keyup event.
+ */
 window.addEventListener("keyup", (event) => {
     switch (event.code) {
         case 'ArrowUp':

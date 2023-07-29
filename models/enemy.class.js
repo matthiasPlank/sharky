@@ -28,12 +28,18 @@ class Enemy extends MovableObjects{
     isDeadFlag = false; 
     dieAniamtionCounter = 0; 
  
+    /**
+     *  Creates a new instance of an enemy. 
+     */
     constructor(){
         super().loadImage("./img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png");
         this.loadImages(this.SWIM_IMAGES); 
         this.loadImages(this.DIE_IMAGES); 
     }
 
+    /**
+     * Let the enemy swim left.
+     */
     swimLeft(){
         this.moveLeft();
         this.swimLeftInterval = setInterval(()=>{
@@ -41,6 +47,9 @@ class Enemy extends MovableObjects{
         }, 300 )
     }
 
+    /**
+     * Let the enemy swim up.
+     */
     swimUp(){
         this.moveUp();
         this.swimUpInterval = setInterval(()=>{
@@ -48,6 +57,9 @@ class Enemy extends MovableObjects{
         }, 300 )
     }
 
+     /**
+     * Let the enemy swim up and down inside the game screen.
+     */
     swimAnimationUpAndDown(){
         this.moveUp(); 
         this.swimUpAndDownInterval = setInterval(()=>{
@@ -63,22 +75,11 @@ class Enemy extends MovableObjects{
         }, 300 )
     }
 
-    die(){
-        this.isDeadFlag = true; 
-        this.dieAniamtionCounter = 0; 
-        this.clearIntervalls();
-        this.dieInterval = setInterval(()=>{
-            if(this.dieAniamtionCounter < 3){
-                this.playAnimation(this.DIE_IMAGES);
-                this.dieAniamtionCounter++; 
-            }
-            else{
-                clearInterval(this.dieInterval); 
-                this.moveUp();  
-            }
-        }, 300 )
-    }  
+   
 
+    /**
+     * Clears the enemy intervals. 
+     */
     clearIntervalls(){
         clearInterval(this.swimUpAndDownInterval); 
         clearInterval(this.swimLeftInterval); 

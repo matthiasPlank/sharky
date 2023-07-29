@@ -75,6 +75,9 @@ class Endboss extends Enemy {
     dieAniamtionCounter = 0; 
     moveUpAndDownInterval; 
 
+    /**
+     * Creates a new instance of an endboss. 
+     */
     constructor(){
         super().loadImage("img/2.Enemy/3 Final Enemy/2.floating/1.png");
         this.loadImages(this.SWIM_IMAGES); 
@@ -86,6 +89,9 @@ class Endboss extends Enemy {
         this.attackTimeInterval(); 
     }
 
+    /**
+     * Set the interval for the swim animation of the endboss.
+     */
     swim(){
         this.swimInterval = setInterval(()=>{
             if(this.introPlayed){
@@ -106,6 +112,9 @@ class Endboss extends Enemy {
         }, 300 )
     }
 
+    /**
+     * Plays the died animation if the endboss is dead. 
+     */
     isDeadAnimation(){
         if(this.dieAniamtionCounter < this.DEAD_ENDBOSS_IMAGES.length){
             this.playSingleAnimation(this.DEAD_ENDBOSS_IMAGES , this.dieAniamtionCounter ); 
@@ -119,6 +128,9 @@ class Endboss extends Enemy {
         }
     }
 
+    /**
+     * Plays the intro animation, when the character is nearly at the endboss.
+     */
     playIntro(){
         clearInterval(this.swimInterval); 
         this.introInterval = setInterval(()=>{
@@ -136,6 +148,9 @@ class Endboss extends Enemy {
         }, 100 )
     }
 
+    /**
+     * Set an interval, so that the endboss moves up and down inside the game screen. 
+     */
     moveUpAndDown(){
         this.moveDown(); 
         this.moveUpAndDownInterval = setInterval(() => {
@@ -150,6 +165,9 @@ class Endboss extends Enemy {
         }, 300);
     }
 
+    /**
+     * Brings the endboss back to his initial position after an attack.
+     */
     backToOrignalPosition(){
         this.posX = this.savePosXWhileAttacK; 
     }
@@ -162,6 +180,9 @@ class Endboss extends Enemy {
         }, 5000);
     }
 
+    /**
+     * Plays the attack image sequence.
+     */
     attack(){
         this.attackInterval = setInterval(() => {
             if( ( this.attackIntervalCounter < this.ATTACK_ENDBOSS_IMAGES.length )){
@@ -179,6 +200,9 @@ class Endboss extends Enemy {
         }, 200);
     }
 
+    /**
+     * Clear all enboss intervals.
+     */
     clearEnbossIntervals(){
         clearInterval(this.swimInterval); 
         clearInterval(this.moveUpAndDownInterval);
@@ -188,7 +212,33 @@ class Endboss extends Enemy {
         clearInterval(this.moveDownInterval);
     }
 
+    /**
+     * Clear the chracter intervals. 
+     */
     clearCharacterIntervals(){
-        clearInterval(this.world.character.animateIntervallAnimation);
+        this.world.character.clearCharacterInvervals(); 
     }
+
+    /**
+     * If bubble is hit Endboss. Decreases endboss energy and refreshes the status bar.
+     * @param {bubble} bubble - instance of bubble
+     */
+    isHitbyBubble(bubble){
+        if(this instanceof Endboss && !this.isDead()){
+              bubble.isPoisoned ? this.energy -= 20 : this.energy -= 5; 
+              this.world.statusBar_Endboss.setPercentage(this.energy);
+              this.timeLastHit = new Date().getTime();   
+          }
+      }
+  
+      /**
+       * If character is hit endboss with fin. Decreases endboss energy and refreshes the status bar.
+       */
+      isHitbyFin(){
+          if(this instanceof Endboss && !this.isDead()){
+              this.energy -= 5;            
+              this.world.statusBar_Endboss.setPercentage(this.energy);
+              this.timeLastHit = new Date().getTime();   
+          }
+      }
 }

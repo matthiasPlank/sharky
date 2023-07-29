@@ -264,6 +264,9 @@ class Character extends MovableObjects{
         }
     }
 
+    /**
+     * Sets the IDLE Animation for short or long IDLE
+     */
     animateImageIDLE(){
         if(this.currentIDLEValue >= 1 && !this.calcLongIDLE()){
             this.playAnimation(this.IDLE_IMAGES);
@@ -278,6 +281,9 @@ class Character extends MovableObjects{
         }  
     }
 
+    /**
+     * Sets the long IDLE animation
+     */
     animateImageLongIDLE(){
         if(this.longIDLECounter < this.LONG_IDLE_IMAGES.length){
             this.playSingleAnimation(this.LONG_IDLE_IMAGES , this.longIDLECounter);
@@ -292,11 +298,18 @@ class Character extends MovableObjects{
         }     
     }
 
+    /**
+     * 
+     * @returns {boolean} if true, IDLE animation should be long.
+     */
     calcLongIDLE(){
         const timepassed = new Date().getTime() - this.timeLastMove; 
         return timepassed > 5000; 
     }
 
+    /**
+     * Sets the animation during a fin attack.
+     */
     finAttack(){
         let finAttackInterval = setInterval(() => {
             if(this.currentFinAttackCounter < 8){
@@ -312,6 +325,9 @@ class Character extends MovableObjects{
         }, 100);
     }
 
+     /**
+     * Sets the animation during a bubble attack.
+     */
     bubbleAttack(){
         let bubbleAttackInterval = setInterval(() => {
             if(this.currentBubbleAttackCounter < 8){
@@ -327,6 +343,9 @@ class Character extends MovableObjects{
         }, 100);
     }
 
+    /**
+     * Sets the character animation befor/during a bubble attack.
+     */
     bubbleAttackCharacterAnimation(){
         if(this.collectedPoisons > 0 && this.world.characterisAtEndboss){
             this.playAnimation(this.BUBBLE_POSION_ATTACK_IMAGE);
@@ -337,6 +356,9 @@ class Character extends MovableObjects{
         this.currentBubbleAttackCounter++; 
     }
     
+    /**
+     * Creates a new bubble for the bubble attack. The bubble can be "normal" or "poisoned" and can be move left or right. 
+     */
     bubbleAttackCreateNewBubble(){
         let isPoisonBubble = (this.collectedPoisons - this.poisonAttacks ) > 0 && this.world.characterisAtEndboss; 
         if(!this.otherDirection){
@@ -349,6 +371,10 @@ class Character extends MovableObjects{
         }
     }
 
+    /**
+     * Checks if the new created bubble is poisoned. If true, it counts the used poisions and refreshs the poison status bar. 
+     * @param {boolean} isPoisonBubble - Is the bubble "normal" or "poisoned"
+     */
     bubbleAttackCheckPoison( isPoisonBubble ){
         if(isPoisonBubble){
             this.poisonAttacks ++; 
@@ -356,20 +382,29 @@ class Character extends MovableObjects{
         }
     }
 
+    /**
+     * Calculates the procentage value of the posion status bar.
+     * @returns {number} - percentage value
+     */
     calcPosionPercentage(){
         let calc = ((this.collectedPoisons  - this.poisonAttacks) / ( this.world.level.poisons.length + this.collectedPoisons + this.poisonAttacks) ) * 100; 
         return calc; 
     }
 
+    /**
+     * Sets the Overlaypanel if the character is died. 
+     */
     characterDied(){
         console.log("character Died Funktion");
         document.getElementById("GameOverScreen").classList.remove("dsp-none");
         document.getElementById("gameOverlayButtons").classList.add("dsp-none"); 
-        clearInterval(this.animateIntervallAnimation);
-        clearInterval(this.animateIntervallMove);
+        this.clearCharacterInvervals();
         this.world.pause = true; 
     }
 
+    /**
+     * Clears the character intervals
+     */
     clearCharacterInvervals(){
         clearInterval(this.animateIntervallAnimation);
         clearInterval(this.animateIntervallMove);

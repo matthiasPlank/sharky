@@ -16,6 +16,9 @@ class Pufferfish extends Enemy{
         bottom: 10
     }
  
+    /**
+     * Creates a new instance of a pufferfish. 
+     */
     constructor(){
         super().loadImage("./img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png");
         this.posX = ( Math.random() * 2300 ) + 300; 
@@ -24,5 +27,24 @@ class Pufferfish extends Enemy{
         this.loadImages(this.SWIM_IMAGES); 
         this.swimLeft(); 
     }
+
+    /**
+    * Plays the died animation for the pufferfish and it swim up outside of the game.     
+    */
+    die(){
+        this.isDeadFlag = true; 
+        this.dieAniamtionCounter = 0; 
+        this.clearIntervalls();
+        this.dieInterval = setInterval(()=>{
+            if(this.dieAniamtionCounter < 3){
+                this.playAnimation(this.DIE_IMAGES);
+                this.dieAniamtionCounter++; 
+            }
+            else{
+                clearInterval(this.dieInterval); 
+                this.moveUp();  
+            }
+        }, 300 )
+    }  
 
 }

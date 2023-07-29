@@ -40,6 +40,10 @@ class StatusBar extends DrawableObjects{
     posX = 20; 
     posY = 0; 
 
+    /**
+     * Cerates a new statusbar. 
+     * @param {string} type - defines the type of the statusbar (LIFE,COIN,POISON or ENDBOSS); 
+     */
     constructor(type){
         super();
         if (type == "LIFE"){
@@ -56,6 +60,14 @@ class StatusBar extends DrawableObjects{
         }
     }
 
+    /**
+     * 
+     * @param {string} imagePath - inital image path. 
+     * @param {images[]} imagesArray - array of images for possible fill status.
+     * @param {number} posY  -position of the status bar on the y-axis.
+     * @param {number} posX - position of the status bar on the x-axis.
+     * @param {string} statusBarType - type of the statusbar (LIFE,COIN,POISON or ENDBOSS); 
+     */
     setInital( imagePath , imagesArray , posY , posX , statusBarType ){
         this.loadImage(imagePath);
         this.loadImages(imagesArray); 
@@ -64,6 +76,10 @@ class StatusBar extends DrawableObjects{
         this.statusBarType = statusBarType; 
     }
 
+    /**
+     * Sets the image for the percentage value of the statusbar.
+     * @param {number} percentage - percentage value (0 - 100%).
+     */
     setPercentage(percentage){
         this.percentage = percentage; 
         if (this.statusBarType == "LIFE"){
@@ -80,6 +96,10 @@ class StatusBar extends DrawableObjects{
         }
     }
 
+    /**
+     * Returns the image number for the percentage value of the status bar.  
+     * @returns {number} - returns the image number 0 to 5.  
+     */
     getImageNumber(){
        if(this.percentage > 99){
         return 5; 
@@ -95,7 +115,4 @@ class StatusBar extends DrawableObjects{
         return 0; 
        }
     }
-
-
-
 }
