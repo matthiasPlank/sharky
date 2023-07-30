@@ -108,6 +108,9 @@ class Character extends MovableObjects{
     swim_sound = new Audio('./audio/swim.mp3'); 
     hurt_shock_sound = new Audio('./audio/shock.mp3'); 
     hurt_hit_sound = new Audio('./audio/hurt2.mp3'); 
+    bubble_sound = new Audio('./audio/bubble.mp3');
+    fin_attack_sound = new Audio ('./audio/finAttack.mp3'); 
+    lose_sound = new Audio ('./audio/lose.mp3');
     offset = {
         top: 70, 
         right: 25, 
@@ -128,6 +131,7 @@ class Character extends MovableObjects{
     currentIDLEValue = this.IDLESpeed;
     timeLastMove= new Date().getTime();  
     longIDLECounter = 0; 
+    playHitSound = true; 
 
     /**
      *  Creates a new instance of a character. 
@@ -144,7 +148,7 @@ class Character extends MovableObjects{
           this.loadImages(this.BUBBLE_ATTACK_IMAGE);
           this.loadImages(this.BUBBLE_POSION_ATTACK_IMAGE); 
           this.animateMove(); 
-          this.animateImage(); 
+          this.animateImage();
     }
 
     /**
@@ -153,7 +157,6 @@ class Character extends MovableObjects{
     animateMove(){
         this.animateIntervallMove = setInterval(()=>{
             this.swim_sound.pause(); 
-            //this.hurt_shock_sound.pause(); 
             this.animateMoveHorizontal();
             this.animateMoveVertical();
             this.world.camera_x = -this.posX + 100;
@@ -229,14 +232,15 @@ class Character extends MovableObjects{
      */
     animateImageIsHurt(){
         if(this.lastHitBy == "Pufferfish"){
-            this.hurt_hit_sound.play();
+            this.playHitSound ? this.playhitSound(this.hurt_hit_sound) : ""; 
             this.playAnimation(this.HURT_IMAGES); 
         }
         else if(this.lastHitBy == "Jellyfish"){
-            this.hurt_shock_sound.play(); 
+            this.playHitSound ? this.playhitSound(this.hurt_shock_sound) : ""; 
             this.playAnimation(this.SHOCK_IMAGES); 
         }
         else{
+            this.playHitSound ? this.playhitSound(this.hurt_hit_sound) : ""; 
             this.playAnimation(this.HURT_IMAGES); 
         }
     }
@@ -317,6 +321,7 @@ class Character extends MovableObjects{
                 this.currentFinAttackCounter++; 
             }
             else{
+                this.fin_attack_sound.play()
                 this.currentFinAttackCounter = 0;
                 this.currentFinAttack = false; 
                 this.playAnimation(this.SWIM_IMAGES); 
@@ -369,6 +374,7 @@ class Character extends MovableObjects{
             this.world.bubbles.push(new Bubble(this.posX + 20, this.posY + (this.height/2), "L", isPoisonBubble)); 
             this.bubbleAttackCheckPoison(isPoisonBubble); 
         }
+        this.bubble_sound.play();
     }
 
     /**
@@ -398,6 +404,7 @@ class Character extends MovableObjects{
         console.log("character Died Funktion");
         document.getElementById("GameOverScreen").classList.remove("dsp-none");
         document.getElementById("gameOverlayButtons").classList.add("dsp-none"); 
+        this.lose_sound.play();
         this.clearCharacterInvervals();
         this.world.pause = true; 
     }
@@ -408,5 +415,17 @@ class Character extends MovableObjects{
     clearCharacterInvervals(){
         clearInterval(this.animateIntervallAnimation);
         clearInterval(this.animateIntervallMove);
+    }
+
+    /**
+     * Plays a sound when the character is hit. 
+     * @param {Audio} sound - sound to play.
+     */
+    playhitSound(sound){
+        this.playHitSound ? sound.play() : "" ; 
+        this.playHitSound = false; 
+        setTimeout(() => {
+            this.playHitSound = true; 
+        }, 2000);
     }
 }

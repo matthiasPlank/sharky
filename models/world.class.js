@@ -15,6 +15,8 @@ class World{
     endbossFromLevel; 
     characterisAtEndboss = false; 
     pause = false; 
+    coin_sound = new Audio('./audio/coin.mp3'); 
+    collect_sound = new Audio ('audio/collectItem.mp3'); 
 
     /**
      * Creates a new instace world. 
@@ -106,6 +108,7 @@ class World{
         let iterationCountCoin = 0;
         this.level.coins.forEach((coin) => { 
             if(this.character.isColliding(coin)){
+                this.playCollectSound(this.coin_sound);      
                 this.level.coins.splice(iterationCountCoin, 1);
                 this.character.collectedCoins ++; 
                 this.statusBar_Coin.setPercentage( (this.character.collectedCoins / ( this.level.coins.length + this.character.collectedCoins) ) * 100);                 
@@ -121,6 +124,7 @@ class World{
         let iterationCountPoison = 0;
         this.level.poisons.forEach((poison) => { 
             if(this.character.isColliding(poison)){
+                this.playCollectSound(this.collect_sound); 
                 this.level.poisons.splice(iterationCountPoison, 1);
                 this.character.collectedPoisons ++; 
                 this.statusBar_Poison.setPercentage(this.character.calcPosionPercentage()); 
@@ -252,5 +256,14 @@ class World{
         setTimeout(() => {
             this.bubbles.splice(index, 1);
         }, 300);
+    }
+
+    /**
+     * Plays a sound for collectable Item. 
+     * @param {Audio} sound 
+     */
+    playCollectSound(sound){
+        var newCoinAudio = sound.cloneNode(true);
+        newCoinAudio.play();
     }
 }

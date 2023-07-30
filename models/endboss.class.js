@@ -66,6 +66,10 @@ class Endboss extends Enemy {
     saveOffsetWhileAttackRight = 0; 
     savePosXWhileAttacK = this.posX; 
     introPlayed = false; 
+    introAudio = new Audio("./audio/orca.mp3");
+    winAudio = new Audio ("./audio/win.mp3"); 
+    hitAudio = new Audio("./audio/whaleHurt.mp3");
+    biteAudio = new Audio ("./audio/whaleBite.mp3"); 
     offset = {
         top: 200, 
         right: 10, 
@@ -123,6 +127,7 @@ class Endboss extends Enemy {
         else{
             this.clearEnbossIntervals(); 
             this.clearCharacterIntervals(); 
+            this.winAudio.play(); 
             document.getElementById("winScreen").classList.remove("dsp-none"); 
             document.getElementById("gameOverlayButtons").classList.add("dsp-none"); 
         }
@@ -132,6 +137,7 @@ class Endboss extends Enemy {
      * Plays the intro animation, when the character is nearly at the endboss.
      */
     playIntro(){
+        this.introAudio.play();
         clearInterval(this.swimInterval); 
         this.introInterval = setInterval(()=>{
             if( ( this.introIntervalCounter < this.INTRO_IMAGES.length ) && !this.introPlayed){
@@ -184,12 +190,15 @@ class Endboss extends Enemy {
      * Plays the attack image sequence.
      */
     attack(){
+       this.playBiteSound();
         this.attackInterval = setInterval(() => {
             if( ( this.attackIntervalCounter < this.ATTACK_ENDBOSS_IMAGES.length )){
                 this.playAnimation(this.ATTACK_ENDBOSS_IMAGES); 
                 this.attackIntervalCounter++; 
-                this.posX -= 20; }
+                this.posX -= 20;
+            }
             else{
+              
                 this.attackIsPlaying = true; 
                 this.timeToAttack = false; 
                 this.attackIntervalCounter = 0;
@@ -224,10 +233,11 @@ class Endboss extends Enemy {
      * @param {bubble} bubble - instance of bubble
      */
     isHitbyBubble(bubble){
-        if(this instanceof Endboss && !this.isDead()){
-              bubble.isPoisoned ? this.energy -= 20 : this.energy -= 5; 
-              this.world.statusBar_Endboss.setPercentage(this.energy);
-              this.timeLastHit = new Date().getTime();   
+        if(!this.isDead()){
+            this.hitAudio.play(); 
+            bubble.isPoisoned ? this.energy -= 20 : this.energy -= 5; 
+            this.world.statusBar_Endboss.setPercentage(this.energy);
+            this.timeLastHit = new Date().getTime();   
           }
       }
   
@@ -235,10 +245,20 @@ class Endboss extends Enemy {
        * If character is hit endboss with fin. Decreases endboss energy and refreshes the status bar.
        */
       isHitbyFin(){
-          if(this instanceof Endboss && !this.isDead()){
-              this.energy -= 5;            
-              this.world.statusBar_Endboss.setPercentage(this.energy);
-              this.timeLastHit = new Date().getTime();   
+          if(!this.isDead()){
+            this.hitAudio.play(); 
+            this.energy -= 5;            
+            this.world.statusBar_Endboss.setPercentage(this.energy);
+            this.timeLastHit = new Date().getTime();   
           }
+      }
+
+      /**
+       * Plays the Bite sound for the endboss after a customizeable timeout. 
+       */
+      playBiteSound(){
+        setTimeout(() => {
+            this.biteAudio.play();  ;
+        }, 1000);
       }
 }
