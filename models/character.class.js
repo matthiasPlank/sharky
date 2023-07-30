@@ -25,49 +25,49 @@ class Character extends MovableObjects{
         "img/1.Sharkie/1.IDLE/18.png"
     ] ; 
     LONG_IDLE_IMAGES = [
-        "img/1.Sharkie/2.Long_IDLE/i1.png", 
-        "img/1.Sharkie/2.Long_IDLE/i2.png", 
-        "img/1.Sharkie/2.Long_IDLE/i3.png", 
-        "img/1.Sharkie/2.Long_IDLE/i4.png", 
-        "img/1.Sharkie/2.Long_IDLE/i5.png", 
-        "img/1.Sharkie/2.Long_IDLE/i6.png", 
-        "img/1.Sharkie/2.Long_IDLE/i7.png", 
-        "img/1.Sharkie/2.Long_IDLE/i8.png", 
-        "img/1.Sharkie/2.Long_IDLE/i9.png", 
-        "img/1.Sharkie/2.Long_IDLE/i10.png", 
-        "img/1.Sharkie/2.Long_IDLE/i11.png", 
-        "img/1.Sharkie/2.Long_IDLE/i12.png", 
-        "img/1.Sharkie/2.Long_IDLE/i13.png", 
-        "img/1.Sharkie/2.Long_IDLE/i14.png"
+        "./img/1.Sharkie/2.Long_IDLE/i1.png", 
+        "./img/1.Sharkie/2.Long_IDLE/I2.png", 
+        "./img/1.Sharkie/2.Long_IDLE/I3.png", 
+        "./img/1.Sharkie/2.Long_IDLE/I4.png", 
+        "./img/1.Sharkie/2.Long_IDLE/I5.png", 
+        "./img/1.Sharkie/2.Long_IDLE/I6.png", 
+        "./img/1.Sharkie/2.Long_IDLE/I7.png", 
+        "./img/1.Sharkie/2.Long_IDLE/I8.png", 
+        "./img/1.Sharkie/2.Long_IDLE/I9.png", 
+        "./img/1.Sharkie/2.Long_IDLE/I10.png", 
+        "./img/1.Sharkie/2.Long_IDLE/I11.png", 
+        "./img/1.Sharkie/2.Long_IDLE/I12.png", 
+        "./img/1.Sharkie/2.Long_IDLE/I13.png", 
+        "./img/1.Sharkie/2.Long_IDLE/I14.png"
     ];
     SWIM_IMAGES = [
-        "img/1.Sharkie/3.Swim/1.png", 
-        "img/1.Sharkie/3.Swim/2.png", 
-        "img/1.Sharkie/3.Swim/3.png", 
-        "img/1.Sharkie/3.Swim/4.png", 
-        "img/1.Sharkie/3.Swim/5.png", 
-        "img/1.Sharkie/3.Swim/6.png" 
+        "./img/1.Sharkie/3.Swim/1.png", 
+        "./img/1.Sharkie/3.Swim/2.png", 
+        "./img/1.Sharkie/3.Swim/3.png", 
+        "./img/1.Sharkie/3.Swim/4.png", 
+        "./img/1.Sharkie/3.Swim/5.png", 
+        "./img/1.Sharkie/3.Swim/6.png" 
     ]; 
     DEAD_IMAGES = [
-        "img/1.Sharkie/6.dead/1.Poisoned/1.png", 
-        "img/1.Sharkie/6.dead/1.Poisoned/2.png", 
-        "img/1.Sharkie/6.dead/1.Poisoned/3.png", 
-        "img/1.Sharkie/6.dead/1.Poisoned/4.png", 
-        "img/1.Sharkie/6.dead/1.Poisoned/5.png", 
-        "img/1.Sharkie/6.dead/1.Poisoned/6.png", 
-        "img/1.Sharkie/6.dead/1.Poisoned/7.png", 
-        "img/1.Sharkie/6.dead/1.Poisoned/8.png", 
-        "img/1.Sharkie/6.dead/1.Poisoned/9.png", 
-        "img/1.Sharkie/6.dead/1.Poisoned/10.png", 
-        "img/1.Sharkie/6.dead/1.Poisoned/11.png",
-        "img/1.Sharkie/6.dead/1.Poisoned/12.png"
+        "./img/1.Sharkie/6.dead/1.Poisoned/1.png", 
+        "./img/1.Sharkie/6.dead/1.Poisoned/2.png", 
+        "./img/1.Sharkie/6.dead/1.Poisoned/3.png", 
+        "./img/1.Sharkie/6.dead/1.Poisoned/4.png", 
+        "./img/1.Sharkie/6.dead/1.Poisoned/5.png", 
+        "./img/1.Sharkie/6.dead/1.Poisoned/6.png", 
+        "./img/1.Sharkie/6.dead/1.Poisoned/7.png", 
+        "./img/1.Sharkie/6.dead/1.Poisoned/8.png", 
+        "./img/1.Sharkie/6.dead/1.Poisoned/9.png", 
+        "./img/1.Sharkie/6.dead/1.Poisoned/10.png", 
+        "./img/1.Sharkie/6.dead/1.Poisoned/11.png",
+        "./img/1.Sharkie/6.dead/1.Poisoned/12.png"
     ]; 
     HURT_IMAGES = [
-        "img/1.Sharkie/5.Hurt/1.Poisoned/1.png", 
-        "img/1.Sharkie/5.Hurt/1.Poisoned/2.png", 
-        "img/1.Sharkie/5.Hurt/1.Poisoned/3.png", 
-        "img/1.Sharkie/5.Hurt/1.Poisoned/4.png", 
-        "img/1.Sharkie/5.Hurt/1.Poisoned/5.png" 
+        "./img/1.Sharkie/5.Hurt/1.Poisoned/1.png", 
+        "./img/1.Sharkie/5.Hurt/1.Poisoned/2.png", 
+        "./img/1.Sharkie/5.Hurt/1.Poisoned/3.png", 
+        "./img/1.Sharkie/5.Hurt/1.Poisoned/4.png", 
+        "./img/1.Sharkie/5.Hurt/1.Poisoned/5.png" 
     ]; 
     SHOCK_IMAGES = [
         "img/1.Sharkie/5.Hurt/2.Electric shock/1.png", 
@@ -404,6 +404,7 @@ class Character extends MovableObjects{
         console.log("character Died Funktion");
         document.getElementById("GameOverScreen").classList.remove("dsp-none");
         document.getElementById("gameOverlayButtons").classList.add("dsp-none"); 
+        document.getElementById("instructionOverlay").classList.add("dsp-none");
         this.lose_sound.play();
         this.clearCharacterInvervals();
         this.world.pause = true; 

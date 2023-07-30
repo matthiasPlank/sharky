@@ -130,6 +130,7 @@ class Endboss extends Enemy {
             this.winAudio.play(); 
             document.getElementById("winScreen").classList.remove("dsp-none"); 
             document.getElementById("gameOverlayButtons").classList.add("dsp-none"); 
+            document.getElementById("instructionOverlay").classList.add("dsp-none");
         }
     }
 
