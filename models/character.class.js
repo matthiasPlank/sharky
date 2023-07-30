@@ -168,12 +168,12 @@ class Character extends MovableObjects{
      */
     animateMoveHorizontal(){
         if( this.world.keyboard.RIGHT && this.posX < this.world.level.level_end_x ) {
-            this.swim_sound.play(); 
+            !this.world.gameIsMuted ? this.swim_sound.play() : ""; 
             this.posX += this.speed; 
             this.otherDirection = false; 
         }
         if( this.world.keyboard.LEFT && this.posX > 100) {
-            this.swim_sound.play(); 
+            !this.world.gameIsMuted ? this.swim_sound.play() : ""; 
             this.posX -= this.speed;
             this.otherDirection = true; 
         }
@@ -184,13 +184,13 @@ class Character extends MovableObjects{
      */
     animateMoveVertical(){
         if( this.world.keyboard.UP ) {
-            this.swim_sound.play(); 
+            !this.world.gameIsMuted ? this.swim_sound.play() : ""; 
             if(this.posY > -70){
                 this.posY -= this.speed;
             }
         }
         if( this.world.keyboard.DOWN ) {
-            this.swim_sound.play(); 
+            !this.world.gameIsMuted ? this.swim_sound.play() : "";  
             if(this.posY < this.world.ctx.canvas.clientHeight - ((this.world.ctx.canvas.clientHeight / 100) * 25)){
                 this.posY += this.speed;
             }
@@ -321,7 +321,7 @@ class Character extends MovableObjects{
                 this.currentFinAttackCounter++; 
             }
             else{
-                this.fin_attack_sound.play()
+                !this.world.gameIsMuted ?  this.fin_attack_sound.play() : "" ; 
                 this.currentFinAttackCounter = 0;
                 this.currentFinAttack = false; 
                 this.playAnimation(this.SWIM_IMAGES); 
@@ -374,7 +374,7 @@ class Character extends MovableObjects{
             this.world.bubbles.push(new Bubble(this.posX + 20, this.posY + (this.height/2), "L", isPoisonBubble)); 
             this.bubbleAttackCheckPoison(isPoisonBubble); 
         }
-        this.bubble_sound.play();
+        !this.world.gameIsMuted ? this.bubble_sound.play() : "" ; 
     }
 
     /**
@@ -401,12 +401,12 @@ class Character extends MovableObjects{
      * Sets the Overlaypanel if the character is died. 
      */
     characterDied(){
-        console.log("character Died Funktion");
         document.getElementById("GameOverScreen").classList.remove("dsp-none");
         document.getElementById("gameOverlayButtons").classList.add("dsp-none"); 
-        document.getElementById("instructionOverlay").classList.add("dsp-none");
-        this.lose_sound.play();
+        document.getElementById("instructionOverlay").classList.add("dsp-none");  
+        !this.world.gameIsMuted ?  this.lose_sound.play() : ""; 
         this.clearCharacterInvervals();
+        this.world.endbossFromLevel.clearEnbossIntervals(); 
         this.world.pause = true; 
     }
 
@@ -423,7 +423,7 @@ class Character extends MovableObjects{
      * @param {Audio} sound - sound to play.
      */
     playhitSound(sound){
-        this.playHitSound ? sound.play() : "" ; 
+        this.playHitSound && !this.world.gameIsMuted ? sound.play() : "" ; 
         this.playHitSound = false; 
         setTimeout(() => {
             this.playHitSound = true; 

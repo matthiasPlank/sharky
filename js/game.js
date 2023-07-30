@@ -11,6 +11,9 @@ let mobileRigthBtn;
 let mobileBubbleBtn; 
 let mobileFinBtn; 
 
+const soundOnPath = "img/custom/sound-medium-icon.png"; 
+const soundOffPath = "img/custom/sound-off-icon.png"; 
+
 /**
  * Initial function
  */
@@ -166,6 +169,20 @@ window.addEventListener("keydown", (event) => {
             break; 
       }
 });
+
+/**
+ * Manage the game sound and enables or disables the sounds in the game. 
+ */
+function toggleSound(){
+    if(!world.gameIsMuted){
+        document.getElementById("soundIcon").src = soundOffPath;
+        world.gameIsMuted = true; 
+    }
+    else{
+        document.getElementById("soundIcon").src = soundOnPath;
+        world.gameIsMuted = false; 
+    }
+}
 
 /**
  * Set eventlistener for "normal" Keyboard on the keyup event.

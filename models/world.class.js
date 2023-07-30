@@ -15,6 +15,7 @@ class World{
     endbossFromLevel; 
     characterisAtEndboss = false; 
     pause = false; 
+    gameIsMuted = false; 
     coin_sound = new Audio('./audio/coin.mp3'); 
     collect_sound = new Audio ('audio/collectItem.mp3'); 
 
@@ -263,7 +264,9 @@ class World{
      * @param {Audio} sound 
      */
     playCollectSound(sound){
-        var newCoinAudio = sound.cloneNode(true);
-        newCoinAudio.play();
+        if(!this.gameIsMuted){
+            var newCoinAudio = sound.cloneNode(true);
+            newCoinAudio.play();
+        }
     }
 }

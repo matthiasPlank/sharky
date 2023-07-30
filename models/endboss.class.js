@@ -127,7 +127,7 @@ class Endboss extends Enemy {
         else{
             this.clearEnbossIntervals(); 
             this.clearCharacterIntervals(); 
-            this.winAudio.play(); 
+            !this.world.gameIsMuted ? this.winAudio.play() : "" ; 
             document.getElementById("winScreen").classList.remove("dsp-none"); 
             document.getElementById("gameOverlayButtons").classList.add("dsp-none"); 
             document.getElementById("instructionOverlay").classList.add("dsp-none");
@@ -138,7 +138,7 @@ class Endboss extends Enemy {
      * Plays the intro animation, when the character is nearly at the endboss.
      */
     playIntro(){
-        this.introAudio.play();
+        !this.world.gameIsMuted ? this.introAudio.play() : "" ; 
         clearInterval(this.swimInterval); 
         this.introInterval = setInterval(()=>{
             if( ( this.introIntervalCounter < this.INTRO_IMAGES.length ) && !this.introPlayed){
@@ -214,7 +214,8 @@ class Endboss extends Enemy {
      * Clear all enboss intervals.
      */
     clearEnbossIntervals(){
-        clearInterval(this.swimInterval); 
+        clearInterval(this.swimInterval);
+        clearInterval(this.attackInterval); 
         clearInterval(this.moveUpAndDownInterval);
         clearInterval(this.moveLeftInterval);
         clearInterval(this.moveRigthInterval);
@@ -235,7 +236,7 @@ class Endboss extends Enemy {
      */
     isHitbyBubble(bubble){
         if(!this.isDead()){
-            this.hitAudio.play(); 
+            !this.world.gameIsMuted ? this.hitAudio.play() : ""; 
             bubble.isPoisoned ? this.energy -= 20 : this.energy -= 5; 
             this.world.statusBar_Endboss.setPercentage(this.energy);
             this.timeLastHit = new Date().getTime();   
@@ -247,7 +248,7 @@ class Endboss extends Enemy {
        */
       isHitbyFin(){
           if(!this.isDead()){
-            this.hitAudio.play(); 
+            !this.world.gameIsMuted ? this.hitAudio.play() : "" ; 
             this.energy -= 5;            
             this.world.statusBar_Endboss.setPercentage(this.energy);
             this.timeLastHit = new Date().getTime();   
@@ -259,7 +260,7 @@ class Endboss extends Enemy {
        */
       playBiteSound(){
         setTimeout(() => {
-            this.biteAudio.play();  ;
+            !this.world.gameIsMuted ? this.biteAudio.play() : ""  ; 
         }, 1000);
       }
 }

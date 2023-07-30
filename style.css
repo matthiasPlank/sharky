@@ -348,6 +348,16 @@ canvas{
 #rotateScreenImage{
     width: 50px;
 }
+#soundIcon{
+    position: absolute;
+    filter: invert();
+    bottom: 135px;
+    right: 10px; 
+    width: 30px;
+}
+#soundIcon:hover{
+   cursor: pointer;
+}
 @media only screen and (max-width: 720px){
      #canvasPanels{
         width: 100%; 
