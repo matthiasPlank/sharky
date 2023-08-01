@@ -3,6 +3,7 @@ let canvas;
 let keyboard = new Keyboard(); 
 let isInFullscreen = false; 
 let isInInstrction = false; 
+let saveSoundStatus = false; 
 
 let mobileUpBtn; 
 let mobileDownBtn; 
@@ -43,6 +44,7 @@ function startGame(){
     initLevel(); 
     world = undefined;
     world = new World(canvas , keyboard); 
+    world.gameIsMuted = saveSoundStatus; 
 }
 
 /**
@@ -52,6 +54,7 @@ function restartGame(){
     document.getElementById("GameOverScreen").classList.add("dsp-none");  
     document.getElementById("winScreen").classList.add("dsp-none");    
     world.character.clearCharacterInvervals(); 
+    saveSoundStatus = world.gameIsMuted; 
     startGame();
 }
 
