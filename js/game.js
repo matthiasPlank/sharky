@@ -15,6 +15,9 @@ let mobileFinBtn;
 const soundOnPath = "img/custom/sound-medium-icon.png"; 
 const soundOffPath = "img/custom/sound-off-icon.png"; 
 
+let counter = 3; 
+let animationPlayed = false; 
+
 /**
  * Initial function
  */
@@ -39,12 +42,37 @@ function init(){
  */
 function startGame(){
     document.getElementById("startScreen").classList.add("dsp-none"); 
-    document.getElementById("gameOverlayButtons").classList.remove("dsp-none");
+    document.getElementById("loadingScreen").classList.remove("dsp-none");
     let canvas = document.getElementById("canvas");
     initLevel(); 
-    world = undefined;
     world = new World(canvas , keyboard); 
     world.gameIsMuted = saveSoundStatus; 
+    if(!animationPlayed){
+        countdownAnimation();
+    }
+    else{
+        document.getElementById("loadingScreen").classList.add("dsp-none");
+        document.getElementById("gameOverlayButtons").classList.remove("dsp-none");
+    }
+}
+
+/**
+ * Plays an countdown at the first gamestart.
+ */
+function countdownAnimation(){
+    let counterHTML = document.getElementById("counter"); 
+    setTimeout(() => {
+        if(counter > 0){
+            counter--; 
+            counter === 0 ? counterHTML.innerHTML = "LOS!" : counterHTML.innerHTML = counter; 
+            countdownAnimation(); 
+        }
+        else{
+            animationPlayed = true; 
+            document.getElementById("loadingScreen").classList.add("dsp-none");
+            document.getElementById("gameOverlayButtons").classList.remove("dsp-none");
+        }
+    }, 1000);
 }
 
 /**
