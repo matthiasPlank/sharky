@@ -89,11 +89,14 @@ canvas{
     height: 480px;
     width: 720px;
     background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .loadingFont{
     color: white;
     position: relative;
-    top: 30%;
+    font-size: 200px;
 }
 #GameOverScreen{
     position: absolute;
