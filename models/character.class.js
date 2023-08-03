@@ -405,7 +405,8 @@ class Character extends MovableObjects{
     characterDied(){
         document.getElementById("GameOverScreen").classList.remove("dsp-none");
         document.getElementById("gameOverlayButtons").classList.add("dsp-none"); 
-        document.getElementById("instructionOverlay").classList.add("dsp-none");  
+        document.getElementById("instructionOverlay").classList.add("dsp-none"); 
+        this.swim_sound.played ? this.swim_sound.pause() : "" ;   
         this.clearCharacterInvervals();
         this.world.endbossFromLevel.clearEnbossIntervals(); 
         !this.world.gameIsMuted ?  this.lose_sound.play() : ""; 
@@ -418,6 +419,8 @@ class Character extends MovableObjects{
     clearCharacterInvervals(){
         clearInterval(this.animateIntervallAnimation);
         clearInterval(this.animateIntervallMove);
+        clearInterval(this.finAttackInterval);
+        clearInterval(this.bubbleAttackInterval);
     }
 
     /**
