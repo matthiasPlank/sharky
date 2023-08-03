@@ -322,7 +322,7 @@ canvas{
     align-items: center;
     position: absolute;
     bottom: 10px;
-    right: 400px;
+    left: 100px;
 }
 #instructionKeysImageStartScreen{
     width: 70px; 
@@ -336,13 +336,14 @@ canvas{
     align-items: center;
     position: absolute;
     bottom: 10px;
-    right: 10px;
+    right: 50px;
 }
 #instructionBubbleStartScreen{
     width: 25px; 
     object-fit: contain;
 }
 #instructionFinStartScreenPanel{
+    width: 200px;
     display: flex;
     flex-direction: column;
     gap:12px;
@@ -350,7 +351,7 @@ canvas{
     align-items: center;
     position: absolute;
     bottom: 10px;
-    right: 200px;
+    right: calc(50% - 100px);
 }
 #instructionFinStartScreen{
     width: 100px; 

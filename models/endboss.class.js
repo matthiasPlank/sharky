@@ -60,6 +60,7 @@ class Endboss extends Enemy {
     introIntervalCounter = 0; 
     attackInterval; 
     attackIntervalCounter = 0; 
+    attackTimeCountInterval; 
     attackIsPlaying = false;
     timeToAttack = false; 
     saveOffsetWhileAttackLeft = 0; 
@@ -180,7 +181,7 @@ class Endboss extends Enemy {
     }
 
     attackTimeInterval(){
-        setInterval(() => {
+        this.attackTimeCountInterval = setInterval(() => {
             if(!this.timeToAttack){
                 this.timeToAttack = true; 
             }
@@ -221,6 +222,7 @@ class Endboss extends Enemy {
         clearInterval(this.moveRigthInterval);
         clearInterval(this.moveUpInterval);
         clearInterval(this.moveDownInterval);
+        clearInterval(this.attackTimeCountInterval); 
     }
 
     /**

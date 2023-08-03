@@ -54,7 +54,7 @@ class World{
             }); 
           this.checkCollisionCoin();
           this.checkCollisionPoison();              
-        }, 200);
+        }, 100);
     }
 
     /**
@@ -148,7 +148,7 @@ class World{
             if(!self.pause){
                 self.draw();
             }
-        })
+        }); 
     }
     
     /**

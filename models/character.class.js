@@ -156,10 +156,12 @@ class Character extends MovableObjects{
      */
     animateMove(){
         this.animateIntervallMove = setInterval(()=>{
-            this.swim_sound.pause(); 
-            this.animateMoveHorizontal();
-            this.animateMoveVertical();
-            this.world.camera_x = -this.posX + 100;
+            if(animationPlayed){
+                this.swim_sound.played ? this.swim_sound.pause() : "" ;  
+                this.animateMoveHorizontal();
+                this.animateMoveVertical();
+                this.world.camera_x = -this.posX + 100;
+            }
          }, 1000 / 60);
     }
 
@@ -249,17 +251,17 @@ class Character extends MovableObjects{
      * Checks the keys for a attack or move and plays the images of the action. With no action the character goes in IDLE mode. 
      */
     animateImageAttacks(){
-        if (this.world.keyboard.SPACE && !this.currentFinAttack){
+        if (this.world.keyboard.SPACE && !this.currentFinAttack && animationPlayed){
             this.currentFinAttack = true; 
             this.finAttack(); 
             this.timeLastMove = new Date().getTime();   
         }
-        if(this.world.keyboard.KeyD && !this.currentBubbleAttack){
+        if(this.world.keyboard.KeyD && !this.currentBubbleAttack  && animationPlayed){
             this.currentBubbleAttack = true; 
             this.bubbleAttack(); 
             this.timeLastMove = new Date().getTime();   
         }
-        if( (this.world.keyboard.RIGHT  || this.world.keyboard.LEFT ||  this.world.keyboard.UP ||  this.world.keyboard.DOWN) && (!this.currentFinAttack && !this.currentBubbleAttack) ) {
+        if( (this.world.keyboard.RIGHT  || this.world.keyboard.LEFT ||  this.world.keyboard.UP ||  this.world.keyboard.DOWN) && (!this.currentFinAttack && !this.currentBubbleAttack)  && animationPlayed ) {
             this.playAnimation(this.SWIM_IMAGES); 
             this.timeLastMove = new Date().getTime();   
         }
@@ -316,8 +318,8 @@ class Character extends MovableObjects{
      */
     finAttack(){
         let finAttackInterval = setInterval(() => {
-            if(this.currentFinAttackCounter < 8){
-                this.playAnimation(this.ATTACK_IMAGE);   
+            if(this.currentFinAttackCounter < this.ATTACK_IMAGE.length){
+                this.playSingleAnimation(this.ATTACK_IMAGE , this.currentFinAttackCounter );   
                 this.currentFinAttackCounter++; 
             }
             else{
@@ -335,8 +337,8 @@ class Character extends MovableObjects{
      */
     bubbleAttack(){
         let bubbleAttackInterval = setInterval(() => {
-            if(this.currentBubbleAttackCounter < 8){
-                this.bubbleAttackCharacterAnimation(); 
+            if(this.currentBubbleAttackCounter < this.BUBBLE_ATTACK_IMAGE.length){
+                this.bubbleAttackCharacterAnimation(this.currentBubbleAttackCounter); 
             }
             else{
                 this.bubbleAttackCreateNewBubble(); 
@@ -351,12 +353,12 @@ class Character extends MovableObjects{
     /**
      * Sets the character animation befor/during a bubble attack.
      */
-    bubbleAttackCharacterAnimation(){
+    bubbleAttackCharacterAnimation(counter){
         if(this.collectedPoisons > 0 && this.world.characterisAtEndboss){
-            this.playAnimation(this.BUBBLE_POSION_ATTACK_IMAGE);
+            this.playSingleAnimation(this.BUBBLE_POSION_ATTACK_IMAGE, counter);
         }
         else{
-            this.playAnimation(this.BUBBLE_ATTACK_IMAGE);  
+            this.playSingleAnimation(this.BUBBLE_ATTACK_IMAGE, counter);  
         }
         this.currentBubbleAttackCounter++; 
     }
@@ -404,9 +406,9 @@ class Character extends MovableObjects{
         document.getElementById("GameOverScreen").classList.remove("dsp-none");
         document.getElementById("gameOverlayButtons").classList.add("dsp-none"); 
         document.getElementById("instructionOverlay").classList.add("dsp-none");  
-        !this.world.gameIsMuted ?  this.lose_sound.play() : ""; 
         this.clearCharacterInvervals();
         this.world.endbossFromLevel.clearEnbossIntervals(); 
+        !this.world.gameIsMuted ?  this.lose_sound.play() : ""; 
         this.world.pause = true; 
     }
 
