@@ -1,4 +1,4 @@
-class Poison extends CollectableObjects{
+class Poison extends MovableObjects{
 
     POISON_IMAGE = ["img/4. Marcadores/Posiขn/Dark - Right.png"]; 
     width = 50; 

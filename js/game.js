@@ -90,7 +90,6 @@ function restartGame(){
  * Toogle fullscreen on button click.
  */
 function fullscreen(){
-    console.log("switch to fullscreen"); 
     let myscreen = document.getElementById("canvasPanels");
 
     if(!isInFullscreen){
@@ -98,7 +97,6 @@ function fullscreen(){
         openFullscreen(myscreen);
     }
     else{
-        console.log("close fullscreen"); 
         isInFullscreen = false; 
         closeFullscreen(); 
     }
@@ -176,7 +174,6 @@ function setupMobileEvents(){
  * Set eventlistener for "normal" Keyboard on the keydown event.
  */
 window.addEventListener("keydown", (event) => {
-    //console.log(event); 
     switch (event.code) {
         case 'ArrowUp':
           keyboard.UP = true; 

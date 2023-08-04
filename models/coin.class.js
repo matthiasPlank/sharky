@@ -1,4 +1,4 @@
-class Coin extends CollectableObjects{
+class Coin extends MovableObjects{
 
     COIN_IMAGE = ["img/4. Marcadores/1. Coins/1.png"]; 
     width = 35; 

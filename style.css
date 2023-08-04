@@ -394,15 +394,18 @@ canvas{
         position: absolute;
         bottom: unset;
         top: 50px;
+        right: 25px;
     }
     #restartBtn{
         position: absolute;
         bottom: unset;
         top: 90px;
+        right: 25px;
     }
     #soundIcon{
         bottom: unset;
         top: 130px;
+        right: 25px;
     }
     #mobileBubbleBtn {
         position: absolute;
@@ -420,6 +423,31 @@ canvas{
     #mobileButtons{
         display:block
     } 
+    .fullscreenBtn{
+        display: none;
+     }
+     #instructionBtn{
+         position: absolute;
+         bottom: unset;
+         top: 50px;
+         right: 25px;
+     }
+     #restartBtn{
+         position: absolute;
+         bottom: unset;
+         top: 90px;
+         right: 25px;
+     }
+     #soundIcon{
+         bottom: unset;
+         top: 130px;
+         right: 25px;
+     }
+     #mobileBubbleBtn {
+         position: absolute;
+         bottom: 10px;
+         right: 50px;‚
+     }
     
 }
 @media screen and (orientation:portrait) {
