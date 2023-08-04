@@ -119,8 +119,10 @@ class Character extends MovableObjects{
     }
     currentFinAttack = false; 
     currentFinAttackCounter = 0; 
+    finAttackInterval; 
     currentBubbleAttack = false; 
     currentBubbleAttackCounter = 0; 
+    bubbleAttackInterval; 
     collectedCoins = 0; 
     collectedPoisons = 0; 
     poisonAttacks = 0;
@@ -274,7 +276,7 @@ class Character extends MovableObjects{
      * Sets the IDLE Animation for short or long IDLE
      */
     animateImageIDLE(){
-        if(this.currentIDLEValue >= 1 && !this.calcLongIDLE()){
+        if(this.currentIDLEValue >= 1 && !this.calcLongIDLE() && !this.currentFinAttack && !this.currentBubbleAttack){
             this.playAnimation(this.IDLE_IMAGES);
             this.currentIDLEValue = this.IDLESpeed; 
             this.longIDLECounter = 0;  
@@ -317,7 +319,7 @@ class Character extends MovableObjects{
      * Sets the animation during a fin attack.
      */
     finAttack(){
-        let finAttackInterval = setInterval(() => {
+        this.finAttackInterval = setInterval(() => {
             if(this.currentFinAttackCounter < this.ATTACK_IMAGE.length){
                 this.playSingleAnimation(this.ATTACK_IMAGE , this.currentFinAttackCounter );   
                 this.currentFinAttackCounter++; 
@@ -327,7 +329,7 @@ class Character extends MovableObjects{
                 this.currentFinAttackCounter = 0;
                 this.currentFinAttack = false; 
                 this.playAnimation(this.SWIM_IMAGES); 
-                clearInterval(finAttackInterval);
+                clearInterval(this.finAttackInterval);
             }
         }, 100);
     }
@@ -336,7 +338,7 @@ class Character extends MovableObjects{
      * Sets the animation during a bubble attack.
      */
     bubbleAttack(){
-        let bubbleAttackInterval = setInterval(() => {
+        this.bubbleAttackInterval = setInterval(() => {
             if(this.currentBubbleAttackCounter < this.BUBBLE_ATTACK_IMAGE.length){
                 this.bubbleAttackCharacterAnimation(this.currentBubbleAttackCounter); 
             }
@@ -345,7 +347,7 @@ class Character extends MovableObjects{
                 this.currentBubbleAttackCounter = 0;
                 this.currentBubbleAttack = false; 
                 this.playAnimation(this.SWIM_IMAGES); 
-                clearInterval(bubbleAttackInterval);
+                clearInterval(this.bubbleAttackInterval);
             }
         }, 100);
     }
